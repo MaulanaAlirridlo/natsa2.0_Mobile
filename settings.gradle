@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "natsa2.0_Mobile"
