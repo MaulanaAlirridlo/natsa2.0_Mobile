@@ -24,14 +24,14 @@
             android:layout_width="55dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/menu"
-            android:onClick="ShowMenu"
+            android:onClick="showMenu"
             android:src="@drawable/ic_menu" />
 
         <ImageView
             android:layout_width="55dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/search"
-            android:onClick="ShowSearch"
+            android:onClick="showSearch"
             android:src="@drawable/ic_search" />
 
         <TextView
@@ -62,7 +62,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
         android:background="@color/white"
-        android:onClick="ShowMenu"
         android:orientation="vertical"
         android:translationZ="9999dp"
         android:visibility="gone"
@@ -99,6 +98,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="showContact"
             android:padding="10dp"
             android:text="@string/contact"
             android:textSize="20sp" />

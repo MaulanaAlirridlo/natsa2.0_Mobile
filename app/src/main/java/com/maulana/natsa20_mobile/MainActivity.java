@@ -3,9 +3,7 @@ package com.maulana.natsa20_mobile;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -29,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     // onClick function
 
-    public void ShowMenu(View v) {
+    public void showMenu(View v) {
         if (menu.getVisibility() == LinearLayout.GONE) {
             menu.setVisibility(LinearLayout.VISIBLE);
         } else {
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void ShowSearch(View v) {
+    public void showSearch(View v) {
         if (search.getVisibility() == LinearLayout.GONE) {
             search.setVisibility(LinearLayout.VISIBLE);
         } else {
@@ -45,16 +43,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-//    public void ShowContact(View v) {
-//        loadFragment(new ContactFragment());
-//        menu.setVisibility(LinearLayout.GONE);
-//    }
-//
-//    //fragment loader
-//    private  void loadFragment(Fragment fragment) {
-//        FragmentManager fm = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-//        fragmentTransaction.replace(R.id.frameLayout, fragment);
-//        fragmentTransaction.commit();
-//    }
+    public void showContact(View v) {
+        Intent i = new Intent(MainActivity.this, BackActivity.class);
+        i.putExtra("page", "contact");
+        startActivity(i);
+        menu.setVisibility(LinearLayout.GONE);
+    }
 }
