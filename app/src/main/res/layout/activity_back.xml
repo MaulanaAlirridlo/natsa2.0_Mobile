@@ -13,8 +13,6 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
         app:contentInsetEnd="0dp"
         app:contentInsetLeft="0dp"
         app:contentInsetRight="0dp"
@@ -26,6 +24,12 @@
             android:contentDescription="@string/menu"
             android:onClick="back"
             android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="25sp" />
     </androidx.appcompat.widget.Toolbar>
 
 <!--    body    -->
