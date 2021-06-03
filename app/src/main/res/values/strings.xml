@@ -29,4 +29,9 @@
     <string name="enter_your_subject">Enter your subject</string>
     <string name="message">Message</string>
     <string name="submit">Submit</string>
+    <string name="pertanyaan_1">Pertanyaan 1</string>
+    <string name="plus_symbol">+</string>
+    <string name="jawaban_pertanyaan_1">Jawaban pertanyaan 1</string>
+    <string name="pertanyaan_2">Pertanyaan 2</string>
+    <string name="jawaban_pertanyaan_2">Jawaban pertanyaan 2</string>
 </resources>

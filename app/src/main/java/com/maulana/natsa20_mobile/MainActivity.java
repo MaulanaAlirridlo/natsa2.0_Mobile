@@ -43,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void showFAQ(View v) {
+        Intent i = new Intent(MainActivity.this, BackActivity.class);
+        i.putExtra("page", "FAQ");
+        startActivity(i);
+        menu.setVisibility(LinearLayout.GONE);
+    }
+
     public void showContact(View v) {
         Intent i = new Intent(MainActivity.this, BackActivity.class);
         i.putExtra("page", "contact");

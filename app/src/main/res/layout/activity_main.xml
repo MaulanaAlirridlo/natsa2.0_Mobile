@@ -91,6 +91,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="showFAQ"
             android:padding="10dp"
             android:text="@string/faq"
             android:textSize="20sp" />

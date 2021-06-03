@@ -26,7 +26,7 @@ public class BackActivity extends AppCompatActivity {
 
             break;
             case "FAQ" :
-
+                loadFragment(new FaqFragment());
             break;
             case "contact" :
                 loadFragment(new ContactFragment());
