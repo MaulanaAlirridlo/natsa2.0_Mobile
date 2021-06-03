@@ -4,108 +4,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ContactFragment"
-    android:padding="16dp"
+    android:background="@color/white"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    tools:context=".ContactFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/contact"
-        android:textSize="30sp"
         android:textAlignment="center"
-        android:gravity="center" />
+        android:textSize="30sp" />
+
     <LinearLayout
+        android:id="@+id/emailLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/email"
             android:textAlignment="center"
-            android:gravity="center"
             android:textSize="28sp"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"/>
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/our_email"
             android:textAlignment="center"
-            android:gravity="center"
             android:textSize="23sp" />
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/phoneLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/phone"
             android:textAlignment="center"
-            android:gravity="center"
             android:textSize="28sp"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"/>
+            android:textStyle="bold" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/phone_number"
             android:textAlignment="center"
-            android:gravity="center"
             android:textSize="23sp" />
     </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="@string/working_hours"
         android:textAlignment="center"
-        android:gravity="center"
         android:textSize="28sp"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"/>
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
         android:text="Summer"
         android:textAlignment="center"
-        android:gravity="center"
         android:textSize="28sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"/>
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="(May to Nov) :Mon - Sat: 9.00 to 18.00"
         android:textAlignment="center"
-        android:gravity="center"
         android:textSize="23sp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
         android:text="Summer"
         android:textAlignment="center"
-        android:gravity="center"
         android:textSize="28sp"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"/>
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="(May to Nov) :Mon - Sat: 9.00 to 18.00"
         android:textAlignment="center"
-        android:gravity="center"
         android:textSize="23sp" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="@string/follow_us"
         android:textAlignment="center"
-        android:gravity="center"
         android:textSize="28sp"
-        android:textStyle="bold"
-        android:layout_marginTop="20dp"/>
+        android:textStyle="bold" />
 </LinearLayout>

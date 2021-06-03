@@ -31,6 +31,9 @@ public class BackActivity extends AppCompatActivity {
             case "contact" :
                 loadFragment(new ContactFragment());
             break;
+            case "email" :
+                loadFragment(new EmailFragment());
+            break;
         }
     }
 

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">natsa2.0_Mobile</string>
-    <string name="name">natsa</string>
+    <string name="real_app_name">natsa</string>
     <string name="home">Home</string>
     <string name="bookmark">Bookmark</string>
     <string name="about">About</string>
@@ -20,4 +20,13 @@
     <string name="follow_us">FOLLOW US</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu">Menu</string>
+    <string name="contact_us_message">Any questions? Contact us through Whatsapp or on our contact from below.</string>
+    <string name="email_address">Email address</string>
+    <string name="name">Name</string>
+    <string name="subject">Subject</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_your_subject">Enter your subject</string>
+    <string name="message">Message</string>
+    <string name="submit">Submit</string>
 </resources>
