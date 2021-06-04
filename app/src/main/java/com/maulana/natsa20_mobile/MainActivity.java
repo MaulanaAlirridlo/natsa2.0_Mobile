@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.maulana.natsa20_mobile.adapter.ProductsAdapter;
+
 public class MainActivity extends AppCompatActivity {
 
     Dialog myDialog;
@@ -43,23 +45,32 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void showSawah(View v) {
+        showProcces("sawah", null);
+    }
+
+    public void showDetailSawah(String id) {
+        showProcces("detailSawah", id);
+    }
+
     public void showAbout(View v) {
-        Intent i = new Intent(MainActivity.this, BackActivity.class);
-        i.putExtra("page", "about");
-        startActivity(i);
-        menu.setVisibility(LinearLayout.GONE);
+        showProcces("about", null);
     }
 
     public void showFAQ(View v) {
-        Intent i = new Intent(MainActivity.this, BackActivity.class);
-        i.putExtra("page", "FAQ");
-        startActivity(i);
-        menu.setVisibility(LinearLayout.GONE);
+        showProcces("FAQ", null);
     }
 
     public void showContact(View v) {
+        showProcces("contact", null);
+    }
+
+    private void showProcces(String page, String id){
         Intent i = new Intent(MainActivity.this, BackActivity.class);
-        i.putExtra("page", "contact");
+        i.putExtra("page", page);
+        if (id != null) {
+            i.putExtra("id", id);
+        }
         startActivity(i);
         menu.setVisibility(LinearLayout.GONE);
     }

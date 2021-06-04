@@ -39,4 +39,5 @@
     <string name="categories">Categories</string>
     <string name="pesan_sawah">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore facere provident molestias ipsam sint voluptatum pariatur.</string>
     <string name="lihat_sekarang"><![CDATA[LIHAT SEKARANG ->]]></string>
+    <string name="productsimage">productsImage</string>
 </resources>

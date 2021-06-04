@@ -26,6 +26,10 @@ public class BackActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         page = extras.getString("page");
         switch (page) {
+            case "sawah" :
+                loadFragment(new ProductsFragment());
+                title.setText("Sawah");
+            break;
             case "about" :
                 loadFragment(new AboutFragment());
                 title.setText("About");
