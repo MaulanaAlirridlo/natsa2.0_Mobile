@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">natsa2.0_Mobile</string>
-    <string name="real_app_name">natsa</string>
+    <string name="real_app_name">NatSa</string>
     <string name="home">Home</string>
     <string name="bookmark">Bookmark</string>
     <string name="about">About</string>
@@ -35,4 +35,8 @@
     <string name="pertanyaan_2">Pertanyaan 2</string>
     <string name="jawaban_pertanyaan_2">Jawaban pertanyaan 2</string>
     <string name="natsa_definition">Nature Sawah Aja ... Transaksi Akan Mudah Nature Sawah merupakan sebuah website e-commerce untuk mempermudah dalam penjualan sawah dengan memasang iklan secara gratis maupun perbayar Transaksi anda akan menjadi lebih mudah dan cepat .</string>
+    <string name="sawah">Sawah</string>
+    <string name="categories">Categories</string>
+    <string name="pesan_sawah">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore facere provident molestias ipsam sint voluptatum pariatur.</string>
+    <string name="lihat_sekarang"><![CDATA[LIHAT SEKARANG ->]]></string>
 </resources>

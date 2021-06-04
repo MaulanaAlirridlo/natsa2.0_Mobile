@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // init vairable
+        // init variable
         myDialog = new Dialog(this);
         menu = this.findViewById(R.id.menu);
         search = this.findViewById(R.id.search);
@@ -41,6 +41,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             search.setVisibility(LinearLayout.GONE);
         }
+    }
+
+    public void showAbout(View v) {
+        Intent i = new Intent(MainActivity.this, BackActivity.class);
+        i.putExtra("page", "about");
+        startActivity(i);
+        menu.setVisibility(LinearLayout.GONE);
     }
 
     public void showFAQ(View v) {

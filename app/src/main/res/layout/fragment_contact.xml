@@ -10,14 +10,6 @@
     android:paddingRight="16dp"
     tools:context=".ContactFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/contact"
-        android:textAlignment="center"
-        android:textSize="30sp" />
-
     <LinearLayout
         android:id="@+id/emailLayout"
         android:layout_width="match_parent"
