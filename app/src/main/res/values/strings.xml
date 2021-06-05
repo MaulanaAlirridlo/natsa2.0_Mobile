@@ -40,4 +40,11 @@
     <string name="pesan_sawah">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore facere provident molestias ipsam sint voluptatum pariatur.</string>
     <string name="lihat_sekarang"><![CDATA[LIHAT SEKARANG ->]]></string>
     <string name="productsimage">productsImage</string>
+    <string name="judul">Judul</string>
+    <string name="harga">Harga</string>
+    <string name="alamat">Alamat</string>
+    <string name="daerah">Daerah</string>
+    <string name="sertifikasi">Sertifikasi</string>
+    <string name="tipe">Tipe</string>
+    <string name="kategori">Kategori</string>
 </resources>

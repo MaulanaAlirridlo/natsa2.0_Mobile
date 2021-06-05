@@ -1,5 +1,7 @@
 package com.maulana.natsa20_mobile.adapter;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +18,12 @@ import java.util.ArrayList;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
 
+    private Context context;
     private final ArrayList<Products> productsList;
-//    private showDetailSawahListener showDetailSawahListener;
+    private showDetailSawahListener showDetailSawahListener;
 
-    public ProductsAdapter(ArrayList<Products> productsList) {
+    public ProductsAdapter(Context context, ArrayList<Products> productsList) {
+        this.context = context;
         this.productsList = productsList;
     }
 
@@ -36,6 +40,12 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 //        holder.productsImage.set(dataList.get(position).());
         holder.productsTitle.setText(productsList.get(position).getTitle());
         holder.productsPrice.setText(productsList.get(position).getPrice());
+
+        try {
+            showDetailSawahListener = (ProductsAdapter.showDetailSawahListener) context;
+        } catch (ClassCastException e) {
+            Log.e("Error", e.getMessage());
+        }
     }
 
     @Override
@@ -56,22 +66,22 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             productsTitle = v.findViewById(R.id.productsTitle);
             productsPrice = v.findViewById(R.id.productsPrice);
 
-//            v.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    position = getAdapterPosition();
-//                    id = productsList.get(position).getId();
-//                    show(id);
-//                }
-//            });
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    position = getAdapterPosition();
+                    id = productsList.get(position).getId();
+                    show(id);
+                }
+            });
         }
     }
 
-//    private void show(final String id) {
-//        showDetailSawahListener.showDetailSawah(id);
-//    }
-//
-//    public interface showDetailSawahListener {
-//        void showDetailSawah(String id);
-//    }
+    private void show(final String id) {
+        showDetailSawahListener.showDetailSawah(id);
+    }
+
+    public interface showDetailSawahListener {
+        void showDetailSawah(String id);
+    }
 }

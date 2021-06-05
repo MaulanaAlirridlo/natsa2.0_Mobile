@@ -15,18 +15,18 @@ import com.maulana.natsa20_mobile.model.Products;
 
 import java.util.ArrayList;
 
-public class ProductsFragment extends Fragment {
+public class ProductFragment extends Fragment {
 
     private ArrayList<Products> productsArrayList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_products, container, false);
+        View view = inflater.inflate(R.layout.fragment_product, container, false);
 
         addData();
 
-        RecyclerView recyclerView = view.findViewById(R.id.productsRecyclerView);
+        RecyclerView recyclerView = view.findViewById(R.id.productRecyclerView);
         ProductsAdapter adapter = new ProductsAdapter(getActivity(), productsArrayList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
@@ -41,6 +41,5 @@ public class ProductsFragment extends Fragment {
         productsArrayList.add(new Products("2", "Sawah 2", "200000000", "@drawable/bg"));
         productsArrayList.add(new Products("3", "Sawah 3", "300000000", "@drawable/bg"));
         productsArrayList.add(new Products("4", "Sawah 4", "400000000", "@drawable/bg"));
-        productsArrayList.add(new Products("5", "Sawah 5", "500000000", "@drawable/bg"));
     }
 }

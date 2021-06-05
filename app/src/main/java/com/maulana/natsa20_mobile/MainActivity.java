@@ -46,31 +46,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showSawah(View v) {
-        showProcces("sawah", null);
+        showProcces("sawah");
     }
 
-    public void showDetailSawah(String id) {
-        showProcces("detailSawah", id);
-    }
+
 
     public void showAbout(View v) {
-        showProcces("about", null);
+        showProcces("about");
     }
 
     public void showFAQ(View v) {
-        showProcces("FAQ", null);
+        showProcces("FAQ");
     }
 
     public void showContact(View v) {
-        showProcces("contact", null);
+        showProcces("contact");
     }
 
-    private void showProcces(String page, String id){
+    private void showProcces(String page){
         Intent i = new Intent(MainActivity.this, BackActivity.class);
         i.putExtra("page", page);
-        if (id != null) {
-            i.putExtra("id", id);
-        }
         startActivity(i);
         menu.setVisibility(LinearLayout.GONE);
     }

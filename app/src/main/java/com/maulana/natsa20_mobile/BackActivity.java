@@ -6,11 +6,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class BackActivity extends AppCompatActivity {
+import com.maulana.natsa20_mobile.adapter.ProductsAdapter;
+
+public class BackActivity extends AppCompatActivity implements ProductsAdapter.showDetailSawahListener {
 
     String page;
     TextView title;
@@ -29,6 +33,10 @@ public class BackActivity extends AppCompatActivity {
             case "sawah" :
                 loadFragment(new ProductsFragment());
                 title.setText("Sawah");
+            break;
+            case "detailSawah" :
+                loadFragment(new ProductFragment());
+                title.setText("Detail Sawah");
             break;
             case "about" :
                 loadFragment(new AboutFragment());
@@ -55,6 +63,10 @@ public class BackActivity extends AppCompatActivity {
         this.finish();
     }
 
+    public void showDetailSawah(String id) {
+        showProces("detailSawah", id);
+    }
+
 
     //fragment loader
     private  void loadFragment(Fragment fragment) {
@@ -62,5 +74,13 @@ public class BackActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.commit();
+    }
+
+    // process
+    private void showProces(String page, String id){
+        Intent i = new Intent(BackActivity.this, BackActivity.class);
+        i.putExtra("page", page);
+        i.putExtra("id", id);
+        startActivity(i);
     }
 }
