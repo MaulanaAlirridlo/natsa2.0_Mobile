@@ -1,4 +1,4 @@
-package com.maulana.natsa20_mobile;
+package com.maulana.natsa20_mobile.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -9,10 +9,16 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.maulana.natsa20_mobile.R;
 import com.maulana.natsa20_mobile.adapter.ProductsAdapter;
+import com.maulana.natsa20_mobile.fragment.AboutFragment;
+import com.maulana.natsa20_mobile.fragment.ContactFragment;
+import com.maulana.natsa20_mobile.fragment.EmailFragment;
+import com.maulana.natsa20_mobile.fragment.FaqFragment;
+import com.maulana.natsa20_mobile.fragment.ProductFragment;
+import com.maulana.natsa20_mobile.fragment.ProductsFragment;
 
 public class BackActivity extends AppCompatActivity implements ProductsAdapter.showDetailSawahListener {
 

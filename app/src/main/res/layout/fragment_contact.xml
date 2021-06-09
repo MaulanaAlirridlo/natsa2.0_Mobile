@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    tools:context=".ContactFragment">
+    tools:context=".fragment.ContactFragment">
 
     <LinearLayout
         android:id="@+id/emailLayout"

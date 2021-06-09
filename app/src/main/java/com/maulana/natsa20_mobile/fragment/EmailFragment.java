@@ -1,4 +1,4 @@
-package com.maulana.natsa20_mobile;
+package com.maulana.natsa20_mobile.fragment;
 
 import android.os.Bundle;
 
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.maulana.natsa20_mobile.R;
 
 public class EmailFragment extends Fragment {
 

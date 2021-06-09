@@ -1,4 +1,4 @@
-package com.maulana.natsa20_mobile;
+package com.maulana.natsa20_mobile.fragment;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.maulana.natsa20_mobile.activity.BackActivity;
+import com.maulana.natsa20_mobile.R;
 
 public class ContactFragment extends Fragment {
 

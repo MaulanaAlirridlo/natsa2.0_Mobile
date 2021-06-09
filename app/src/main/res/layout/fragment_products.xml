@@ -4,4 +4,4 @@
     android:id="@+id/productsRecyclerView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ProductsFragment" />
+    tools:context=".fragment.ProductsFragment" />

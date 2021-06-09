@@ -1,4 +1,4 @@
-package com.maulana.natsa20_mobile;
+package com.maulana.natsa20_mobile.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.maulana.natsa20_mobile.adapter.ProductsAdapter;
+import com.maulana.natsa20_mobile.R;
 
 public class MainActivity extends AppCompatActivity {
 

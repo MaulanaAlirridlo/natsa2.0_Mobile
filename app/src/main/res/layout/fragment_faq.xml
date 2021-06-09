@@ -6,7 +6,7 @@
     android:background="@color/white"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    tools:context=".FaqFragment">
+    tools:context=".fragment.FaqFragment">
 
     <LinearLayout
         android:id="@+id/pertanyaan1"

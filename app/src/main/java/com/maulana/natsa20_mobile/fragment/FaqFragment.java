@@ -1,4 +1,4 @@
-package com.maulana.natsa20_mobile;
+package com.maulana.natsa20_mobile.fragment;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.maulana.natsa20_mobile.R;
 
 public class FaqFragment extends Fragment {
 
