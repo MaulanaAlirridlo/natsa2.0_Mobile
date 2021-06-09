@@ -2,11 +2,11 @@ package com.maulana.natsa20_mobile.model;
 
 public class Products {
     private String id;
+    private String image;
     private String title;
     private String price;
-    private String image;
 
-    public Products(String id, String title, String price, String image) {
+    public Products(String id, String image, String title, String price) {
         this.id = id;
         this.image = image;
         this.title = title;
