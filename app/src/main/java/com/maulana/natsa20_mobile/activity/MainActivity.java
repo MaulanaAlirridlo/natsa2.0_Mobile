@@ -13,7 +13,7 @@ import com.maulana.natsa20_mobile.R;
 public class MainActivity extends AppCompatActivity {
 
     Dialog myDialog;
-    LinearLayout menu, search;
+    LinearLayout menu, search, accountBeforeLogin, accountAfterLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,46 +24,97 @@ public class MainActivity extends AppCompatActivity {
         myDialog = new Dialog(this);
         menu = this.findViewById(R.id.menu);
         search = this.findViewById(R.id.search);
+        accountBeforeLogin = this.findViewById(R.id.accountBeforeLogin);
+        accountAfterLogin = this.findViewById(R.id.accountAfterLogin);
     }
 
 
     // onClick function
 
-    public void showMenu(View v) {
+    public void showMenu(View view) {
         if (menu.getVisibility() == LinearLayout.GONE) {
             menu.setVisibility(LinearLayout.VISIBLE);
         } else {
             menu.setVisibility(LinearLayout.GONE);
         }
+        if (search.getVisibility() == LinearLayout.VISIBLE) {
+            search.setVisibility(LinearLayout.GONE);
+        }
+        if (accountBeforeLogin.getVisibility() == LinearLayout.VISIBLE) {
+            accountBeforeLogin.setVisibility(LinearLayout.GONE);
+        }
+        if (accountAfterLogin.getVisibility() == LinearLayout.VISIBLE) {
+            accountAfterLogin.setVisibility(LinearLayout.GONE);
+        }
     }
 
-    public void showSearch(View v) {
+    public void showSearch(View view) {
         if (search.getVisibility() == LinearLayout.GONE) {
             search.setVisibility(LinearLayout.VISIBLE);
         } else {
             search.setVisibility(LinearLayout.GONE);
         }
+        if (menu.getVisibility() == LinearLayout.VISIBLE) {
+            menu.setVisibility(LinearLayout.GONE);
+        }
+        if (accountBeforeLogin.getVisibility() == LinearLayout.VISIBLE) {
+            accountBeforeLogin.setVisibility(LinearLayout.GONE);
+        }
+        if (accountAfterLogin.getVisibility() == LinearLayout.VISIBLE) {
+            accountAfterLogin.setVisibility(LinearLayout.GONE);
+        }
     }
 
-    public void showSawah(View v) {
-        showProcces("sawah");
+    public void showAccount(View view) {
+        Boolean login = false;
+        if (login) {
+            if (accountAfterLogin.getVisibility() == LinearLayout.GONE) {
+                accountAfterLogin.setVisibility(LinearLayout.VISIBLE);
+            } else {
+                accountAfterLogin.setVisibility(LinearLayout.GONE);
+            }
+        } else {
+            if (accountBeforeLogin.getVisibility() == LinearLayout.GONE) {
+                accountBeforeLogin.setVisibility(LinearLayout.VISIBLE);
+            } else {
+                accountBeforeLogin.setVisibility(LinearLayout.GONE);
+            }
+        }
+        if (search.getVisibility() == LinearLayout.VISIBLE) {
+            search.setVisibility(LinearLayout.GONE);
+        }
+        if (menu.getVisibility() == LinearLayout.VISIBLE) {
+            menu.setVisibility(LinearLayout.GONE);
+        }
     }
 
-
-
-    public void showAbout(View v) {
-        showProcces("about");
+    public void showSawah(View view) {
+        showBackActivity("sawah");
     }
 
-    public void showFAQ(View v) {
-        showProcces("FAQ");
+    public void showAbout(View view) {
+        showBackActivity("about");
     }
 
-    public void showContact(View v) {
-        showProcces("contact");
+    public void showFAQ(View view) {
+        showBackActivity("FAQ");
     }
 
-    private void showProcces(String page){
+    public void showContact(View view) {
+        showBackActivity("contact");
+    }
+
+    public void showRegister(View view){
+        Intent i = new Intent(MainActivity.this, RegisterActivity.class);
+        startActivity(i);
+    }
+
+    public void showLogin(View view){
+        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(i);
+    }
+
+    private void showBackActivity(String page) {
         Intent i = new Intent(MainActivity.this, BackActivity.class);
         i.putExtra("page", page);
         startActivity(i);

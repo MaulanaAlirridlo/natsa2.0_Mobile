@@ -41,14 +41,16 @@
         <ImageView
             android:layout_width="55dp"
             android:layout_height="match_parent"
-            android:contentDescription="@string/account"
-            android:src="@drawable/ic_account" />
+            android:contentDescription="@string/bookmark"
+            android:src="@drawable/ic_bookmark" />
 
         <ImageView
             android:layout_width="55dp"
             android:layout_height="match_parent"
-            android:contentDescription="@string/bookmark"
-            android:src="@drawable/ic_bookmark" />
+            android:contentDescription="@string/account"
+            android:onClick="showAccount"
+            android:src="@drawable/ic_account" />
+
     </androidx.appcompat.widget.Toolbar>
 
     <!--    menu    -->
@@ -154,19 +156,64 @@
 
     <!--    end of bookmark    -->
 
+    <!--    account     -->
+    <LinearLayout
+        android:id="@+id/accountBeforeLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:translationZ="9999dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/sign_up"
+            android:textColor="@color/black"
+            android:onClick="showRegister"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/sign_in"
+            android:onClick="showLogin"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/accountAfterLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:translationZ="9999dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/account"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/logout"
+            android:textColor="@color/black" />
+    </LinearLayout>
+    <!--    end of account  -->
+
     <!--    end of header      -->
 
     <!--    body    -->
-    <!--    <FrameLayout-->
-    <!--        android:id="@+id/frameLayout"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_below="@+id/toolbar">-->
-
-    <!--        -->
-    <!--    </FrameLayout>-->
-
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar">
@@ -278,7 +325,7 @@
             </LinearLayout>
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <!--    end of body     -->
 

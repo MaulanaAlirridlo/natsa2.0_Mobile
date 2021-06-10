@@ -11,7 +11,6 @@
     <string name="back">Back</string>
     <string name="mic">Mic</string>
     <string name="hello_world">Hello World</string>
-    <string name="account">Account</string>
     <string name="email">Email</string>
     <string name="our_email">natsa@email.com</string>
     <string name="phone">Phone</string>
@@ -52,4 +51,11 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="signup">Signup</string>
+    <string name="already_have_an_account_sign_in">Already have an account? Sign In</string>
+    <string name="dont_have_account_sign_up">Dont have account? Sign Up</string>
+    <string name="lewati">Lewati</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="account">Account</string>
+    <string name="logout">Logout</string>
 </resources>
