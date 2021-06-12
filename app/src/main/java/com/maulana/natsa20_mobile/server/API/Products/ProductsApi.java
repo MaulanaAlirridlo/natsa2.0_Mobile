@@ -10,4 +10,6 @@ import retrofit2.http.GET;
 public interface ProductsApi {
     @GET("riceFields")
     Call<Products> getRiceFields();
+
+    
 }
