@@ -12,19 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.maulana.natsa20_mobile.R;
-import com.maulana.natsa20_mobile.model.Products;
+import com.maulana.natsa20_mobile.model.products.Data;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
 
     private Context context;
-    private final ArrayList<Products> productsList;
+    private final List<Data> productsDataList;
     private showDetailSawahListener showDetailSawahListener;
 
-    public ProductsAdapter(Context context, ArrayList<Products> productsList) {
+    public ProductsAdapter(Context context, List<Data> productsDataList) {
         this.context = context;
-        this.productsList = productsList;
+        this.productsDataList = productsDataList;
     }
 
     @NonNull
@@ -37,20 +37,20 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     @Override
     public void onBindViewHolder(ProductsViewHolder holder, int position) {
-//        holder.productsImage.set(dataList.get(position).());
-        holder.productsTitle.setText(productsList.get(position).getTitle());
-        holder.productsPrice.setText(productsList.get(position).getPrice());
+//        holder.productsImage.set(productsDataList.get(position).());
+        holder.productsTitle.setText(productsDataList.get(position).getTitle());
+        holder.productsPrice.setText(productsDataList.get(position).getHarga()+"");
 
         try {
             showDetailSawahListener = (ProductsAdapter.showDetailSawahListener) context;
         } catch (ClassCastException e) {
-            Log.e("Error", e.getMessage());
+            e.printStackTrace();
         }
     }
 
     @Override
     public int getItemCount() {
-        return (productsList != null) ? productsList.size() : 0;
+        return (productsDataList != null) ? productsDataList.size() : 0;
     }
 
     public class ProductsViewHolder extends  RecyclerView.ViewHolder {
@@ -58,7 +58,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         private final ImageView productsImage;
         private final TextView productsTitle, productsPrice;
         private int position;
-        private String id;
+        private int id;
 
         public ProductsViewHolder(View v) {
             super(v);
@@ -70,18 +70,18 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                 @Override
                 public void onClick(View v) {
                     position = getAdapterPosition();
-                    id = productsList.get(position).getId();
+                    id = productsDataList.get(position).getId();
                     show(id);
                 }
             });
         }
     }
 
-    private void show(final String id) {
+    private void show(final int id) {
         showDetailSawahListener.showDetailSawah(id);
     }
 
     public interface showDetailSawahListener {
-        void showDetailSawah(String id);
+        void showDetailSawah(int id);
     }
 }

@@ -69,7 +69,7 @@ public class BackActivity extends AppCompatActivity implements ProductsAdapter.s
         this.finish();
     }
 
-    public void showDetailSawah(String id) {
+    public void showDetailSawah(int id) {
         showProces("detailSawah", id);
     }
 
@@ -83,7 +83,7 @@ public class BackActivity extends AppCompatActivity implements ProductsAdapter.s
     }
 
     // process
-    private void showProces(String page, String id){
+    private void showProces(String page, int id){
         Intent i = new Intent(BackActivity.this, BackActivity.class);
         i.putExtra("page", page);
         i.putExtra("id", id);

@@ -12,15 +12,12 @@ import android.view.ViewGroup;
 
 import com.maulana.natsa20_mobile.R;
 import com.maulana.natsa20_mobile.adapter.ProductsAdapter;
-import com.maulana.natsa20_mobile.model.Products;
-import com.maulana.natsa20_mobile.server.process.products;
-
-import java.util.ArrayList;
+import com.maulana.natsa20_mobile.server.process.ProductsApiProcess;
 
 public class ProductFragment extends Fragment {
 
     ProductsAdapter adapter;
-    products productsClass = new products();
+    ProductsApiProcess productsApiProcessClass = new ProductsApiProcess();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,7 +25,7 @@ public class ProductFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.productRecyclerView);
-        adapter = new ProductsAdapter(getActivity(), products.getProductsArrayList());
+        adapter = new ProductsAdapter(getActivity(), ProductsApiProcess.getProductsDataList());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -38,6 +35,6 @@ public class ProductFragment extends Fragment {
 
     public void onResume() {
         super.onResume();
-        productsClass.getData(getContext(), adapter, null);
+        productsApiProcessClass.getDataFromApi(adapter);
     }
 }
