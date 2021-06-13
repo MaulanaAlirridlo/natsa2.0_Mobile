@@ -39,7 +39,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     public void onBindViewHolder(ProductsViewHolder holder, int position) {
 //        holder.productsImage.set(productsDataList.get(position).());
         holder.productsTitle.setText(productsDataList.get(position).getTitle());
-        holder.productsPrice.setText(productsDataList.get(position).getHarga()+"");
+        holder.productsPrice.setText(String.valueOf(productsDataList.get(position).getHarga()));
 
         try {
             showDetailSawahListener = (ProductsAdapter.showDetailSawahListener) context;

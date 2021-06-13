@@ -1,4 +1,4 @@
-package com.maulana.natsa20_mobile.server.process;
+package com.maulana.natsa20_mobile.server.process.products;
 
 import com.maulana.natsa20_mobile.adapter.ProductsAdapter;
 import com.maulana.natsa20_mobile.model.products.Data;
@@ -12,7 +12,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductsApiProcess {
+public class GetProducts {
 
     public static List<Data> productsDataList = new ArrayList<Data>();
 
@@ -20,8 +20,8 @@ public class ProductsApiProcess {
         return productsDataList;
     }
 
-    public void getDataFromApi(ProductsAdapter adapter) {
-        ProductsEndPoint.productEndPoint().getRiceFields()
+    public void getProductsFromApi(ProductsAdapter adapter) {
+        ProductsEndPoint.productsEndPoint().getRiceFields()
                 .enqueue(new Callback<Products>() {
                     @Override
                     public void onResponse(Call<Products> call, Response<Products> response) {

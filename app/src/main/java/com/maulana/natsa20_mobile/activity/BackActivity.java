@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -19,8 +20,13 @@ import com.maulana.natsa20_mobile.fragment.EmailFragment;
 import com.maulana.natsa20_mobile.fragment.FaqFragment;
 import com.maulana.natsa20_mobile.fragment.ProductFragment;
 import com.maulana.natsa20_mobile.fragment.ProductsFragment;
+import com.maulana.natsa20_mobile.model.product.RiceField;
+import com.maulana.natsa20_mobile.server.process.products.GetProduct;
 
-public class BackActivity extends AppCompatActivity implements ProductsAdapter.showDetailSawahListener {
+import java.util.List;
+
+public class BackActivity extends AppCompatActivity implements
+        ProductsAdapter.showDetailSawahListener {
 
     String page;
     TextView title;
@@ -33,8 +39,7 @@ public class BackActivity extends AppCompatActivity implements ProductsAdapter.s
 
         title = findViewById(R.id.title);
 
-        Bundle extras = getIntent().getExtras();
-        page = extras.getString("page");
+        page = getIntent().getExtras().getString("page");
         switch (page) {
             case "sawah" :
                 loadFragment(new ProductsFragment());

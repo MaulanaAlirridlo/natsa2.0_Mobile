@@ -15,21 +15,20 @@ import android.view.ViewGroup;
 
 import com.maulana.natsa20_mobile.R;
 import com.maulana.natsa20_mobile.adapter.ProductsAdapter;
-import com.maulana.natsa20_mobile.server.process.ProductsApiProcess;
+import com.maulana.natsa20_mobile.server.process.products.GetProducts;
 
 public class ProductsFragment extends Fragment {
 
     ProductsAdapter adapter;
-    ProductsApiProcess productsApiProcessClass = new ProductsApiProcess();
+    GetProducts getProducts = new GetProducts();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_products, container, false);
 
-
         RecyclerView recyclerView = view.findViewById(R.id.productsRecyclerView);
-        adapter = new ProductsAdapter(getActivity(), ProductsApiProcess.getProductsDataList());
+        adapter = new ProductsAdapter(getActivity(), GetProducts.getProductsDataList());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -38,13 +37,13 @@ public class ProductsFragment extends Fragment {
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                productsApiProcessClass.getDataFromApi(adapter);
+                getProducts.getProductsFromApi(adapter);
                 new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         pullToRefresh.setRefreshing(false);
                     }
-                }, 1000);
+                }, 700);
             }
         });
 
@@ -53,6 +52,6 @@ public class ProductsFragment extends Fragment {
 
     public void onResume() {
         super.onResume();
-        productsApiProcessClass.getDataFromApi(adapter);
+        getProducts.getProductsFromApi(adapter);
     }
 }
