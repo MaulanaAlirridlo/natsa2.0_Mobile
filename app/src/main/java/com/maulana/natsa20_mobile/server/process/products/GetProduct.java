@@ -3,7 +3,7 @@ package com.maulana.natsa20_mobile.server.process.products;
 import com.maulana.natsa20_mobile.adapter.ProductAdapter;
 import com.maulana.natsa20_mobile.model.products.product.Product;
 import com.maulana.natsa20_mobile.model.products.product.RiceField;
-import com.maulana.natsa20_mobile.server.API.products.ProductsEndPoint;
+import com.maulana.natsa20_mobile.server.ApiEndPoint;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class GetProduct {
     }
 
     public void getProductFromApi(int id, ProductAdapter adapter) {
-        ProductsEndPoint.productsEndPoint().showRiceFields(id)
+        ApiEndPoint.EndPoint().showRiceFields(id)
                 .enqueue(new Callback<Product>() {
                     @Override
                     public void onResponse(Call<Product> call, Response<Product> response) {
