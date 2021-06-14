@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -32,11 +33,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //onclick function
     public void login(View view) {
-        new Login(email.getText().toString(), password.getText().toString()).LoginProcess(context);
-
-        if (Preferences.getToken(context) != null) {
-            startMainActivity();
-        }
+        new Login(email.getText().toString(), password.getText().toString()).LoginProcess(LoginActivity.this);
     }
 
     public void showRegister(View view) {

@@ -3,7 +3,7 @@ package com.natsa.natsa20_mobile.server.process.products;
 import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
 import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.model.products.products.Products;
-import com.natsa.natsa20_mobile.server.ApiEndPoint;
+import com.natsa.natsa20_mobile.server.RetrofitBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public class GetProducts {
     }
 
     public void getProductsFromApi(ProductsAdapter adapter) {
-        ApiEndPoint.EndPoint().getRiceFields()
+        RetrofitBuilder.endPoint().getRiceFields()
                 .enqueue(new Callback<Products>() {
                     @Override
                     public void onResponse(Call<Products> call, Response<Products> response) {

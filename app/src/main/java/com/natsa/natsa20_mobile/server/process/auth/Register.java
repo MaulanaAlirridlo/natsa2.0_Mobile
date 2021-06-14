@@ -1,10 +1,13 @@
 package com.natsa.natsa20_mobile.server.process.auth;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
+import com.natsa.natsa20_mobile.activity.MainActivity;
 import com.natsa.natsa20_mobile.model.auth.register.RegisterForm;
 import com.natsa.natsa20_mobile.model.auth.register.RegisterRespone;
-import com.natsa.natsa20_mobile.server.ApiEndPoint;
+import com.natsa.natsa20_mobile.server.RetrofitBuilder;
 import com.natsa.natsa20_mobile.shared_preference.Preferences;
 
 import retrofit2.Call;
@@ -20,14 +23,17 @@ public class Register {
     }
 
 
-    public void RegisterProcess(Context context) {
-        ApiEndPoint.EndPoint().Register(registerForm)
+    public void RegisterProcess(Activity activity) {
+        RetrofitBuilder.endPoint().Register(registerForm)
                 .enqueue(new Callback<RegisterRespone>() {
                     @Override
                     public void onResponse(Call<RegisterRespone> call, Response<RegisterRespone> response) {
                         if (response.isSuccessful()){
                             String token = response.body().getToken();
-                            Preferences.setToken(context, token);
+                            Preferences.setToken(activity, token);
+                            Intent i = new Intent(activity, MainActivity.class);
+                            activity.startActivity(i);
+                            activity.finish();
                         }
                     }
                     @Override

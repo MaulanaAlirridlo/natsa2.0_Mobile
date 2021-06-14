@@ -33,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void signup(View view) {
         new Register(name.getText().toString(), email.getText().toString(),
                 password.getText().toString(), password_confirmation.getText().toString())
-                .RegisterProcess(context);
+                .RegisterProcess(RegisterActivity.this);
         if (Preferences.getToken(context) != null) {
             Intent i = new Intent(RegisterActivity.this, MainActivity.class);
             startActivity(i);

@@ -21,6 +21,17 @@ public class LoginRespone {
     }
 
     public class User {
+
+        private String name;
+        private String email;
+        private String email_verified_at;
+        private int current_team_id;
+        private String profile_photo_path;
+        private String created_at;
+        private String updated_at;
+        private String role;
+        private String profile_photo_url;
+
         public String getName() {
             return name;
         }
@@ -93,14 +104,5 @@ public class LoginRespone {
             this.profile_photo_url = profile_photo_url;
         }
 
-        private String name;
-        private String email;
-        private String email_verified_at;
-        private int current_team_id;
-        private String profile_photo_path;
-        private String created_at;
-        private String updated_at;
-        private String role;
-        private String profile_photo_url;
     }
 }
