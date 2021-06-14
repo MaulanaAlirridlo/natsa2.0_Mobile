@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,10 +19,6 @@ import com.maulana.natsa20_mobile.fragment.EmailFragment;
 import com.maulana.natsa20_mobile.fragment.FaqFragment;
 import com.maulana.natsa20_mobile.fragment.ProductFragment;
 import com.maulana.natsa20_mobile.fragment.ProductsFragment;
-import com.maulana.natsa20_mobile.model.product.RiceField;
-import com.maulana.natsa20_mobile.server.process.products.GetProduct;
-
-import java.util.List;
 
 public class BackActivity extends AppCompatActivity implements
         ProductsAdapter.showDetailSawahListener {

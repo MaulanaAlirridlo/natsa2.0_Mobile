@@ -1,9 +1,9 @@
 package com.maulana.natsa20_mobile.server.process.products;
 
 import com.maulana.natsa20_mobile.adapter.ProductsAdapter;
-import com.maulana.natsa20_mobile.model.products.Data;
-import com.maulana.natsa20_mobile.model.products.Products;
-import com.maulana.natsa20_mobile.server.API.Products.ProductsEndPoint;
+import com.maulana.natsa20_mobile.model.products.products.Data;
+import com.maulana.natsa20_mobile.model.products.products.Products;
+import com.maulana.natsa20_mobile.server.API.products.ProductsEndPoint;
 
 import java.util.ArrayList;
 import java.util.List;

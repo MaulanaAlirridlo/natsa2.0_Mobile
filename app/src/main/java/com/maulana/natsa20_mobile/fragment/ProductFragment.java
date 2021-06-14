@@ -1,6 +1,5 @@
 package com.maulana.natsa20_mobile.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,20 +9,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.maulana.natsa20_mobile.R;
 import com.maulana.natsa20_mobile.adapter.ProductAdapter;
 import com.maulana.natsa20_mobile.adapter.ProductsAdapter;
-import com.maulana.natsa20_mobile.model.product.RiceField;
 import com.maulana.natsa20_mobile.server.process.products.GetProduct;
 import com.maulana.natsa20_mobile.server.process.products.GetProducts;
-
-import java.util.List;
 
 public class ProductFragment extends Fragment{
 

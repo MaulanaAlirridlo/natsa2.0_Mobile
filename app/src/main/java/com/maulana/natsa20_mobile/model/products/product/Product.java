@@ -1,4 +1,4 @@
-package com.maulana.natsa20_mobile.model.product;
+package com.maulana.natsa20_mobile.model.products.product;
 
 import java.util.List;
 

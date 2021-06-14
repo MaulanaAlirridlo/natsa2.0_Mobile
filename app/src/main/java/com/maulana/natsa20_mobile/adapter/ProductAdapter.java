@@ -3,15 +3,13 @@ package com.maulana.natsa20_mobile.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.maulana.natsa20_mobile.R;
-import com.maulana.natsa20_mobile.model.product.RiceField;
-import com.maulana.natsa20_mobile.server.process.products.GetProduct;
+import com.maulana.natsa20_mobile.model.products.product.RiceField;
 
 import java.util.List;
 

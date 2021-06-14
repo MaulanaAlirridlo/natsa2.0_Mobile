@@ -1,12 +1,9 @@
 package com.maulana.natsa20_mobile.server.process.products;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.maulana.natsa20_mobile.adapter.ProductAdapter;
-import com.maulana.natsa20_mobile.model.product.Product;
-import com.maulana.natsa20_mobile.model.product.RiceField;
-import com.maulana.natsa20_mobile.server.API.Products.ProductsEndPoint;
+import com.maulana.natsa20_mobile.model.products.product.Product;
+import com.maulana.natsa20_mobile.model.products.product.RiceField;
+import com.maulana.natsa20_mobile.server.API.products.ProductsEndPoint;
 
 import java.util.ArrayList;
 import java.util.List;

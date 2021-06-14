@@ -1,7 +1,5 @@
 package com.maulana.natsa20_mobile.server;
 
-import com.maulana.natsa20_mobile.server.API.Products.ProductsApi;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

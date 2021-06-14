@@ -1,4 +1,4 @@
-package com.maulana.natsa20_mobile.model.products;
+package com.maulana.natsa20_mobile.model.products.products;
 
 public class Data {
     private int id;

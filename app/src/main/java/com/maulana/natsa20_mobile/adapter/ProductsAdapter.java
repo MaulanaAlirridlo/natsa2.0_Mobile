@@ -1,7 +1,6 @@
 package com.maulana.natsa20_mobile.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.maulana.natsa20_mobile.R;
-import com.maulana.natsa20_mobile.model.products.Data;
+import com.maulana.natsa20_mobile.model.products.products.Data;
 
 import java.util.List;
 

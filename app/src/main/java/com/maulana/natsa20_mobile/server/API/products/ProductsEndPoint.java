@@ -1,4 +1,4 @@
-package com.maulana.natsa20_mobile.server.API.Products;
+package com.maulana.natsa20_mobile.server.API.products;
 
 import com.maulana.natsa20_mobile.server.RetrofitBuilder;
 
