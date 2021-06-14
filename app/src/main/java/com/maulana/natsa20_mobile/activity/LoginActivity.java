@@ -2,40 +2,57 @@ package com.maulana.natsa20_mobile.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import com.maulana.natsa20_mobile.R;
+import com.maulana.natsa20_mobile.server.process.auth.Login;
 import com.maulana.natsa20_mobile.shared_preference.Preferences;
 
 public class LoginActivity extends AppCompatActivity {
+    Context context;
+    private EditText email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if (Preferences.getToken(getApplicationContext()) != null) {
-            Intent i = new Intent(LoginActivity.this, MainActivity.class);
-            startActivity(i);
+        email = findViewById(R.id.email);
+        password = findViewById(R.id.password);
+        context = getApplicationContext();
+
+        if (Preferences.getToken(context) != null) {
+            startMainActivity();
         }
     }
 
-    //onclick funtion
+    //onclick function
     public void login(View view) {
-        Intent i = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(i);
+        new Login(email.getText().toString(), password.getText().toString()).LoginProcess(context);
+
+        if (Preferences.getToken(context) != null) {
+            startMainActivity();
+        }
     }
 
     public void showRegister(View view) {
         Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(i);
+        finish();
     }
 
     public void skip(View view) {
+        startMainActivity();
+    }
+
+    private void startMainActivity() {
         Intent i = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(i);
+        finish();
     }
 
 }

@@ -1,5 +1,7 @@
 package com.maulana.natsa20_mobile.server;
 
+import com.maulana.natsa20_mobile.model.auth.login.LoginForm;
+import com.maulana.natsa20_mobile.model.auth.login.LoginRespone;
 import com.maulana.natsa20_mobile.model.auth.register.RegisterForm;
 import com.maulana.natsa20_mobile.model.auth.register.RegisterRespone;
 import com.maulana.natsa20_mobile.model.products.product.Product;
@@ -14,9 +16,15 @@ import retrofit2.http.Path;
 public interface RouteAPI {
 
     //user
+
+
     //register
     @POST(Server.register)
     Call<RegisterRespone> Register(@Body RegisterForm registerForm);
+
+    //login
+    @POST(Server.login)
+    Call<LoginRespone> Login(@Body LoginForm loginForm);
 
 
 
