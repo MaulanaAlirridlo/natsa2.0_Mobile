@@ -10,6 +10,7 @@ import com.natsa.natsa20_mobile.model.products.products.Products;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -19,19 +20,23 @@ public interface RouteAPI {
 
 
     //register
+    @Headers({"Accept: application/json"})
     @POST(Server.register)
     Call<RegisterRespone> Register(@Body RegisterForm registerForm);
 
     //login
+    @Headers({"Accept: application/json"})
     @POST(Server.login)
     Call<LoginRespone> Login(@Body LoginForm loginForm);
 
 
 
     //product
+    @Headers({"Accept: application/json"})
     @GET(Server.riceFields)
     Call<Products> getRiceFields();
 
-    @GET(Server.riceFields+"/{id}")
-    Call<Product> showRiceFields(@Path("id") int id);
+    @Headers({"Accept: application/json"})
+    @GET(Server.riceFields+"{id}")
+    Call<Product> showRiceField(@Path("id") int id);
 }

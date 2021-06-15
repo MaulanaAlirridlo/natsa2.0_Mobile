@@ -27,7 +27,7 @@ public class GetProduct {
     }
 
     public void getProductFromApi(int id, ProductAdapter adapter) {
-        RetrofitBuilder.endPoint().showRiceFields(id)
+        RetrofitBuilder.endPoint().showRiceField(id)
                 .enqueue(new Callback<Product>() {
                     @Override
                     public void onResponse(Call<Product> call, Response<Product> response) {

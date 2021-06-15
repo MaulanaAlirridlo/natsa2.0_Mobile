@@ -20,6 +20,12 @@ public class GetProducts {
         return productsDataList;
     }
 
+    public void setProducts(List<Data> products, ProductsAdapter adapter) {
+        productsDataList.clear();
+        productsDataList.addAll(products);
+        adapter.notifyDataSetChanged();
+    }
+
     public void getProductsFromApi(ProductsAdapter adapter) {
         RetrofitBuilder.endPoint().getRiceFields()
                 .enqueue(new Callback<Products>() {
@@ -38,10 +44,5 @@ public class GetProducts {
                 });
     }
 
-    public void setProducts(List<Data> products, ProductsAdapter adapter) {
-        productsDataList.clear();
-        productsDataList.addAll(products);
-        adapter.notifyDataSetChanged();
-    }
 
 }
