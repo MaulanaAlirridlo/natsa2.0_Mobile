@@ -26,14 +26,15 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         context = getApplicationContext();
 
-        if (Preferences.getToken(context) != null) {
+        if (Preferences.isLogin(context)) {
             startMainActivity();
         }
     }
 
     //onclick function
     public void login(View view) {
-        new Login(email.getText().toString(), password.getText().toString()).LoginProcess(LoginActivity.this);
+        new Login(email.getText().toString(), password.getText().toString())
+                .LoginProcess(LoginActivity.this);
     }
 
     public void showRegister(View view) {

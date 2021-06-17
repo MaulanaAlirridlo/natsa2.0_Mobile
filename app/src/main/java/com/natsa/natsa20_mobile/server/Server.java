@@ -6,4 +6,5 @@ public class Server {
     public static final String users = "users/";
     public static final String register = users+"register/";
     public static final String login = users+"login/";
+    public static final String logout = users+"logout/";
 }

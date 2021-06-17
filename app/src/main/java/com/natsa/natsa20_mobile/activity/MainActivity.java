@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.natsa.natsa20_mobile.R;
+import com.natsa.natsa20_mobile.server.process.auth.Logout;
+import com.natsa.natsa20_mobile.shared_preference.Preferences;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,15 +39,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             menu.setVisibility(LinearLayout.GONE);
         }
-        if (search.getVisibility() == LinearLayout.VISIBLE) {
-            search.setVisibility(LinearLayout.GONE);
-        }
-        if (accountBeforeLogin.getVisibility() == LinearLayout.VISIBLE) {
-            accountBeforeLogin.setVisibility(LinearLayout.GONE);
-        }
-        if (accountAfterLogin.getVisibility() == LinearLayout.VISIBLE) {
-            accountAfterLogin.setVisibility(LinearLayout.GONE);
-        }
+        checkSearchVisibility();
+        checkAccountVisibility();
     }
 
     public void showSearch(View view) {
@@ -54,20 +49,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             search.setVisibility(LinearLayout.GONE);
         }
-        if (menu.getVisibility() == LinearLayout.VISIBLE) {
-            menu.setVisibility(LinearLayout.GONE);
-        }
-        if (accountBeforeLogin.getVisibility() == LinearLayout.VISIBLE) {
-            accountBeforeLogin.setVisibility(LinearLayout.GONE);
-        }
-        if (accountAfterLogin.getVisibility() == LinearLayout.VISIBLE) {
-            accountAfterLogin.setVisibility(LinearLayout.GONE);
-        }
+        checkMenuVisibility();
+        checkAccountVisibility();
     }
 
     public void showAccount(View view) {
-        Boolean login = false;
-        if (login) {
+        //cek login
+        if (Preferences.isLogin(getApplicationContext())) {
             if (accountAfterLogin.getVisibility() == LinearLayout.GONE) {
                 accountAfterLogin.setVisibility(LinearLayout.VISIBLE);
             } else {
@@ -80,12 +68,8 @@ public class MainActivity extends AppCompatActivity {
                 accountBeforeLogin.setVisibility(LinearLayout.GONE);
             }
         }
-        if (search.getVisibility() == LinearLayout.VISIBLE) {
-            search.setVisibility(LinearLayout.GONE);
-        }
-        if (menu.getVisibility() == LinearLayout.VISIBLE) {
-            menu.setVisibility(LinearLayout.GONE);
-        }
+        checkSearchVisibility();
+        checkMenuVisibility();
     }
 
     public void showSawah(View view) {
@@ -114,10 +98,37 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void logout(View view) {
+        new Logout().LogoutProcess(MainActivity.this);
+    }
+
     private void showBackActivity(String page) {
         Intent i = new Intent(MainActivity.this, BackActivity.class);
         i.putExtra("page", page);
         startActivity(i);
         menu.setVisibility(LinearLayout.GONE);
+    }
+
+
+    //helper funtion
+    private void checkSearchVisibility() {
+        if (search.getVisibility() == LinearLayout.VISIBLE) {
+            search.setVisibility(LinearLayout.GONE);
+        }
+    }
+
+    private void checkMenuVisibility() {
+        if (menu.getVisibility() == LinearLayout.VISIBLE) {
+            menu.setVisibility(LinearLayout.GONE);
+        }
+    }
+
+    private void checkAccountVisibility() {
+        if (accountBeforeLogin.getVisibility() == LinearLayout.VISIBLE) {
+            accountBeforeLogin.setVisibility(LinearLayout.GONE);
+        }
+        if (accountAfterLogin.getVisibility() == LinearLayout.VISIBLE) {
+            accountAfterLogin.setVisibility(LinearLayout.GONE);
+        }
     }
 }

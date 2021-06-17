@@ -1,7 +1,6 @@
 package com.natsa.natsa20_mobile.server.process.auth;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 
 import com.natsa.natsa20_mobile.activity.MainActivity;
@@ -30,7 +29,7 @@ public class Register {
                     public void onResponse(Call<RegisterRespone> call, Response<RegisterRespone> response) {
                         if (response.isSuccessful()){
                             String token = response.body().getToken();
-                            Preferences.setToken(activity, token);
+                            Preferences.setToken(activity.getApplicationContext(), token);
                             Intent i = new Intent(activity, MainActivity.class);
                             activity.startActivity(i);
                             activity.finish();

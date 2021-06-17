@@ -58,4 +58,6 @@
     <string name="sign_in">Sign In</string>
     <string name="account">Account</string>
     <string name="logout">Logout</string>
+    <string name="sawah_dijual">Sawah Dijual</string>
+    <string name="sawah_disewakan">Sawah Disewakan</string>
 </resources>

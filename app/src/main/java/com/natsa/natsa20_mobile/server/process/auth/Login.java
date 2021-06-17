@@ -1,10 +1,8 @@
 package com.natsa.natsa20_mobile.server.process.auth;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 
-import com.natsa.natsa20_mobile.activity.LoginActivity;
 import com.natsa.natsa20_mobile.activity.MainActivity;
 import com.natsa.natsa20_mobile.model.auth.login.LoginForm;
 import com.natsa.natsa20_mobile.model.auth.login.LoginRespone;
@@ -29,7 +27,7 @@ public class Login {
                     public void onResponse(Call<LoginRespone> call, Response<LoginRespone> response) {
                         if (response.isSuccessful()){
                             String token = response.body().getToken();
-                            Preferences.setToken(activity, token);
+                            Preferences.setToken(activity.getApplicationContext(), token);
                             Intent i = new Intent(activity, MainActivity.class);
                             activity.startActivity(i);
                             activity.finish();

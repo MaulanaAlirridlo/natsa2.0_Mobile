@@ -19,4 +19,16 @@ public class Preferences {
     public static String getToken(Context context){
         return getSharedPreference(context).getString(TOKEN,null);
     }
+    public static Boolean isLogin(Context context) {
+        if (getToken(context) != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static void removeToken(Context context) {
+        SharedPreferences.Editor editor = getSharedPreference(context).edit();
+        editor.remove(TOKEN);
+        editor.apply();
+    }
 }
