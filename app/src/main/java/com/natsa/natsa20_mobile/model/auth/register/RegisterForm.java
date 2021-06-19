@@ -5,12 +5,16 @@ public class RegisterForm {
     private String email;
     private String password;
     private String password_confirmation;
+    private String username;
+    private String ktp;
 
-    public RegisterForm(String name, String email, String password, String password_confirmation) {
+    public RegisterForm(String name, String email, String password, String password_confirmation, String username, String ktp) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.password_confirmation = password_confirmation;
+        this.username = username;
+        this.ktp = ktp;
     }
 
     public String getName() {
@@ -43,5 +47,21 @@ public class RegisterForm {
 
     public void setPassword_confirmation(String password_confirmation) {
         this.password_confirmation = password_confirmation;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getKtp() {
+        return ktp;
+    }
+
+    public void setKtp(String ktp) {
+        this.ktp = ktp;
     }
 }

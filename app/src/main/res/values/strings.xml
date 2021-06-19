@@ -60,4 +60,9 @@
     <string name="logout">Logout</string>
     <string name="sawah_dijual">Sawah Dijual</string>
     <string name="sawah_disewakan">Sawah Disewakan</string>
+    <string name="username">Username</string>
+    <string name="ktp">KTP</string>
+    <string name="sudah_punya_akun_masuk">Sudah punya akun? Masuk</string>
+    <string name="kembali">kembali</string>
+    <string name="lanjut">Lanjut</string>
 </resources>

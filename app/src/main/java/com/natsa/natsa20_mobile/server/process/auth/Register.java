@@ -2,6 +2,7 @@ package com.natsa.natsa20_mobile.server.process.auth;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 
 import com.natsa.natsa20_mobile.activity.MainActivity;
 import com.natsa.natsa20_mobile.model.auth.register.RegisterForm;
@@ -17,8 +18,9 @@ public class Register {
     RegisterForm registerForm;
     String TAG = "jkl";
 
-    public Register(String name, String email, String password, String password_confirmation) {
-        registerForm = new RegisterForm(name, email, password, password_confirmation);
+    public Register(String name, String email, String password, String password_confirmation,
+                    String username, String ktp) {
+        registerForm = new RegisterForm(name, email, password, password_confirmation, username, ktp);
     }
 
 

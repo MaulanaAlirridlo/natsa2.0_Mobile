@@ -39,27 +39,27 @@ public class BackActivity extends AppCompatActivity implements
             case "sawah" :
                 loadFragment(new ProductsFragment());
                 title.setText("Sawah");
-            break;
+                break;
             case "detailSawah" :
                 loadFragment(new ProductFragment());
                 title.setText("Detail Sawah");
-            break;
+                break;
             case "about" :
                 loadFragment(new AboutFragment());
                 title.setText("About");
-            break;
+                break;
             case "FAQ" :
                 loadFragment(new FaqFragment());
                 title.setText("FAQ");
-            break;
+                break;
             case "contact" :
                 loadFragment(new ContactFragment());
                 title.setText("Our Contact");
-            break;
+                break;
             case "email" :
                 loadFragment(new EmailFragment());
                 title.setText("Send Email");
-            break;
+                break;
         }
     }
 
@@ -75,7 +75,7 @@ public class BackActivity extends AppCompatActivity implements
 
 
     //fragment loader
-    private  void loadFragment(Fragment fragment) {
+    private void loadFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.frameLayout, fragment);

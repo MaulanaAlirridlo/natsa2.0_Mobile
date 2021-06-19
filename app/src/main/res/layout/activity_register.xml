@@ -29,74 +29,40 @@
             android:textColor="@color/black"
             android:textSize="25sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/name"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/name"
+        <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:imeOptions="actionNext"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:maxLines="1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/email"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:imeOptions="actionNext"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress"
-            android:maxLines="1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/password"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:imeOptions="actionNext"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:maxLines="1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/confirm_password"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/password_confirmation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:imeOptions="actionNext"
-            android:importantForAutofill="no"
-            android:inputType="textPassword"
-            android:maxLines="1" />
+            android:layout_height="wrap_content" />
 
         <Button
+            android:id="@+id/nextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="nextFragment"
+            android:text="@string/lanjut"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+        <Button
+            android:id="@+id/registerButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:onClick="signup"
             android:text="@string/signup"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="@string/kembali"
+            android:onClick="prevFragment"
+            android:visibility="gone" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -104,7 +70,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:onClick="showLogin"
-            android:text="@string/already_have_an_account_sign_in" />
+            android:text="@string/sudah_punya_akun_masuk" />
 
     </LinearLayout>
 
