@@ -16,7 +16,6 @@ import retrofit2.Response;
 
 public class Register {
     RegisterForm registerForm;
-    String TAG = "jkl";
 
     public Register(String name, String email, String password, String password_confirmation,
                     String username, String ktp) {

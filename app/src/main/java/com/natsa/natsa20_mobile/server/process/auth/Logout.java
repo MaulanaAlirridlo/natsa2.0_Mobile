@@ -3,6 +3,7 @@ package com.natsa.natsa20_mobile.server.process.auth;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.natsa.natsa20_mobile.activity.LoginActivity;
 import com.natsa.natsa20_mobile.model.auth.logout.LogoutRespone;
@@ -18,7 +19,7 @@ public class Logout {
 
     public void LogoutProcess(Activity activity) {
         context = activity.getApplicationContext();
-        RetrofitBuilder.endPoint().Logout(Preferences.getToken(context))
+        RetrofitBuilder.endPoint().Logout("Bearer "+Preferences.getToken(context))
                 .enqueue(new Callback<LogoutRespone>() {
 
                     @Override

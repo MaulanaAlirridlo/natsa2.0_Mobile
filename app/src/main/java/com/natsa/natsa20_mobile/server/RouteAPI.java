@@ -32,6 +32,7 @@ public interface RouteAPI {
     Call<LoginRespone> Login(@Body LoginForm loginForm);
 
     //logout
+    @Headers({"Accept: application/json"})
     @POST(Server.logout)
     Call<LogoutRespone> Logout(@Header("Authorization") String token);
 
