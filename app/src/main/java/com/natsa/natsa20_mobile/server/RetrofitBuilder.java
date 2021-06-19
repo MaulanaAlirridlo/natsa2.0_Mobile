@@ -9,7 +9,7 @@ public class RetrofitBuilder {
 
     public static RouteAPI endPoint(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Server.url)
+                .baseUrl(Server.urlApi)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit.create(RouteAPI.class);

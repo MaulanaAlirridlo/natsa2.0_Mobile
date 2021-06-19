@@ -1,6 +1,8 @@
 package com.natsa.natsa20_mobile.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +10,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.badoo.mobile.util.WeakHandler;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.model.products.products.Data;
+import com.natsa.natsa20_mobile.server.Server;
 
 import java.util.List;
 
@@ -36,7 +46,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     @Override
     public void onBindViewHolder(ProductsViewHolder holder, int position) {
-//        holder.productsImage.set(productsDataList.get(position).());
+        glideLoader(holder, position);
         holder.productsTitle.setText(productsDataList.get(position).getTitle());
         holder.productsPrice.setText(String.valueOf(productsDataList.get(position).getHarga()));
 
@@ -82,5 +92,34 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     public interface showDetailSawahListener {
         void showDetailSawah(int id);
+    }
+
+    //glide image loader and setter
+    private void glideLoader(ProductsViewHolder holder, int position) {
+
+        final WeakHandler weakHandler = new WeakHandler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                glideLoader(holder, position);
+            }
+        };
+
+        Glide.with(context)
+                .load(Server.storage +productsDataList.get(position).getPhoto().getPhoto_path())
+                .centerCrop()
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        weakHandler.postDelayed(runnable, 1);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        return false;
+                    }
+                })
+                .into(holder.productsImage);
     }
 }
