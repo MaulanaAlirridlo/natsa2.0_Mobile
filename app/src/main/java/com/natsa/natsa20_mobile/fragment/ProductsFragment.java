@@ -34,17 +34,9 @@ public class ProductsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swipeRefresh);
-        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getProducts.getProductsFromApi(adapter);
-                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        pullToRefresh.setRefreshing(false);
-                    }
-                }, 700);
-            }
+        pullToRefresh.setOnRefreshListener(() -> {
+            getProducts.getProductsFromApi(adapter);
+            new Handler(Looper.getMainLooper()).postDelayed(() -> pullToRefresh.setRefreshing(false), 700);
         });
 
         return view;

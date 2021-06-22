@@ -25,8 +25,6 @@ public class ProfileFragment extends Fragment {
         name = view.findViewById(R.id.name);
         email = view.findViewById(R.id.email);
 
-        
-
 
         return view;
     }

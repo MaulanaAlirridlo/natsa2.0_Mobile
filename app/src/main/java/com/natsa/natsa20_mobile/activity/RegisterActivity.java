@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,17 +46,17 @@ public class RegisterActivity extends AppCompatActivity {
     public void nextFragment(View view) {
         getFragmentInput();
         Fragment fragment = getLastFragment();
-        switch (fragment.getClass().getSimpleName()){
-            case "RegisterNameUsernameFragment" :
+        switch (fragment.getClass().getSimpleName()) {
+            case "RegisterNameUsernameFragment":
                 addFragment(new RegisterKtpFragment());
                 back.setVisibility(TextView.VISIBLE);
                 break;
-            case "RegisterKtpFragment" :
+            case "RegisterKtpFragment":
                 addFragment(new RegisterEmailPasswordFragment());
                 registerButton.setVisibility(Button.VISIBLE);
                 nextButton.setVisibility(Button.GONE);
                 break;
-            case "RegisterEmailPasswordFragment" :
+            case "RegisterEmailPasswordFragment":
 
                 break;
         }
@@ -79,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    public void showLogin(View view){
+    public void showLogin(View view) {
         Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(i);
         finish();
@@ -96,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     //get active/last fragment
     private Fragment getLastFragment() {
-        int fragementIndex = getSupportFragmentManager().getBackStackEntryCount()-1;
+        int fragementIndex = getSupportFragmentManager().getBackStackEntryCount() - 1;
         FragmentManager.BackStackEntry backEntry = getSupportFragmentManager()
                 .getBackStackEntryAt(fragementIndex);
         String tag = backEntry.getName();
@@ -106,20 +105,20 @@ public class RegisterActivity extends AppCompatActivity {
     //get input from last fragment
     private void getFragmentInput() {
         Fragment fragment = getLastFragment();
-        switch (fragment.getClass().getSimpleName()){
-            case "RegisterNameUsernameFragment" :
-                name = ((EditText)fragment.getView().findViewById(R.id.name)).getText().toString();
-                username = ((EditText)fragment.getView()
+        switch (fragment.getClass().getSimpleName()) {
+            case "RegisterNameUsernameFragment":
+                name = ((EditText) fragment.getView().findViewById(R.id.name)).getText().toString();
+                username = ((EditText) fragment.getView()
                         .findViewById(R.id.username)).getText().toString();
                 break;
-            case "RegisterKtpFragment" :
-                ktp = ((EditText)fragment.getView().findViewById(R.id.ktp)).getText().toString();
+            case "RegisterKtpFragment":
+                ktp = ((EditText) fragment.getView().findViewById(R.id.ktp)).getText().toString();
                 break;
-            case "RegisterEmailPasswordFragment" :
-                email = ((EditText)fragment.getView().findViewById(R.id.email)).getText().toString();
-                password = ((EditText)fragment.getView()
+            case "RegisterEmailPasswordFragment":
+                email = ((EditText) fragment.getView().findViewById(R.id.email)).getText().toString();
+                password = ((EditText) fragment.getView()
                         .findViewById(R.id.password)).getText().toString();
-                password_confirmation = ((EditText)fragment.getView()
+                password_confirmation = ((EditText) fragment.getView()
                         .findViewById(R.id.password_confirmation)).getText().toString();
                 break;
         }

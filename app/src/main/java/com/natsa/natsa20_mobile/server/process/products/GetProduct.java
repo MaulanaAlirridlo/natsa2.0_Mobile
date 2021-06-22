@@ -1,5 +1,7 @@
 package com.natsa.natsa20_mobile.server.process.products;
 
+import androidx.annotation.NonNull;
+
 import com.natsa.natsa20_mobile.adapter.ProductAdapter;
 import com.natsa.natsa20_mobile.model.products.product.Product;
 import com.natsa.natsa20_mobile.model.products.product.RiceField;
@@ -14,7 +16,7 @@ import retrofit2.Response;
 
 public class GetProduct {
 
-    private static List<RiceField> product = new ArrayList<RiceField>();
+    private final static List<RiceField> product = new ArrayList<>();
 
     public static List<RiceField> getProductList() {
         return product;
@@ -30,15 +32,16 @@ public class GetProduct {
         RetrofitBuilder.endPoint().showRiceField(id)
                 .enqueue(new Callback<Product>() {
                     @Override
-                    public void onResponse(Call<Product> call, Response<Product> response) {
+                    public void onResponse(@NonNull Call<Product> call, @NonNull Response<Product> response) {
                         if (response.isSuccessful()) {
+                            assert response.body() != null;
                             List<RiceField> riceField = response.body().getRiceField();
                             setProductList(riceField, adapter);
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Product> call, Throwable t) {
+                    public void onFailure(@NonNull Call<Product> call, @NonNull Throwable t) {
                         t.printStackTrace();
                     }
                 });

@@ -25,18 +25,8 @@ public class ContactFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_contact, container, false);
         emailLayout = view.findViewById(R.id.emailLayout);
         phoneLayout = view.findViewById(R.id.phoneLayout);
-        emailLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showEmail(v);
-            }
-        });
-        phoneLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showCall(v);
-            }
-        });
+        emailLayout.setOnClickListener(this::showEmail);
+        phoneLayout.setOnClickListener(this::showCall);
         return view;
     }
 

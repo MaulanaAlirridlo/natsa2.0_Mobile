@@ -21,14 +21,14 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/menu"
             android:onClick="showMenu"
-            android:src="@drawable/ic_menu" />
+            app:srcCompat="@drawable/ic_menu" />
 
         <ImageView
             android:layout_width="55dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/search"
             android:onClick="showSearch"
-            android:src="@drawable/ic_search" />
+            app:srcCompat="@drawable/ic_search" />
 
         <TextView
             android:layout_width="192dp"
@@ -42,14 +42,14 @@
             android:layout_width="55dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/bookmark"
-            android:src="@drawable/ic_bookmark" />
+            app:srcCompat="@drawable/ic_bookmark" />
 
         <ImageView
             android:layout_width="55dp"
             android:layout_height="match_parent"
             android:contentDescription="@string/account"
             android:onClick="showAccount"
-            android:src="@drawable/ic_account" />
+            app:srcCompat="@drawable/ic_account" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -71,13 +71,6 @@
             android:onClick="showSawah"
             android:padding="10dp"
             android:text="@string/sawah"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="@string/categories"
             android:textSize="20sp" />
 
         <TextView
@@ -127,7 +120,7 @@
             android:contentDescription="@string/back"
             android:paddingEnd="10dp"
             android:paddingRight="10dp"
-            android:src="@drawable/ic_back"
+            app:srcCompat="@drawable/ic_back"
             tools:ignore="RtlSymmetry" />
 
         <EditText
@@ -146,7 +139,7 @@
             android:contentDescription="@string/mic"
             android:paddingStart="10dp"
             android:paddingLeft="10dp"
-            android:src="@drawable/ic_mic"
+            app:srcCompat="@drawable/ic_mic"
             tools:ignore="RtlSymmetry" />
 
     </LinearLayout>

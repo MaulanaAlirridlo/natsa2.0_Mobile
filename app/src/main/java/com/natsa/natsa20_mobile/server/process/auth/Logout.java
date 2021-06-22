@@ -3,7 +3,8 @@ package com.natsa.natsa20_mobile.server.process.auth;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.natsa.natsa20_mobile.activity.LoginActivity;
 import com.natsa.natsa20_mobile.model.auth.logout.LogoutRespone;
@@ -23,7 +24,7 @@ public class Logout {
                 .enqueue(new Callback<LogoutRespone>() {
 
                     @Override
-                    public void onResponse(Call<LogoutRespone> call, Response<LogoutRespone> response) {
+                    public void onResponse(@NonNull Call<LogoutRespone> call, @NonNull Response<LogoutRespone> response) {
                         if (response.isSuccessful()) {
                             Preferences.removeUser(context);
                             Intent i = new Intent(activity, LoginActivity.class);
@@ -33,7 +34,7 @@ public class Logout {
                     }
 
                     @Override
-                    public void onFailure(Call<LogoutRespone> call, Throwable t) {
+                    public void onFailure(@NonNull Call<LogoutRespone> call, @NonNull Throwable t) {
                         t.printStackTrace();
                     }
                 });

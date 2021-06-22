@@ -88,13 +88,13 @@ public class MainActivity extends AppCompatActivity {
         showBackActivity("contact");
     }
 
-    public void showRegister(View view){
+    public void showRegister(View view) {
         Intent i = new Intent(MainActivity.this, RegisterActivity.class);
         startActivity(i);
         finish();
     }
 
-    public void showLogin(View view){
+    public void showLogin(View view) {
         Intent i = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(i);
         finish();

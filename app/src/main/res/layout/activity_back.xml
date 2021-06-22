@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/menu"
             android:onClick="back"
-            android:src="@drawable/ic_back" />
+            app:srcCompat="@drawable/ic_back" />
 
         <TextView
             android:id="@+id/title"

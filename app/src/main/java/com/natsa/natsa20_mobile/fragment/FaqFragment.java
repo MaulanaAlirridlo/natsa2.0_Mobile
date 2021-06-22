@@ -29,29 +29,23 @@ public class FaqFragment extends Fragment {
         jawaban1 = view.findViewById(R.id.jawaban1);
         jawaban2 = view.findViewById(R.id.jawaban2);
 
-        pertanyaan1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (jawaban1.getVisibility() == TextView.GONE) {
-                    jawaban1.setVisibility(TextView.VISIBLE);
-                    plusPertanyaan1.setText("-");
-                } else {
-                    jawaban1.setVisibility(TextView.GONE);
-                    plusPertanyaan1.setText("+");
-                }
+        pertanyaan1.setOnClickListener(v -> {
+            if (jawaban1.getVisibility() == TextView.GONE) {
+                jawaban1.setVisibility(TextView.VISIBLE);
+                plusPertanyaan1.setText("-");
+            } else {
+                jawaban1.setVisibility(TextView.GONE);
+                plusPertanyaan1.setText("+");
             }
         });
 
-        pertanyaan2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (jawaban2.getVisibility() == TextView.GONE) {
-                    jawaban2.setVisibility(TextView.VISIBLE);
-                    plusPertanyaan2.setText("-");
-                } else {
-                    jawaban2.setVisibility(TextView.GONE);
-                    plusPertanyaan2.setText("+");
-                }
+        pertanyaan2.setOnClickListener(v -> {
+            if (jawaban2.getVisibility() == TextView.GONE) {
+                jawaban2.setVisibility(TextView.VISIBLE);
+                plusPertanyaan2.setText("-");
+            } else {
+                jawaban2.setVisibility(TextView.GONE);
+                plusPertanyaan2.setText("+");
             }
         });
 

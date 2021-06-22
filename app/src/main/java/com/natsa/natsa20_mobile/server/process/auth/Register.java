@@ -2,7 +2,8 @@ package com.natsa.natsa20_mobile.server.process.auth;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.natsa.natsa20_mobile.activity.MainActivity;
 import com.natsa.natsa20_mobile.model.auth.register.RegisterForm;
@@ -27,9 +28,10 @@ public class Register {
         RetrofitBuilder.endPoint().Register(registerForm)
                 .enqueue(new Callback<RegisterRespone>() {
                     @Override
-                    public void onResponse(Call<RegisterRespone> call, Response<RegisterRespone> response) {
+                    public void onResponse(@NonNull Call<RegisterRespone> call, @NonNull Response<RegisterRespone> response) {
                         if (response.isSuccessful()){
                             RegisterRespone res = response.body();
+                            assert res != null;
                             RegisterRespone.User resUser = res.getUser();
                             Preferences.setUser(activity.getApplicationContext(), res.getToken(),
                                     resUser.getId(), resUser.getName(), resUser.getEmail(),
@@ -41,7 +43,7 @@ public class Register {
                         }
                     }
                     @Override
-                    public void onFailure(Call<RegisterRespone> call, Throwable t) {
+                    public void onFailure(@NonNull Call<RegisterRespone> call, @NonNull Throwable t) {
                         t.printStackTrace();
                     }
                 });

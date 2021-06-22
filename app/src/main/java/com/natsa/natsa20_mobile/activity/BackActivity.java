@@ -37,31 +37,31 @@ public class BackActivity extends AppCompatActivity implements
 
         page = getIntent().getExtras().getString("page");
         switch (page) {
-            case "sawah" :
+            case "sawah":
                 loadFragment(new ProductsFragment());
                 title.setText("Sawah");
                 break;
-            case "detailSawah" :
+            case "detailSawah":
                 loadFragment(new ProductFragment());
                 title.setText("Detail Sawah");
                 break;
-            case "about" :
+            case "about":
                 loadFragment(new AboutFragment());
                 title.setText("About");
                 break;
-            case "FAQ" :
+            case "FAQ":
                 loadFragment(new FaqFragment());
                 title.setText("FAQ");
                 break;
-            case "contact" :
+            case "contact":
                 loadFragment(new ContactFragment());
                 title.setText("Our Contact");
                 break;
-            case "email" :
+            case "email":
                 loadFragment(new EmailFragment());
                 title.setText("Send Email");
                 break;
-            case "account" :
+            case "account":
                 loadFragment(new AccountFragment());
                 title.setText(getIntent().getExtras().getString("accountPage"));
                 break;
@@ -88,7 +88,7 @@ public class BackActivity extends AppCompatActivity implements
     }
 
     // process
-    private void showProces(String page, int id){
+    private void showProces(String page, int id) {
         Intent i = new Intent(BackActivity.this, BackActivity.class);
         i.putExtra("page", page);
         i.putExtra("id", id);

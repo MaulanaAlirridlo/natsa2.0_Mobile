@@ -19,12 +19,12 @@ import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
 import com.natsa.natsa20_mobile.server.process.products.GetProduct;
 import com.natsa.natsa20_mobile.server.process.products.GetProducts;
 
-public class ProductFragment extends Fragment{
+public class ProductFragment extends Fragment {
 
     private ProductAdapter productAdapter;
     private ProductsAdapter productsAdapter;
-    private GetProduct getProduct = new GetProduct();
-    private GetProducts getProducts = new GetProducts();
+    private final GetProduct getProduct = new GetProduct();
+    private final GetProducts getProducts = new GetProducts();
 
 
     @Override
@@ -47,18 +47,10 @@ public class ProductFragment extends Fragment{
         productsRecyclerView.setAdapter(productsAdapter);
 
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swipeRefresh);
-        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getProduct.getProductFromApi((Integer) getActivity().getIntent().getExtras().get("id"), productAdapter);
-                getProducts.getProductsFromApi(productsAdapter);
-                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        pullToRefresh.setRefreshing(false);
-                    }
-                }, 700);
-            }
+        pullToRefresh.setOnRefreshListener(() -> {
+            getProduct.getProductFromApi((Integer) getActivity().getIntent().getExtras().get("id"), productAdapter);
+            getProducts.getProductsFromApi(productsAdapter);
+            new Handler(Looper.getMainLooper()).postDelayed(() -> pullToRefresh.setRefreshing(false), 700);
         });
 
         return view;

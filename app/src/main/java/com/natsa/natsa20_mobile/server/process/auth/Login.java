@@ -3,13 +3,13 @@ package com.natsa.natsa20_mobile.server.process.auth;
 import android.app.Activity;
 import android.content.Intent;
 
+import androidx.annotation.NonNull;
+
 import com.natsa.natsa20_mobile.activity.MainActivity;
 import com.natsa.natsa20_mobile.model.auth.login.LoginForm;
 import com.natsa.natsa20_mobile.model.auth.login.LoginRespone;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
 import com.natsa.natsa20_mobile.shared_preference.Preferences;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,9 +26,10 @@ public class Login {
         RetrofitBuilder.endPoint().Login(loginForm)
                 .enqueue(new Callback<LoginRespone>() {
                     @Override
-                    public void onResponse(Call<LoginRespone> call, Response<LoginRespone> response) {
-                        if (response.isSuccessful()){
+                    public void onResponse(@NonNull Call<LoginRespone> call, @NonNull Response<LoginRespone> response) {
+                        if (response.isSuccessful()) {
                             LoginRespone res = response.body();
+                            assert res != null;
                             LoginRespone.User resUser = res.getUser();
                             Preferences.setUser(activity.getApplicationContext(), res.getToken(),
                                     resUser.getId(), resUser.getName(), resUser.getEmail(),
@@ -39,8 +40,9 @@ public class Login {
                             activity.finish();
                         }
                     }
+
                     @Override
-                    public void onFailure(Call<LoginRespone> call, Throwable t) {
+                    public void onFailure(@NonNull Call<LoginRespone> call, @NonNull Throwable t) {
                         t.printStackTrace();
                     }
                 });

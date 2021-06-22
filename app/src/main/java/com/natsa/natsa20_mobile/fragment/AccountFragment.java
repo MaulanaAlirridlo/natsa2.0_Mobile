@@ -1,6 +1,5 @@
 package com.natsa.natsa20_mobile.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,7 +18,7 @@ import com.natsa.natsa20_mobile.fragment.Account.JualSewakanFragment;
 import com.natsa.natsa20_mobile.fragment.Account.ProfileFragment;
 
 public class AccountFragment extends Fragment {
-    private TextView dashboard, bookmark, jualSewakan, profile, title;
+    TextView dashboard, bookmark, jualSewakan, profile, title;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,33 +31,13 @@ public class AccountFragment extends Fragment {
         profile = view.findViewById(R.id.profile);
         title = getActivity().findViewById(R.id.title);
 
-        dashboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPage("Dashboard");
-            }
-        });
+        dashboard.setOnClickListener(v -> openPage("Dashboard"));
 
-        bookmark.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPage("Bookmark");
-            }
-        });
+        bookmark.setOnClickListener(v -> openPage("Bookmark"));
 
-        jualSewakan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPage("Jual/Sewakan");
-            }
-        });
+        jualSewakan.setOnClickListener(v -> openPage("Jual/Sewakan"));
 
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPage("Profile");
-            }
-        });
+        profile.setOnClickListener(v -> openPage("Profile"));
 
         openPage("Dashboard");
 

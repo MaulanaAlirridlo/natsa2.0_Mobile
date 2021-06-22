@@ -46,7 +46,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView productTitle, productPrice, address,
+        private final TextView productTitle, productPrice, address,
         //            region,
         certification, type
 //        , category

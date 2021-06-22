@@ -114,10 +114,6 @@ public class Preferences {
     }
 
     public static Boolean isLogin(Context context) {
-        if (getToken(context) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return getToken(context) != null;
     }
 }

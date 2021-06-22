@@ -7,7 +7,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="275dp"
-        android:src="@drawable/bg" />
+        android:src="@drawable/bg"
+        android:contentDescription="@string/productsimage"/>
 
     <TextView
         android:id="@+id/productTitle"

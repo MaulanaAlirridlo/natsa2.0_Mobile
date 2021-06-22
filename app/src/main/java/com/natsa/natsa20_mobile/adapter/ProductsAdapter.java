@@ -2,7 +2,6 @@ package com.natsa.natsa20_mobile.adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,7 @@ import java.util.List;
 
 public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
 
-    private Context context;
+    private final Context context;
     private final List<Data> productsDataList;
     private showDetailSawahListener showDetailSawahListener;
 
@@ -45,7 +44,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     }
 
     @Override
-    public void onBindViewHolder(ProductsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProductsViewHolder holder, int position) {
         glideLoader(holder, position);
         holder.productsTitle.setText(productsDataList.get(position).getTitle());
         holder.productsPrice.setText(String.valueOf(productsDataList.get(position).getHarga()));
@@ -62,7 +61,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         return (productsDataList != null) ? productsDataList.size() : 0;
     }
 
-    public class ProductsViewHolder extends  RecyclerView.ViewHolder {
+    public class ProductsViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView productsImage;
         private final TextView productsTitle, productsPrice;
@@ -75,13 +74,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
             productsTitle = v.findViewById(R.id.productsTitle);
             productsPrice = v.findViewById(R.id.productsPrice);
 
-            v.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    position = getAdapterPosition();
-                    id = productsDataList.get(position).getId();
-                    show(id);
-                }
+            v.setOnClickListener(v1 -> {
+                position = getAdapterPosition();
+                id = productsDataList.get(position).getId();
+                show(id);
             });
         }
     }
@@ -98,15 +94,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     private void glideLoader(ProductsViewHolder holder, int position) {
 
         final WeakHandler weakHandler = new WeakHandler();
-        final Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                glideLoader(holder, position);
-            }
-        };
+        final Runnable runnable = () -> glideLoader(holder, position);
 
         Glide.with(context)
-                .load(Server.storage +productsDataList.get(position).getPhoto().getPhoto_path())
+                .load(Server.storage + productsDataList.get(position).getPhoto().getPhoto_path())
                 .centerCrop()
                 .listener(new RequestListener<Drawable>() {
                     @Override
