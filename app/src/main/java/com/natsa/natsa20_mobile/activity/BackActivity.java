@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
 import com.natsa.natsa20_mobile.fragment.AboutFragment;
+import com.natsa.natsa20_mobile.fragment.AccountFragment;
 import com.natsa.natsa20_mobile.fragment.ContactFragment;
 import com.natsa.natsa20_mobile.fragment.EmailFragment;
 import com.natsa.natsa20_mobile.fragment.FaqFragment;
@@ -59,6 +60,10 @@ public class BackActivity extends AppCompatActivity implements
             case "email" :
                 loadFragment(new EmailFragment());
                 title.setText("Send Email");
+                break;
+            case "account" :
+                loadFragment(new AccountFragment());
+                title.setText(getIntent().getExtras().getString("accountPage"));
                 break;
         }
     }

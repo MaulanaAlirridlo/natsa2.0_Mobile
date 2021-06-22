@@ -65,4 +65,16 @@
     <string name="sudah_punya_akun_masuk">Sudah punya akun? Masuk</string>
     <string name="kembali">kembali</string>
     <string name="lanjut">Lanjut</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="jual_sewakan">Jual/Sewakan</string>
+    <string name="profile">Profile</string>
+    <string name="nama">Nama</string>
+    <string name="role">Role</string>
+    <string name="profile_information">Profile Information</string>
+    <string name="update_password">Update Password</string>
+    <string name="save">Save</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="once_your_account_is_deleted_all_of_its_resources_and_data_will_be_permanently_deleted_before_deleting_your_account_please_download_any_data_or_information_that_you_wish_to_retain">Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.</string>
+    <string name="delete_account">DELETE ACCOUNT</string>
 </resources>

@@ -91,11 +91,20 @@ public class MainActivity extends AppCompatActivity {
     public void showRegister(View view){
         Intent i = new Intent(MainActivity.this, RegisterActivity.class);
         startActivity(i);
+        finish();
     }
 
     public void showLogin(View view){
         Intent i = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(i);
+        finish();
+    }
+
+    public void showDashboard(View view) {
+        Intent i = new Intent(MainActivity.this, BackActivity.class);
+        i.putExtra("page", "account");
+        startActivity(i);
+        accountAfterLogin.setVisibility(LinearLayout.GONE);
     }
 
     public void logout(View view) {
