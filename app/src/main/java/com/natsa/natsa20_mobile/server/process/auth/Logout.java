@@ -25,7 +25,7 @@ public class Logout {
                     @Override
                     public void onResponse(Call<LogoutRespone> call, Response<LogoutRespone> response) {
                         if (response.isSuccessful()) {
-                            Preferences.removeToken(context);
+                            Preferences.removeUser(context);
                             Intent i = new Intent(activity, LoginActivity.class);
                             activity.startActivity(i);
                             activity.finish();

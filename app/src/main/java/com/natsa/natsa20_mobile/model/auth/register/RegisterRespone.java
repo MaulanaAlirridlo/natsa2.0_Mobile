@@ -21,12 +21,22 @@ public class RegisterRespone {
     }
 
     public class User {
+        private String ktp;
         private String name;
         private String email;
+        private String username;
         private String updated_at;
         private String created_at;
         private int id;
         private String profile_photo_url;
+
+        public String getKtp() {
+            return ktp;
+        }
+
+        public void setKtp(String ktp) {
+            this.ktp = ktp;
+        }
 
         public String getName() {
             return name;
@@ -42,6 +52,14 @@ public class RegisterRespone {
 
         public void setEmail(String email) {
             this.email = email;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
         }
 
         public String getUpdated_at() {

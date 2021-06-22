@@ -29,8 +29,12 @@ public class Register {
                     @Override
                     public void onResponse(Call<RegisterRespone> call, Response<RegisterRespone> response) {
                         if (response.isSuccessful()){
-                            String token = response.body().getToken();
-                            Preferences.setToken(activity.getApplicationContext(), token);
+                            RegisterRespone res = response.body();
+                            RegisterRespone.User resUser = res.getUser();
+                            Preferences.setUser(activity.getApplicationContext(), res.getToken(),
+                                    resUser.getId(), resUser.getName(), resUser.getEmail(),
+                                    resUser.getUsername(), resUser.getKtp(),
+                                    resUser.getProfile_photo_url());
                             Intent i = new Intent(activity, MainActivity.class);
                             activity.startActivity(i);
                             activity.finish();

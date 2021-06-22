@@ -21,7 +21,7 @@ public class LoginRespone {
     }
 
     public class User {
-
+        private int id;
         private String name;
         private String email;
         private String email_verified_at;
@@ -30,7 +30,17 @@ public class LoginRespone {
         private String created_at;
         private String updated_at;
         private String role;
+        private String username;
+        private String ktp;
         private String profile_photo_url;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
 
         public String getName() {
             return name;
@@ -96,6 +106,22 @@ public class LoginRespone {
             this.role = role;
         }
 
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getKtp() {
+            return ktp;
+        }
+
+        public void setKtp(String ktp) {
+            this.ktp = ktp;
+        }
+
         public String getProfile_photo_url() {
             return profile_photo_url;
         }
@@ -103,6 +129,5 @@ public class LoginRespone {
         public void setProfile_photo_url(String profile_photo_url) {
             this.profile_photo_url = profile_photo_url;
         }
-
     }
 }

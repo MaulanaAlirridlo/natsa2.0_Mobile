@@ -9,6 +9,8 @@ import com.natsa.natsa20_mobile.model.auth.login.LoginRespone;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
 import com.natsa.natsa20_mobile.shared_preference.Preferences;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -26,8 +28,12 @@ public class Login {
                     @Override
                     public void onResponse(Call<LoginRespone> call, Response<LoginRespone> response) {
                         if (response.isSuccessful()){
-                            String token = response.body().getToken();
-                            Preferences.setToken(activity.getApplicationContext(), token);
+                            LoginRespone res = response.body();
+                            LoginRespone.User resUser = res.getUser();
+                            Preferences.setUser(activity.getApplicationContext(), res.getToken(),
+                                    resUser.getId(), resUser.getName(), resUser.getEmail(),
+                                    resUser.getUsername(), resUser.getKtp(),
+                                    resUser.getProfile_photo_url());
                             Intent i = new Intent(activity, MainActivity.class);
                             activity.startActivity(i);
                             activity.finish();
