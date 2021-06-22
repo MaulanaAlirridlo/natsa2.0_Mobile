@@ -19,7 +19,7 @@ import com.natsa.natsa20_mobile.fragment.Account.JualSewakanFragment;
 import com.natsa.natsa20_mobile.fragment.Account.ProfileFragment;
 
 public class AccountFragment extends Fragment {
-    TextView dashboard, bookmark, jualSewakan, profile;
+    private TextView dashboard, bookmark, jualSewakan, profile, title;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,6 +30,7 @@ public class AccountFragment extends Fragment {
         bookmark = view.findViewById(R.id.bookmark);
         jualSewakan = view.findViewById(R.id.jualSewakan);
         profile = view.findViewById(R.id.profile);
+        title = getActivity().findViewById(R.id.title);
 
         dashboard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +66,7 @@ public class AccountFragment extends Fragment {
     }
 
     private void openPage(String page) {
+        title.setText(page);
         switch (page) {
             case "Dashboard":
                 loadFragment(new DashboardFragment());
