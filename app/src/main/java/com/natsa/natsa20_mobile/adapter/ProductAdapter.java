@@ -1,8 +1,10 @@
 package com.natsa.natsa20_mobile.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,13 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.model.products.product.RiceField;
+import com.natsa.natsa20_mobile.server.process.bookmark.AddBookmark;
 
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+    private final Context context;
     private final List<RiceField> productDataList;
 
-    public ProductAdapter(List<RiceField> productsDataList) {
+    public ProductAdapter(Context context, List<RiceField> productsDataList) {
+        this.context = context;
         this.productDataList = productsDataList;
     }
 
@@ -37,6 +42,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.certification.setText(productDataList.get(position).getSertifikasi());
         holder.type.setText(productDataList.get(position).getTipe());
 //        holder.category.setText(productDataList.get(position).getTipe());
+//        holder.addBookmarkButton.setOnClickListener(v -> {
+//            new AddBookmark().addBookmarkProcess(productDataList.get(position).getId(), new BookmarkAdapater(), context);
+//        });
     }
 
     @Override
@@ -51,6 +59,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         certification, type
 //        , category
                 ;
+//        private final Button addBookmarkButton;
 
         public ProductViewHolder(View view) {
             super(view);
@@ -61,6 +70,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             certification = view.findViewById(R.id.certification);
             type = view.findViewById(R.id.type);
 //        category = view.findViewById(R.id.category);
+//            addBookmarkButton = view.findViewById(R.id.addBookmarkButton);
         }
     }
 

@@ -22,9 +22,9 @@ public class GetProduct {
         return product;
     }
 
-    public static void setProductList(List<RiceField> riceField, ProductAdapter adapter) {
+    public static void setProductList(RiceField riceField, ProductAdapter adapter) {
         product.clear();
-        product.addAll(riceField);
+        product.add(riceField);
         adapter.notifyDataSetChanged();
     }
 
@@ -35,7 +35,7 @@ public class GetProduct {
                     public void onResponse(@NonNull Call<Product> call, @NonNull Response<Product> response) {
                         if (response.isSuccessful()) {
                             assert response.body() != null;
-                            List<RiceField> riceField = response.body().getRiceField();
+                            RiceField riceField = response.body().getRiceField();
                             setProductList(riceField, adapter);
                         }
                     }

@@ -5,7 +5,7 @@ import java.util.List;
 public class Product {
 
     private Status status;
-    private List<RiceField> riceField;
+    private RiceField riceField;
 
     public Status getStatus() {
         return status;
@@ -15,11 +15,11 @@ public class Product {
         this.status = status;
     }
 
-    public List<RiceField> getRiceField() {
+    public RiceField getRiceField() {
         return riceField;
     }
 
-    public void setRiceField(List<RiceField> riceField) {
+    public void setRiceField(RiceField riceField) {
         this.riceField = riceField;
     }
 }
