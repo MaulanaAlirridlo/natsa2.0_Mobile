@@ -101,16 +101,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showDashboard(View view) {
-        Intent i = new Intent(MainActivity.this, BackActivity.class);
-        i.putExtra("page", "account");
-        startActivity(i);
-        accountAfterLogin.setVisibility(LinearLayout.GONE);
+        showAccountPage("Dashboard");
+    }
+
+    public void showBookmark(View view) {
+        showAccountPage("Bookmark");
     }
 
     public void logout(View view) {
         new Logout().LogoutProcess(MainActivity.this);
     }
 
+    //helper funtion
     private void showBackActivity(String page) {
         Intent i = new Intent(MainActivity.this, BackActivity.class);
         i.putExtra("page", page);
@@ -118,8 +120,15 @@ public class MainActivity extends AppCompatActivity {
         menu.setVisibility(LinearLayout.GONE);
     }
 
+    private void showAccountPage(String page) {
+        Intent i = new Intent(MainActivity.this, BackActivity.class);
+        i.putExtra("page", "account");
+        i.putExtra("accountPage", page);
+        startActivity(i);
+        checkAccountVisibility();
+    }
 
-    //helper funtion
+
     private void checkSearchVisibility() {
         if (search.getVisibility() == LinearLayout.VISIBLE) {
             search.setVisibility(LinearLayout.GONE);

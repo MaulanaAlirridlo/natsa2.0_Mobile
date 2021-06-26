@@ -41,7 +41,8 @@
         <ImageView
             android:layout_width="55dp"
             android:layout_height="match_parent"
-            android:contentDescription="@string/bookmark"
+            android:contentDescription="@string/bookmarks"
+            android:onClick="showBookmark"
             app:srcCompat="@drawable/ic_bookmark" />
 
         <ImageView
@@ -145,9 +146,9 @@
     </LinearLayout>
     <!--    end of search      -->
 
-    <!--    bookmark    -->
+    <!--    bookmarks    -->
 
-    <!--    end of bookmark    -->
+    <!--    end of bookmarks    -->
 
     <!--    account     -->
     <LinearLayout

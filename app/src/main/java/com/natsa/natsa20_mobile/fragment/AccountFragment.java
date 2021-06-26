@@ -39,7 +39,7 @@ public class AccountFragment extends Fragment {
 
         profile.setOnClickListener(v -> openPage("Profile"));
 
-        openPage("Dashboard");
+        openPage(getActivity().getIntent().getExtras().getString("accountPage"));
 
         return view;
     }

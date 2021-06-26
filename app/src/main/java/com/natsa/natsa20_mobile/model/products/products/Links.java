@@ -1,6 +1,6 @@
 package com.natsa.natsa20_mobile.model.products.products;
 
-public class Link {
+public class Links {
     private String url;
     private String label;
     private Boolean active;

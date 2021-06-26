@@ -37,7 +37,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="@string/bookmark"
+                android:text="@string/bookmarks"
                 android:textAlignment="center"
                 android:textSize="17sp" />
 

@@ -43,7 +43,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.type.setText(productDataList.get(position).getTipe());
 //        holder.category.setText(productDataList.get(position).getTipe());
         holder.addBookmarkButton.setOnClickListener(v -> {
-            new AddBookmark().addBookmarkProcess(productDataList.get(position).getId(), new BookmarkAdapater(), context);
+            new AddBookmark().addBookmarkProcess(productDataList.get(position).getId(), context);
         });
     }
 

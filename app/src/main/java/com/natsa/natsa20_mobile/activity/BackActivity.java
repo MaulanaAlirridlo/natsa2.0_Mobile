@@ -63,7 +63,6 @@ public class BackActivity extends AppCompatActivity implements
                 break;
             case "account":
                 loadFragment(new AccountFragment());
-                title.setText(getIntent().getExtras().getString("accountPage"));
                 break;
         }
     }

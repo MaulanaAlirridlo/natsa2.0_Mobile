@@ -2,7 +2,7 @@
     <string name="app_name">natsa2.0_Mobile</string>
     <string name="real_app_name">NatSa</string>
     <string name="home">Home</string>
-    <string name="bookmark">Bookmark</string>
+    <string name="bookmarks">Bookmark</string>
     <string name="about">About</string>
     <string name="faq">FAQ</string>
     <string name="contact">Contact</string>
@@ -80,4 +80,6 @@
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="simpan_sawah">Simpan Sawah</string>
+    <string name="makelar">Makelar</string>
+    <string name="hapus">Hapus</string>
 </resources>

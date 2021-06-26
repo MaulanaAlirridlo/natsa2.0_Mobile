@@ -1,15 +1,15 @@
-package com.natsa.natsa20_mobile.model.products.products;
+package com.natsa.natsa20_mobile.model.bookmark.get_bookmark;
 
 import java.util.List;
 
-public class RiceField {
+public class Bookmarks {
     private int current_page;
     private List<Data> data;
     private String first_page_url;
     private int from;
     private int last_page;
     private String last_page_url;
-    private List<Links> links;
+    private List<Links>links;
     private String next_page_url;
     private String path;
     private int per_page;
@@ -65,11 +65,11 @@ public class RiceField {
         this.last_page_url = last_page_url;
     }
 
-    public List<Links> getLink() {
+    public List<Links> getLinks() {
         return links;
     }
 
-    public void setLink(List<Links> links) {
+    public void setLinks(List<Links> links) {
         this.links = links;
     }
 

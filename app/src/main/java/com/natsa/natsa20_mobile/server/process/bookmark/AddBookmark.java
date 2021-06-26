@@ -15,8 +15,7 @@ import retrofit2.Response;
 
 public class AddBookmark {
 
-    public void addBookmarkProcess(int riceFieldId, BookmarkAdapater adapter, Context appContext) {
-        Context context = appContext;
+    public void addBookmarkProcess(int riceFieldId, Context context) {
         RetrofitBuilder.endPoint().addBookmark("Bearer "+ Preferences.getToken(context), riceFieldId)
                 .enqueue(new Callback<AddBookmarkRespone>() {
                     @Override
