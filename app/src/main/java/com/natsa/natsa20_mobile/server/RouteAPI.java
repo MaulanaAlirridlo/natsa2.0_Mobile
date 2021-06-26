@@ -5,6 +5,7 @@ import com.natsa.natsa20_mobile.model.auth.login.LoginRespone;
 import com.natsa.natsa20_mobile.model.auth.logout.LogoutRespone;
 import com.natsa.natsa20_mobile.model.auth.register.RegisterForm;
 import com.natsa.natsa20_mobile.model.auth.register.RegisterRespone;
+import com.natsa.natsa20_mobile.model.bookmark.add_bookmark.add_bookmark_respone.AddBookmarkRespone;
 import com.natsa.natsa20_mobile.model.products.product.Product;
 import com.natsa.natsa20_mobile.model.products.products.Products;
 
@@ -46,4 +47,9 @@ public interface RouteAPI {
     @Headers({"Accept: application/json"})
     @GET(Server.riceFields+"{id}")
     Call<Product> showRiceField(@Path("id") int id);
+
+    //bookmarks
+    @Headers({"Accept: application/json"})
+    @POST(Server.bookmarks+"{riceFieldId}")
+    Call<AddBookmarkRespone> addBookmark(@Header("Authorization") String token, @Path("riceFieldId") int riceFieldId);
 }

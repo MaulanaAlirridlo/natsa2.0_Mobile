@@ -42,9 +42,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.certification.setText(productDataList.get(position).getSertifikasi());
         holder.type.setText(productDataList.get(position).getTipe());
 //        holder.category.setText(productDataList.get(position).getTipe());
-//        holder.addBookmarkButton.setOnClickListener(v -> {
-//            new AddBookmark().addBookmarkProcess(productDataList.get(position).getId(), new BookmarkAdapater(), context);
-//        });
+        holder.addBookmarkButton.setOnClickListener(v -> {
+            new AddBookmark().addBookmarkProcess(productDataList.get(position).getId(), new BookmarkAdapater(), context);
+        });
     }
 
     @Override
@@ -59,7 +59,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         certification, type
 //        , category
                 ;
-//        private final Button addBookmarkButton;
+        private final Button addBookmarkButton;
 
         public ProductViewHolder(View view) {
             super(view);
@@ -70,7 +70,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             certification = view.findViewById(R.id.certification);
             type = view.findViewById(R.id.type);
 //        category = view.findViewById(R.id.category);
-//            addBookmarkButton = view.findViewById(R.id.addBookmarkButton);
+            addBookmarkButton = view.findViewById(R.id.addBookmarkButton);
         }
     }
 

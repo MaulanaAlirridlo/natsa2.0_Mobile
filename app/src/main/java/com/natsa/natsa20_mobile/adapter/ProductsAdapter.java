@@ -96,21 +96,21 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         final WeakHandler weakHandler = new WeakHandler();
         final Runnable runnable = () -> glideLoader(holder, position);
 
-        Glide.with(context)
-                .load(Server.storage + productsDataList.get(position).getPhoto().getPhoto_path())
-                .centerCrop()
-                .listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        weakHandler.postDelayed(runnable, 1);
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        return false;
-                    }
-                })
-                .into(holder.productsImage);
+//        Glide.with(context)
+//                .load(Server.storage + productsDataList.get(position).getPhoto().getPhoto_path())
+//                .centerCrop()
+//                .listener(new RequestListener<Drawable>() {
+//                    @Override
+//                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+//                        weakHandler.postDelayed(runnable, 1);
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+//                        return false;
+//                    }
+//                })
+//                .into(holder.productsImage);
     }
 }

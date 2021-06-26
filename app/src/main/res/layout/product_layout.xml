@@ -90,4 +90,13 @@
     <!--                    android:text="@string/kategori"-->
     <!--                    android:textSize="18sp" />-->
 
+    <Button
+        android:id="@+id/addBookmarkButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/simpan_sawah"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="5dp" />
+
 </LinearLayout>
