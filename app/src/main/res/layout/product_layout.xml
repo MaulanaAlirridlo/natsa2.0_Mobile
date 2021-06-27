@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <com.smarteist.autoimageslider.SliderView
+        android:id="@+id/imageSlider"
         android:layout_width="match_parent"
         android:layout_height="275dp"
-        android:src="@drawable/bg"
-        android:contentDescription="@string/productsimage"/>
+        app:sliderIndicatorGravity="center_horizontal|bottom"
+        app:sliderIndicatorMargin="15dp"
+        app:sliderIndicatorOrientation="horizontal"
+        app:sliderIndicatorPadding="4dp"
+        app:sliderIndicatorRadius="1.5dp"
+        app:sliderIndicatorSelectedColor="#5A5A5A"
+        app:sliderIndicatorUnselectedColor="#ECECEC"
+        app:sliderScrollTimeInSec="1"
+        app:sliderStartAutoCycle="true" />
 
     <TextView
         android:id="@+id/productTitle"
@@ -94,9 +103,9 @@
         android:id="@+id/addBookmarkButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/simpan_sawah"
-        android:textColor="@color/black"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="5dp" />
+        android:layout_margin="5dp"
+        android:text="@string/simpan_sawah"
+        android:textColor="@color/black" />
 
 </LinearLayout>

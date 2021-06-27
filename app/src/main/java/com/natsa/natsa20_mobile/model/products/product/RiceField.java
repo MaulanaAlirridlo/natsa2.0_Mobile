@@ -18,7 +18,7 @@ public class RiceField {
     private int vestige_id;
     private int irrigation_id;
     private int region_id;
-    private List<Photo> photo;
+    private List<Photos> photos;
 
     public int getId() {
         return id;
@@ -140,11 +140,11 @@ public class RiceField {
         this.region_id = region_id;
     }
 
-    public List<Photo> getPhoto() {
-        return photo;
+    public List<Photos> getPhotos() {
+        return photos;
     }
 
-    public void setPhoto(List<Photo> photo) {
-        this.photo = photo;
+    public void setPhotos(List<Photos> photos) {
+        this.photos = photos;
     }
 }

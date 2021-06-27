@@ -1,11 +1,11 @@
 package com.natsa.natsa20_mobile.server.process.products;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.natsa.natsa20_mobile.adapter.ProductAdapter;
+import com.natsa.natsa20_mobile.adapter.ProductImageAdapter;
 import com.natsa.natsa20_mobile.adapter.RandomRiceFieldsAdapter;
+import com.natsa.natsa20_mobile.model.products.product.Photos;
 import com.natsa.natsa20_mobile.model.products.product.Product;
 import com.natsa.natsa20_mobile.model.products.product.RandomRiceFields;
 import com.natsa.natsa20_mobile.model.products.product.RiceField;
@@ -20,20 +20,32 @@ import retrofit2.Response;
 
 public class GetProduct {
 
-    private final static List<RiceField> product = new ArrayList<>();
+    private final static List<RiceField> productList = new ArrayList<>();
+    private final static List<Photos> productImageList = new ArrayList<Photos>();
     private final static List<RandomRiceFields> randomRiceFieldsList = new ArrayList<>();
 
     public static List<RiceField> getProductList() {
-        return product;
+        return productList;
     }
 
-    public static void setProductList(RiceField riceField, ProductAdapter adapter) {
-        product.clear();
-        product.add(riceField);
-        adapter.notifyDataSetChanged();
+    public static void setProductList(RiceField riceField,
+                                      ProductAdapter productAdapter) {
+        productList.clear();
+        productList.add(riceField);
+        productAdapter.notifyDataSetChanged();
     }
 
-    public static List<RandomRiceFields> getRandomRiceFields() {
+    public static List<Photos> getProductImageList() {
+        return productImageList;
+    }
+
+    public static void setProductImageList(List<Photos> photos, ProductImageAdapter productImageAdapter) {
+        productImageList.clear();
+        productImageList.addAll(photos);
+        productImageAdapter.notifyDataSetChanged();
+    }
+
+    public static List<RandomRiceFields> getRandomRiceFieldsList() {
         return randomRiceFieldsList;
     }
 
@@ -43,7 +55,9 @@ public class GetProduct {
         adapter.notifyDataSetChanged();
     }
 
-    public void getProductFromApi(int id, ProductAdapter productAdapter, RandomRiceFieldsAdapter randomRiceFieldsAdapter) {
+    public void getProductFromApi(int id, ProductAdapter productAdapter,
+                                  ProductImageAdapter productImageAdapter,
+                                  RandomRiceFieldsAdapter randomRiceFieldsAdapter) {
         RetrofitBuilder.endPoint().showRiceField(id)
                 .enqueue(new Callback<Product>() {
                     @Override
@@ -52,7 +66,9 @@ public class GetProduct {
                             assert response.body() != null;
                             Product res = response.body();
                             RiceField riceField = res.getRiceField();
+                            List<Photos> photos = riceField.getPhotos();
                             List<RandomRiceFields> randomRiceFields = res.getRandomRiceFields();
+                            setProductImageList(photos, productImageAdapter);
                             setProductList(riceField, productAdapter);
                             setRandomProductList(randomRiceFields, randomRiceFieldsAdapter);
                         }

@@ -13,16 +13,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.model.products.product.RiceField;
 import com.natsa.natsa20_mobile.server.process.bookmark.AddBookmark;
+import com.natsa.natsa20_mobile.server.process.products.GetProduct;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private final Context context;
     private final List<RiceField> productDataList;
+    private final ProductImageAdapter productImageAdapter;
 
-    public ProductAdapter(Context context, List<RiceField> productsDataList) {
+    public ProductAdapter(Context context, List<RiceField> productsDataList, ProductImageAdapter productImageAdapter) {
         this.context = context;
         this.productDataList = productsDataList;
+        this.productImageAdapter = productImageAdapter;
     }
 
     @NonNull
@@ -35,6 +40,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(ProductAdapter.ProductViewHolder holder, int position) {
+        SliderView sliderView = holder.sliderView;
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.THIN_WORM);
+        sliderView.setAutoCycle(false);
+        sliderView.setSliderAdapter(productImageAdapter);
+
         holder.productTitle.setText(productDataList.get(position).getTitle());
         holder.productPrice.setText(String.valueOf(productDataList.get(position).getHarga()));
         holder.address.setText(productDataList.get(position).getAlamat());
@@ -60,6 +70,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 //        , category
                 ;
         private final Button addBookmarkButton;
+        private final SliderView sliderView;
 
         public ProductViewHolder(View view) {
             super(view);
@@ -71,6 +82,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             type = view.findViewById(R.id.type);
 //        category = view.findViewById(R.id.category);
             addBookmarkButton = view.findViewById(R.id.addBookmarkButton);
+            sliderView = view.findViewById(R.id.imageSlider);
         }
     }
 
