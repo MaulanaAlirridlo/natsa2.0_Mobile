@@ -1,5 +1,7 @@
 package com.natsa.natsa20_mobile.model.products.product;
 
+import java.util.List;
+
 public class RiceField {
     private int id;
     private String title;
@@ -16,7 +18,7 @@ public class RiceField {
     private int vestige_id;
     private int irrigation_id;
     private int region_id;
-    private int verification_id;
+    private List<Photo> photo;
 
     public int getId() {
         return id;
@@ -138,11 +140,11 @@ public class RiceField {
         this.region_id = region_id;
     }
 
-    public int getVerification_id() {
-        return verification_id;
+    public List<Photo> getPhoto() {
+        return photo;
     }
 
-    public void setVerification_id(int verification_id) {
-        this.verification_id = verification_id;
+    public void setPhoto(List<Photo> photo) {
+        this.photo = photo;
     }
 }

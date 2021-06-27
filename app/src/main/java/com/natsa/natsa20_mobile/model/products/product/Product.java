@@ -6,6 +6,7 @@ public class Product {
 
     private Status status;
     private RiceField riceField;
+    private List<RandomRiceFields> randomRiceFields;
 
     public Status getStatus() {
         return status;
@@ -21,5 +22,13 @@ public class Product {
 
     public void setRiceField(RiceField riceField) {
         this.riceField = riceField;
+    }
+
+    public List<RandomRiceFields> getRandomRiceFields() {
+        return randomRiceFields;
+    }
+
+    public void setRandomRiceFields(List<RandomRiceFields> randomRiceFields) {
+        this.randomRiceFields = randomRiceFields;
     }
 }

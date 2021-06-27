@@ -48,7 +48,7 @@ public interface RouteAPI {
     Call<Products> getRiceFields();
 
     @Headers({"Accept: application/json"})
-    @GET(Server.riceFields+"{id}")
+    @GET(Server.product+"{id}")
     Call<Product> showRiceField(@Path("id") int id);
 
     //bookmarks
