@@ -6,12 +6,14 @@ import com.natsa.natsa20_mobile.model.auth.logout.LogoutRespone;
 import com.natsa.natsa20_mobile.model.auth.register.RegisterForm;
 import com.natsa.natsa20_mobile.model.auth.register.RegisterRespone;
 import com.natsa.natsa20_mobile.model.bookmark.add_bookmark.add_bookmark_respone.AddBookmarkRespone;
+import com.natsa.natsa20_mobile.model.bookmark.delete_bookmark.DeleteBookmarkRespone;
 import com.natsa.natsa20_mobile.model.bookmark.get_bookmark.GetBookmarkRespone;
 import com.natsa.natsa20_mobile.model.products.product.Product;
 import com.natsa.natsa20_mobile.model.products.products.Products;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -57,4 +59,8 @@ public interface RouteAPI {
     @Headers({"Accept: application/json"})
     @GET(Server.bookmarks)
     Call<GetBookmarkRespone> getBookmark(@Header("Authorization") String token);
+
+    @Headers({"Accept: application/json"})
+    @DELETE(Server.bookmarks+"{bookmarkId}")
+    Call<DeleteBookmarkRespone> deleteBookmark(@Header("Authorization") String token, @Path("bookmarkId") int bookmarkId);
 }

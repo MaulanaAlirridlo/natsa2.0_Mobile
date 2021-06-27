@@ -1,7 +1,11 @@
 package com.natsa.natsa20_mobile.adapter;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +26,8 @@ import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.model.bookmark.get_bookmark.Data;
 import com.natsa.natsa20_mobile.model.products.product.RiceField;
 import com.natsa.natsa20_mobile.server.Server;
+import com.natsa.natsa20_mobile.server.process.bookmark.DeleteBookmark;
+import com.natsa.natsa20_mobile.server.process.bookmark.GetBookmark;
 
 import java.util.List;
 
@@ -48,6 +54,31 @@ public class BookmarkAdapater extends RecyclerView.Adapter<BookmarkAdapater.Book
         glideLoader(holder, position);
         holder.productsTitle.setText(bookmarkDataList.get(position).getTitle());
         holder.productsPrice.setText(String.valueOf(bookmarkDataList.get(position).getHarga()));
+        holder.deleteBookmark.setOnClickListener(v -> {
+            AlertDialog dialog = new AlertDialog.Builder(context)
+                    .setMessage("Apakah anda yakin ingin menghapusnya?")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            new DeleteBookmark().deleteBookmarkProcess(
+                                    bookmarkDataList.get(position).getBookmarks_id(),
+                                    context);
+                            new GetBookmark().getBookmarkFromApi(BookmarkAdapater.this, context);
+                        }})
+                    .setNegativeButton("Tidak", null)
+                    .create();
+            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface a) {
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
+                            context.getResources().getColor(R.color.black));
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(context.getResources()
+                            .getColor(R.color.black));
+                }
+            });
+            dialog.show();
+        });
     }
 
     @Override
@@ -58,13 +89,14 @@ public class BookmarkAdapater extends RecyclerView.Adapter<BookmarkAdapater.Book
     public class BookmarkViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView productsImage;
-        private final TextView productsTitle, productsPrice;
+        private final TextView productsTitle, productsPrice, deleteBookmark;
 
         public BookmarkViewHolder(@NonNull View v) {
             super(v);
             productsImage = v.findViewById(R.id.productsImage);
             productsTitle = v.findViewById(R.id.productsTitle);
             productsPrice = v.findViewById(R.id.productsPrice);
+            deleteBookmark = v.findViewById(R.id.delete_bookmark);
         }
     }
 
