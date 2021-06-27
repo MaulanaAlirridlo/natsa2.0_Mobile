@@ -50,7 +50,7 @@ public class RandomRiceFieldsAdapter extends RecyclerView.Adapter<RandomRiceFiel
         holder.productsPrice.setText(String.valueOf(randomRiceFieldsDataList.get(position).getHarga()));
 
         try {
-            showDetailSawahListener = (showDetailSawahListener) context;
+            showDetailSawahListener = (RandomRiceFieldsAdapter.showDetailSawahListener) context;
         } catch (ClassCastException e) {
             e.printStackTrace();
         }
@@ -67,6 +67,7 @@ public class RandomRiceFieldsAdapter extends RecyclerView.Adapter<RandomRiceFiel
         private final TextView productsTitle, productsPrice;
         private int position;
         private int id;
+        private View itemView;
 
         public RandomRiceFieldsViewHolder(View v) {
             super(v);
@@ -79,6 +80,8 @@ public class RandomRiceFieldsAdapter extends RecyclerView.Adapter<RandomRiceFiel
                 id = randomRiceFieldsDataList.get(position).getId();
                 show(id);
             });
+
+            itemView = v;
         }
     }
 
@@ -96,7 +99,7 @@ public class RandomRiceFieldsAdapter extends RecyclerView.Adapter<RandomRiceFiel
         final WeakHandler weakHandler = new WeakHandler();
         final Runnable runnable = () -> glideLoader(holder, position);
 
-        Glide.with(context)
+        Glide.with(holder.itemView)
                 .load(Server.storage + randomRiceFieldsDataList.get(position).getPhoto().getPhoto_path())
                 .centerCrop()
                 .listener(new RequestListener<Drawable>() {

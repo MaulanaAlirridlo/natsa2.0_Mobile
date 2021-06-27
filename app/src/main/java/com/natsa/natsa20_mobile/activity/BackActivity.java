@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
+import com.natsa.natsa20_mobile.adapter.RandomRiceFieldsAdapter;
 import com.natsa.natsa20_mobile.fragment.AboutFragment;
 import com.natsa.natsa20_mobile.fragment.AccountFragment;
 import com.natsa.natsa20_mobile.fragment.ContactFragment;
@@ -22,7 +23,8 @@ import com.natsa.natsa20_mobile.fragment.ProductFragment;
 import com.natsa.natsa20_mobile.fragment.ProductsFragment;
 
 public class BackActivity extends AppCompatActivity implements
-        ProductsAdapter.showDetailSawahListener {
+        ProductsAdapter.showDetailSawahListener,
+        RandomRiceFieldsAdapter.showDetailSawahListener {
 
     String page;
     TextView title;

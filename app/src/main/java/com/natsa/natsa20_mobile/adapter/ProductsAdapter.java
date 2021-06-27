@@ -67,6 +67,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         private final TextView productsTitle, productsPrice;
         private int position;
         private int id;
+        private View itemView;
 
         public ProductsViewHolder(View v) {
             super(v);
@@ -79,6 +80,8 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
                 id = productsDataList.get(position).getId();
                 show(id);
             });
+
+            itemView = v;
         }
     }
 
@@ -96,7 +99,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         final WeakHandler weakHandler = new WeakHandler();
         final Runnable runnable = () -> glideLoader(holder, position);
 
-        Glide.with(context)
+        Glide.with(holder.itemView)
                 .load(Server.storage + productsDataList.get(position).getPhoto().getPhoto_path())
                 .centerCrop()
                 .listener(new RequestListener<Drawable>() {

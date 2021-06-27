@@ -16,10 +16,8 @@ import android.view.ViewGroup;
 
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.ProductAdapter;
-import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
 import com.natsa.natsa20_mobile.adapter.RandomRiceFieldsAdapter;
 import com.natsa.natsa20_mobile.server.process.products.GetProduct;
-import com.natsa.natsa20_mobile.server.process.products.GetProducts;
 
 public class ProductFragment extends Fragment {
 

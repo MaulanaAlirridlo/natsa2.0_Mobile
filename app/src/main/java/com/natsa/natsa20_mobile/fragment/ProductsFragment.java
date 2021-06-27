@@ -28,7 +28,7 @@ public class ProductsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_products, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.productsRecyclerView);
-        adapter = new ProductsAdapter(getActivity(), GetProducts.getProductsDataList());
+        adapter = new ProductsAdapter(getContext(), GetProducts.getProductsDataList());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
