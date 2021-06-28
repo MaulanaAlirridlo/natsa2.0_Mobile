@@ -16,33 +16,166 @@
         app:contentInsetRight="0dp"
         app:contentInsetStart="0dp">
 
-        <ImageView
-            android:layout_width="55dp"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/menu"
-            android:onClick="back"
-            app:srcCompat="@drawable/ic_back" />
-
-        <TextView
-            android:id="@+id/title"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="25sp" />
+            android:layout_height="55dp"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="55dp"
+                android:layout_height="25dp"
+                android:contentDescription="@string/menu"
+                app:srcCompat="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="25sp"
+                android:gravity="center_vertical|start" />
+
+            <ImageView
+                android:id="@+id/show_search"
+                android:layout_width="55dp"
+                android:layout_height="25dp"
+                android:contentDescription="@string/search"
+                app:srcCompat="@drawable/ic_search" />
+
+            <ImageView
+                android:id="@+id/show_bookmark"
+                android:layout_width="55dp"
+                android:layout_height="25dp"
+                android:contentDescription="@string/bookmarks"
+                app:srcCompat="@drawable/ic_bookmark" />
+
+            <ImageView
+                android:id="@+id/show_account_menu"
+                android:layout_width="55dp"
+                android:layout_height="25dp"
+                android:contentDescription="@string/account"
+                app:srcCompat="@drawable/ic_account" />
+
+        </LinearLayout>
+
     </androidx.appcompat.widget.Toolbar>
 
-<!--    body    -->
+    <!--    search      -->
+    <LinearLayout
+        android:id="@+id/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:translationZ="9999dp"
+        android:visibility="gone"
+        tools:targetApi="lollipop">
+
+        <ImageView
+            android:id="@+id/search_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/back"
+            android:paddingEnd="10dp"
+            android:paddingRight="10dp"
+            app:srcCompat="@drawable/ic_back"
+            tools:ignore="RtlSymmetry" />
+
+        <EditText
+            android:id="@+id/searchInput"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="@string/search"
+            android:importantForAutofill="no"
+            android:inputType="text" />
+
+        <ImageView
+            android:id="@+id/mic"
+            android:layout_width="35dp"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/mic"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            app:srcCompat="@drawable/ic_mic"
+            tools:ignore="RtlSymmetry" />
+
+    </LinearLayout>
+    <!--    end of search      -->
+
+    <!--    account     -->
+    <LinearLayout
+        android:id="@+id/accountBeforeLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:translationZ="9999dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/show_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/sign_up"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/show_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/sign_in"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/accountAfterLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:translationZ="9999dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/show_dashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/account"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="@string/logout"
+            android:textColor="@color/black" />
+    </LinearLayout>
+    <!--    end of account  -->
+
+    <!--    body    -->
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar">
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:text="@string/hello_world"-->
-<!--            android:textAlignment="center" />-->
+        <!--        <TextView-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:text="@string/hello_world"-->
+        <!--            android:textAlignment="center" />-->
     </FrameLayout>
     <!--    end of body     -->
 

@@ -6,7 +6,9 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.server.process.auth.Logout;
@@ -14,102 +16,128 @@ import com.natsa.natsa20_mobile.shared_preference.Preferences;
 
 public class MainActivity extends AppCompatActivity {
 
-    Dialog myDialog;
     LinearLayout menu, search, accountBeforeLogin, accountAfterLogin;
+    ImageView showMenu, showSearch, showBookmark, showAccountMenu;
+    TextView showSawah, showAbout, showFaq, showContact, showRegister, showLogin, showDashboard, logout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // init variable
-        myDialog = new Dialog(this);
-        menu = this.findViewById(R.id.menu);
-        search = this.findViewById(R.id.search);
-        accountBeforeLogin = this.findViewById(R.id.accountBeforeLogin);
-        accountAfterLogin = this.findViewById(R.id.accountAfterLogin);
+        init();
+        setOnclickListener();
     }
 
+
+    // init variable
+    private void init() {
+        menu = findViewById(R.id.menu);
+        search = findViewById(R.id.search);
+        accountBeforeLogin = findViewById(R.id.accountBeforeLogin);
+        accountAfterLogin = findViewById(R.id.accountAfterLogin);
+        showMenu = findViewById(R.id.show_menu);
+        showSearch = findViewById(R.id.show_search);
+        showBookmark = findViewById(R.id.show_bookmark);
+        showAccountMenu = findViewById(R.id.show_account_menu);
+        showSawah = findViewById(R.id.show_sawah);
+        showAbout = findViewById(R.id.show_about);
+        showFaq = findViewById(R.id.show_faq);
+        showContact = findViewById(R.id.show_contact);
+        showRegister = findViewById(R.id.show_register);
+        showLogin = findViewById(R.id.show_login);
+        showDashboard = findViewById(R.id.show_dashboard);
+        logout = findViewById(R.id.logout);
+    }
 
     // onClick function
-
-    public void showMenu(View view) {
-        if (menu.getVisibility() == LinearLayout.GONE) {
-            menu.setVisibility(LinearLayout.VISIBLE);
-        } else {
-            menu.setVisibility(LinearLayout.GONE);
-        }
-        checkSearchVisibility();
-        checkAccountVisibility();
-    }
-
-    public void showSearch(View view) {
-        if (search.getVisibility() == LinearLayout.GONE) {
-            search.setVisibility(LinearLayout.VISIBLE);
-        } else {
-            search.setVisibility(LinearLayout.GONE);
-        }
-        checkMenuVisibility();
-        checkAccountVisibility();
-    }
-
-    public void showAccount(View view) {
-        //cek login
-        if (Preferences.isLogin(getApplicationContext())) {
-            if (accountAfterLogin.getVisibility() == LinearLayout.GONE) {
-                accountAfterLogin.setVisibility(LinearLayout.VISIBLE);
+    private void setOnclickListener() {
+        showMenu.setOnClickListener(v -> {
+            if (menu.getVisibility() == LinearLayout.GONE) {
+                menu.setVisibility(LinearLayout.VISIBLE);
             } else {
-                accountAfterLogin.setVisibility(LinearLayout.GONE);
+                menu.setVisibility(LinearLayout.GONE);
             }
-        } else {
-            if (accountBeforeLogin.getVisibility() == LinearLayout.GONE) {
-                accountBeforeLogin.setVisibility(LinearLayout.VISIBLE);
+            checkSearchVisibility();
+            checkAccountVisibility();
+        });
+
+        showSearch.setOnClickListener(v -> {
+            if (search.getVisibility() == LinearLayout.GONE) {
+                search.setVisibility(LinearLayout.VISIBLE);
             } else {
-                accountBeforeLogin.setVisibility(LinearLayout.GONE);
+                search.setVisibility(LinearLayout.GONE);
             }
-        }
-        checkSearchVisibility();
-        checkMenuVisibility();
-    }
+            checkMenuVisibility();
+            checkAccountVisibility();
+        });
 
-    public void showSawah(View view) {
-        showBackActivity("sawah");
-    }
+        showAccountMenu.setOnClickListener(v -> {
+            //cek login
+            if (Preferences.isLogin(getApplicationContext())) {
+                if (accountAfterLogin.getVisibility() == LinearLayout.GONE) {
+                    accountAfterLogin.setVisibility(LinearLayout.VISIBLE);
+                } else {
+                    accountAfterLogin.setVisibility(LinearLayout.GONE);
+                }
+            } else {
+                if (accountBeforeLogin.getVisibility() == LinearLayout.GONE) {
+                    accountBeforeLogin.setVisibility(LinearLayout.VISIBLE);
+                } else {
+                    accountBeforeLogin.setVisibility(LinearLayout.GONE);
+                }
+            }
+            checkSearchVisibility();
+            checkMenuVisibility();
 
-    public void showAbout(View view) {
-        showBackActivity("about");
-    }
+        });
 
-    public void showFAQ(View view) {
-        showBackActivity("FAQ");
-    }
+        showSawah.setOnClickListener(v -> {
+            showBackActivity("sawah");
 
-    public void showContact(View view) {
-        showBackActivity("contact");
-    }
+        });
 
-    public void showRegister(View view) {
-        Intent i = new Intent(MainActivity.this, RegisterActivity.class);
-        startActivity(i);
-        finish();
-    }
+        showAbout.setOnClickListener(v -> {
+            showBackActivity("about");
 
-    public void showLogin(View view) {
-        Intent i = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(i);
-        finish();
-    }
+        });
 
-    public void showDashboard(View view) {
-        showAccountPage("Dashboard");
-    }
+        showFaq.setOnClickListener(v -> {
+            showBackActivity("FAQ");
 
-    public void showBookmark(View view) {
-        showAccountPage("Bookmark");
-    }
+        });
 
-    public void logout(View view) {
-        new Logout().LogoutProcess(MainActivity.this);
+        showContact.setOnClickListener(v -> {
+            showBackActivity("contact");
+
+        });
+
+        showRegister.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(i);
+            finish();
+        });
+
+        showLogin.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(i);
+            finish();
+        });
+
+        showDashboard.setOnClickListener(v -> {
+            showAccountPage("Dashboard");
+
+        });
+
+        showBookmark.setOnClickListener(v -> {
+            showAccountPage("Bookmark");
+
+        });
+
+        logout.setOnClickListener(v -> {
+            new Logout().LogoutProcess(MainActivity.this);
+
+        });
     }
 
     //helper funtion
