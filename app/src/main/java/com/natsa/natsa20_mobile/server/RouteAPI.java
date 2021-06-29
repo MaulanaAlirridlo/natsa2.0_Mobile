@@ -19,6 +19,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RouteAPI {
 
@@ -41,7 +42,6 @@ public interface RouteAPI {
     Call<LogoutRespone> Logout(@Header("Authorization") String token);
 
 
-
     //product
     @Headers({"Accept: application/json"})
     @GET(Server.riceFields)
@@ -50,6 +50,12 @@ public interface RouteAPI {
     @Headers({"Accept: application/json"})
     @GET(Server.product+"{id}")
     Call<Product> showRiceField(@Path("id") int id);
+
+    //user product
+    @Headers({"Accept: application/json"})
+    @GET(Server.riceFields)
+    Call<Products> getUserRiceFields(@Query("filter[user_id]") int id);
+
 
     //bookmarks
     @Headers({"Accept: application/json"})

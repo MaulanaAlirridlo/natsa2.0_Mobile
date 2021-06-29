@@ -34,8 +34,8 @@ public class Preferences {
         editor.apply();
     }
 
-    public static String getId(Context context) {
-        return getSharedPreference(context).getString(ID, null);
+    public static int getId(Context context) {
+        return getSharedPreference(context).getInt(ID, 0);
     }
 
     public static void setName(Context context, String name) {
