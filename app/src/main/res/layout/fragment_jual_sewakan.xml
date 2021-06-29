@@ -8,7 +8,7 @@
     tools:context=".fragment.Account.BookmarkFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addUser"
+        android:id="@+id/show_add_product_form"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

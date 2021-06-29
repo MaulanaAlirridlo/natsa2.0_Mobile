@@ -82,4 +82,14 @@
     <string name="simpan_sawah">Simpan Sawah</string>
     <string name="makelar">Makelar</string>
     <string name="hapus">Hapus</string>
+    <string name="rp">Rp</string>
+    <string name="luas">Luas</string>
+    <string name="m">m</string>
+    <string name="_2">2</string>
+    <string name="deskripsi">Deskripsi</string>
+    <string name="maps">Maps</string>
+    <string name="bekas_sawah">Bekas Sawah</string>
+    <string name="irigasi_sawah">Irigasi Sawah</string>
+    <string name="gambar">Gambar</string>
+    <string name="tambah">Tambah</string>
 </resources>
