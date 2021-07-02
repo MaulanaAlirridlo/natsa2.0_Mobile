@@ -17,4 +17,13 @@ public class Server {
 
     //bookmark
     public static final String bookmarks = "bookmarks/";
+
+    //regions
+    public static final String regions = "regions/";
+
+    //vestiges
+    public static final String vestiges = "vestiges/";
+
+    //irrigations
+    public static final String irrigations = "irrigations/";
 }

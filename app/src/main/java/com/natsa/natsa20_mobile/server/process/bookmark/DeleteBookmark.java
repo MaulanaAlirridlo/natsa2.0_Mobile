@@ -4,10 +4,9 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.natsa.natsa20_mobile.model.bookmark.add_bookmark.add_bookmark_respone.AddBookmarkRespone;
 import com.natsa.natsa20_mobile.model.bookmark.delete_bookmark.DeleteBookmarkRespone;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
-import com.natsa.natsa20_mobile.shared_preference.Preferences;
+import com.natsa.natsa20_mobile.helper.Preferences;
 
 import retrofit2.Call;
 import retrofit2.Callback;

@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.server.process.auth.Login;
-import com.natsa.natsa20_mobile.shared_preference.Preferences;
+import com.natsa.natsa20_mobile.helper.Preferences;
 
 public class LoginActivity extends AppCompatActivity {
     Context context;

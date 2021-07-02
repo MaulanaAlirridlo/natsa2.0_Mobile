@@ -3,11 +3,10 @@ package com.natsa.natsa20_mobile.server.process.bookmark;
 import android.content.Context;
 
 import com.natsa.natsa20_mobile.adapter.BookmarkAdapater;
-import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
 import com.natsa.natsa20_mobile.model.bookmark.get_bookmark.Data;
 import com.natsa.natsa20_mobile.model.bookmark.get_bookmark.GetBookmarkRespone;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
-import com.natsa.natsa20_mobile.shared_preference.Preferences;
+import com.natsa.natsa20_mobile.helper.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;

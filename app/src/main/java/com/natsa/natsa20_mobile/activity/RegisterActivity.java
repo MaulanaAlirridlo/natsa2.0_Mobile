@@ -18,7 +18,7 @@ import com.natsa.natsa20_mobile.fragment.Register.RegisterEmailPasswordFragment;
 import com.natsa.natsa20_mobile.fragment.Register.RegisterKtpFragment;
 import com.natsa.natsa20_mobile.fragment.Register.RegisterNameUsernameFragment;
 import com.natsa.natsa20_mobile.server.process.auth.Register;
-import com.natsa.natsa20_mobile.shared_preference.Preferences;
+import com.natsa.natsa20_mobile.helper.Preferences;
 
 public class RegisterActivity extends AppCompatActivity {
 

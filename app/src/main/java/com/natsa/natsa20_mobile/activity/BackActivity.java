@@ -24,7 +24,7 @@ import com.natsa.natsa20_mobile.fragment.FaqFragment;
 import com.natsa.natsa20_mobile.fragment.ProductFragment;
 import com.natsa.natsa20_mobile.fragment.ProductsFragment;
 import com.natsa.natsa20_mobile.server.process.auth.Logout;
-import com.natsa.natsa20_mobile.shared_preference.Preferences;
+import com.natsa.natsa20_mobile.helper.Preferences;
 
 public class BackActivity extends AppCompatActivity implements
         ProductsAdapter.showDetailSawahListener,

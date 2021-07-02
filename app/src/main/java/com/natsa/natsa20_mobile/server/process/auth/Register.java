@@ -9,7 +9,7 @@ import com.natsa.natsa20_mobile.activity.MainActivity;
 import com.natsa.natsa20_mobile.model.auth.register.RegisterForm;
 import com.natsa.natsa20_mobile.model.auth.register.RegisterRespone;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
-import com.natsa.natsa20_mobile.shared_preference.Preferences;
+import com.natsa.natsa20_mobile.helper.Preferences;
 
 import retrofit2.Call;
 import retrofit2.Callback;

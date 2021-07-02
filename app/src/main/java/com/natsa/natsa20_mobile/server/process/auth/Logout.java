@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import com.natsa.natsa20_mobile.activity.LoginActivity;
 import com.natsa.natsa20_mobile.model.auth.logout.LogoutRespone;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
-import com.natsa.natsa20_mobile.shared_preference.Preferences;
+import com.natsa.natsa20_mobile.helper.Preferences;
 
 import retrofit2.Call;
 import retrofit2.Callback;

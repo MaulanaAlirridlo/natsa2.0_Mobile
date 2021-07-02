@@ -1,13 +1,11 @@
 package com.natsa.natsa20_mobile.server.process.bookmark;
 
-import android.app.Activity;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.natsa.natsa20_mobile.adapter.BookmarkAdapater;
 import com.natsa.natsa20_mobile.model.bookmark.add_bookmark.add_bookmark_respone.AddBookmarkRespone;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
-import com.natsa.natsa20_mobile.shared_preference.Preferences;
+import com.natsa.natsa20_mobile.helper.Preferences;
 
 import retrofit2.Call;
 import retrofit2.Callback;

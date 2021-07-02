@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.AddProductFragment">
+    android:background="@color/white"
+    tools:context=".fragment.Account.AddProductFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:paddingRight="16dp"
+        android:paddingBottom="50dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -19,6 +21,7 @@
             android:text="@string/judul" />
 
         <EditText
+            android:id="@+id/judul"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="150"
@@ -51,6 +54,7 @@
                 android:text="@string/rp" />
 
             <EditText
+                android:id="@+id/harga"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="2dp"
@@ -59,6 +63,7 @@
                 android:maxLines="1" />
 
             <EditText
+                android:id="@+id/luas"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -83,6 +88,7 @@
             android:text="@string/alamat" />
 
         <EditText
+            android:id="@+id/alamat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -92,6 +98,7 @@
             android:text="@string/deskripsi" />
 
         <EditText
+            android:id="@+id/desktipsi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -101,6 +108,7 @@
             android:text="@string/maps" />
 
         <EditText
+            android:id="@+id/maps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -126,6 +134,7 @@
             android:layout_height="wrap_content">
 
             <Spinner
+                android:id="@+id/sertifikasi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="2dp"
@@ -133,6 +142,7 @@
                 android:layout_weight="1" />
 
             <Spinner
+                android:id="@+id/tipe"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -144,6 +154,7 @@
             android:text="@string/daerah" />
 
         <Spinner
+            android:id="@+id/daerah"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -169,6 +180,7 @@
             android:layout_height="wrap_content">
 
             <Spinner
+                android:id="@+id/bekas_sawah"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="2dp"
@@ -176,6 +188,7 @@
                 android:layout_weight="1" />
 
             <Spinner
+                android:id="@+id/irigasi_sawah"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -186,46 +199,37 @@
             android:layout_height="wrap_content"
             android:text="@string/gambar" />
 
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/newAttachmentList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp" />
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_gravity="center"
+            android:id="@+id/add_image"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:srcCompat="@drawable/ic_add" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:text="Tambah\nGambar"
+                tools:ignore="HardcodedText" />
+        </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="wrap_content"
-                    android:layout_height="90dp"
-                    android:layout_margin="8dp"
-                    android:orientation="horizontal" />
-
-                <LinearLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        app:srcCompat="@drawable/ic_add" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tambah\nGambar"
-                        tools:ignore="HardcodedText" />
-                </LinearLayout>
-            </LinearLayout>
-
-        </HorizontalScrollView>
 
         <Button
+            android:id="@+id/add_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -235,4 +239,4 @@
     </LinearLayout>
 
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

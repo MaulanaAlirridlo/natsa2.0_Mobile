@@ -1,4 +1,4 @@
-package com.natsa.natsa20_mobile.shared_preference;
+package com.natsa.natsa20_mobile.helper;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -67,7 +67,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         private final TextView productsTitle, productsPrice;
         private int position;
         private int id;
-        private View itemView;
+        View itemView;
 
         public ProductsViewHolder(View v) {
             super(v);

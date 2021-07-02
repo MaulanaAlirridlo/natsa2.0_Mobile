@@ -19,9 +19,8 @@ import android.view.ViewGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.UserProductsadapter;
-import com.natsa.natsa20_mobile.fragment.AddProductFragment;
 import com.natsa.natsa20_mobile.server.process.products.GetUserProducts;
-import com.natsa.natsa20_mobile.shared_preference.Preferences;
+import com.natsa.natsa20_mobile.helper.Preferences;
 
 public class JualSewakanFragment extends Fragment {
 
@@ -40,15 +39,16 @@ public class JualSewakanFragment extends Fragment {
         showAddProductForm = view.findViewById(R.id.show_add_product_form);
         userId = Preferences.getId(context);
 
-        showAddProductForm.setOnClickListener(v -> {
-            loadFragment(new AddProductFragment());
-        });
 
         RecyclerView recyclerView = view.findViewById(R.id.jual_sewakan_recycler_view);
         adapter = new UserProductsadapter(context, GetUserProducts.getUserProductsDataList());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        showAddProductForm.setOnClickListener(v -> {
+            loadFragment(new AddProductFragment());
+        });
 
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swipeRefresh);
         pullToRefresh.setOnRefreshListener(() -> {

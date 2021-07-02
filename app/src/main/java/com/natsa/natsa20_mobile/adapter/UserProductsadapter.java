@@ -21,6 +21,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.natsa.natsa20_mobile.R;
+import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.server.Server;
 
@@ -46,7 +47,8 @@ public class UserProductsadapter extends RecyclerView.Adapter<UserProductsadapte
 
     @Override
     public void onBindViewHolder(@NonNull UserProductsViewHolder holder, int position) {
-        glideLoader(holder, position);
+        new GlideLoader().glideLoader(holder.itemView, holder.productsImage,
+                Server.storage + userProductsDataList.get(position).getPhoto().getPhoto_path());
         holder.productsTitle.setText(userProductsDataList.get(position).getTitle());
         holder.productsPrice.setText(String.valueOf(userProductsDataList.get(position).getHarga()));
         holder.lihatProduct.setOnClickListener(v -> {

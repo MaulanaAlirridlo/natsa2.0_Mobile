@@ -2,17 +2,15 @@ package com.natsa.natsa20_mobile.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.server.process.auth.Logout;
-import com.natsa.natsa20_mobile.shared_preference.Preferences;
+import com.natsa.natsa20_mobile.helper.Preferences;
 
 public class MainActivity extends AppCompatActivity {
 
