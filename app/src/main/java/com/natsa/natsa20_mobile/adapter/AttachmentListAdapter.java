@@ -46,7 +46,7 @@ public class AttachmentListAdapter extends RecyclerView.Adapter<AttachmentListAd
     @Override
     public void onBindViewHolder(final AttachmentListViewHolder holder, int position) {
         holder.attachedImageName.setText((newAttachmentList.get(position).getImageName()));
-        String userImage = newAttachmentList.get(position).getImageID();
+        String userImage = newAttachmentList.get(position).getImageUri();
         if (!userImage.isEmpty()) {
             new GlideLoader().glideLoader(holder.itemView, holder.attachedImageId, userImage);
         }

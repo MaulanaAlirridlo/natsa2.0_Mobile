@@ -1,10 +1,9 @@
 package com.natsa.natsa20_mobile.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class AttachmentListData implements Parcelable {
+public class AttachmentListData {
     private String imageName;
+
+        private String imageUri;
 
     public String getImageName() {
         return imageName;
@@ -14,52 +13,12 @@ public class AttachmentListData implements Parcelable {
         this.imageName = imageName;
     }
 
-    public String getImageID() {
-        return imageID;
+    public String getImageUri() {
+        return imageUri;
     }
 
-    public void setImageID(String imageID) {
-        this.imageID = imageID;
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
     }
 
-    private String imageID;
-
-    public static final Creator CREATOR = new Creator() {
-        public AttachmentListData createFromParcel(Parcel in) {
-            return new AttachmentListData(in);
-        }
-
-        public AttachmentListData[] newArray(int size) {
-            return new AttachmentListData[size];
-        }
-    };
-
-
-
-
-    public AttachmentListData() {
-    }
-
-    public AttachmentListData(Parcel in) {
-        super();
-        readFromParcel(in);
-    }
-
-
-
-    public void readFromParcel(Parcel in) {
-        imageName = in.readString();
-        imageID = in.readString();
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(imageName);
-        dest.writeString(imageID);
-    }
 }

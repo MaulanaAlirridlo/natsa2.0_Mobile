@@ -153,7 +153,8 @@ public class AddProductFragment extends Fragment {
                     returnCursor.moveToFirst();
                     AttachmentListData attachmentListData = new AttachmentListData();
                     attachmentListData.setImageName(returnCursor.getString(nameIndex));
-                    attachmentListData.setImageID(returnUri.toString());
+                    attachmentListData.setImageUri(returnUri.toString());
+                    Log.d("TAG", "setData: "+returnUri.toString());
                     newAttachmentList.add(attachmentListData);
                 }
             });
