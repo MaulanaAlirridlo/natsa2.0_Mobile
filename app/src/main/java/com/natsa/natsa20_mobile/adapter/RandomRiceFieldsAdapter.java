@@ -46,8 +46,12 @@ public class RandomRiceFieldsAdapter extends RecyclerView.Adapter<RandomRiceFiel
 
     @Override
     public void onBindViewHolder(@NonNull RandomRiceFieldsViewHolder holder, int position) {
-        new GlideLoader().glideLoader(holder.itemView, holder.productsImage,
-                Server.storage + randomRiceFieldsDataList.get(position).getPhoto().getPhoto_path());
+        if (randomRiceFieldsDataList.get(position).getPhoto() != null) {
+            new GlideLoader().glideLoader(holder.itemView, holder.productsImage,
+                    Server.storage + randomRiceFieldsDataList.get(position).getPhoto().getPhoto_path());
+        } else {
+            holder.productsImage.setImageResource(R.drawable.no_image);
+        }
         holder.productsTitle.setText(randomRiceFieldsDataList.get(position).getTitle());
         holder.productsPrice.setText(String.valueOf(randomRiceFieldsDataList.get(position).getHarga()));
 

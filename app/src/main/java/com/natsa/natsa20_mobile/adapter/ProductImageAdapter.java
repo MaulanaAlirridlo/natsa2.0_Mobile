@@ -39,8 +39,12 @@ public class ProductImageAdapter extends SliderViewAdapter<ProductImageAdapter.S
 
     @Override
     public void onBindViewHolder(SliderAdapterVH holder, final int position) {
-        new GlideLoader().glideLoader(holder.itemView, holder.imageViewBackground,
-                Server.storage + sliderItems.get(position).getPhoto_path());
+        if (sliderItems.get(position) != null){
+            new GlideLoader().glideLoader(holder.itemView, holder.imageViewBackground,
+                    Server.storage + sliderItems.get(position).getPhoto_path());
+        } else {
+            holder.imageViewBackground.setImageResource(R.drawable.no_image);
+        }
     }
 
     @Override

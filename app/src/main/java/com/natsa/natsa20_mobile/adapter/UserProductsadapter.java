@@ -27,7 +27,7 @@ import com.natsa.natsa20_mobile.server.Server;
 
 import java.util.List;
 
-public class UserProductsadapter extends RecyclerView.Adapter<UserProductsadapter.UserProductsViewHolder>  {
+public class UserProductsadapter extends RecyclerView.Adapter<UserProductsadapter.UserProductsViewHolder> {
 
     private final Context context;
     private final List<Data> userProductsDataList;
@@ -47,8 +47,14 @@ public class UserProductsadapter extends RecyclerView.Adapter<UserProductsadapte
 
     @Override
     public void onBindViewHolder(@NonNull UserProductsViewHolder holder, int position) {
-        new GlideLoader().glideLoader(holder.itemView, holder.productsImage,
-                Server.storage + userProductsDataList.get(position).getPhoto().getPhoto_path());
+        if (userProductsDataList.get(position).getPhoto() != null) {
+            new GlideLoader().glideLoader(holder.itemView, holder.productsImage,
+                    Server.storage + userProductsDataList.get(position).getPhoto()
+                            .getPhoto_path());
+        } else {
+            holder.productsImage.setImageResource(R.drawable.no_image);
+
+        }
         holder.productsTitle.setText(userProductsDataList.get(position).getTitle());
         holder.productsPrice.setText(String.valueOf(userProductsDataList.get(position).getHarga()));
         holder.lihatProduct.setOnClickListener(v -> {

@@ -19,6 +19,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.natsa.natsa20_mobile.R;
+import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.server.Server;
 
@@ -45,7 +46,13 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     @Override
     public void onBindViewHolder(@NonNull ProductsViewHolder holder, int position) {
-        glideLoader(holder, position);
+        if (productsDataList.get(position).getPhoto() != null) {
+            new GlideLoader().glideLoader(holder.itemView, holder.productsImage,
+                    Server.storage + productsDataList.get(position).getPhoto()
+                            .getPhoto_path());
+        } else {
+            holder.productsImage.setImageResource(R.drawable.no_image);
+        }
         holder.productsTitle.setText(productsDataList.get(position).getTitle());
         holder.productsPrice.setText(String.valueOf(productsDataList.get(position).getHarga()));
 
@@ -91,29 +98,5 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     public interface showDetailSawahListener {
         void showDetailSawah(int id);
-    }
-
-    //glide image loader and setter
-    private void glideLoader(ProductsViewHolder holder, int position) {
-
-        final WeakHandler weakHandler = new WeakHandler();
-        final Runnable runnable = () -> glideLoader(holder, position);
-
-        Glide.with(holder.itemView)
-                .load(Server.storage + productsDataList.get(position).getPhoto().getPhoto_path())
-                .centerCrop()
-                .listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        weakHandler.postDelayed(runnable, 1);
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        return false;
-                    }
-                })
-                .into(holder.productsImage);
     }
 }

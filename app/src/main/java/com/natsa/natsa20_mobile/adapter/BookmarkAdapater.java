@@ -23,6 +23,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.natsa.natsa20_mobile.R;
+import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.model.bookmark.get_bookmark.Data;
 import com.natsa.natsa20_mobile.model.products.product.RiceField;
 import com.natsa.natsa20_mobile.server.Server;
@@ -31,7 +32,7 @@ import com.natsa.natsa20_mobile.server.process.bookmark.GetBookmark;
 
 import java.util.List;
 
-public class BookmarkAdapater extends RecyclerView.Adapter<BookmarkAdapater.BookmarkViewHolder>  {
+public class BookmarkAdapater extends RecyclerView.Adapter<BookmarkAdapater.BookmarkViewHolder> {
 
     private final Context context;
     private final List<Data> bookmarkDataList;
@@ -51,7 +52,13 @@ public class BookmarkAdapater extends RecyclerView.Adapter<BookmarkAdapater.Book
 
     @Override
     public void onBindViewHolder(@NonNull BookmarkViewHolder holder, int position) {
-        glideLoader(holder, position);
+        if (bookmarkDataList.get(position).getPhoto() != null) {
+            new GlideLoader().glideLoader(holder.itemView, holder.productsImage,
+                    Server.storage + bookmarkDataList.get(position).getPhoto()
+                            .getPhoto_path());
+        } else {
+            holder.productsImage.setImageResource(R.drawable.no_image);
+        }
         holder.productsTitle.setText(bookmarkDataList.get(position).getTitle());
         holder.productsPrice.setText(String.valueOf(bookmarkDataList.get(position).getHarga()));
         holder.deleteBookmark.setOnClickListener(v -> {
@@ -65,7 +72,8 @@ public class BookmarkAdapater extends RecyclerView.Adapter<BookmarkAdapater.Book
                                     bookmarkDataList.get(position).getBookmarks_id(),
                                     context);
                             new GetBookmark().getBookmarkFromApi(BookmarkAdapater.this, context);
-                        }})
+                        }
+                    })
                     .setNegativeButton("Tidak", null)
                     .create();
             dialog.setOnShowListener(new DialogInterface.OnShowListener() {
@@ -98,29 +106,5 @@ public class BookmarkAdapater extends RecyclerView.Adapter<BookmarkAdapater.Book
             productsPrice = v.findViewById(R.id.productsPrice);
             deleteBookmark = v.findViewById(R.id.delete_bookmark);
         }
-    }
-
-    //glide image loader and setter
-    private void glideLoader(BookmarkViewHolder holder, int position) {
-
-        final WeakHandler weakHandler = new WeakHandler();
-        final Runnable runnable = () -> glideLoader(holder, position);
-
-        Glide.with(context)
-                .load(Server.storage + bookmarkDataList.get(position).getPhoto().getPhoto_path())
-                .centerCrop()
-                .listener(new RequestListener<Drawable>() {
-                    @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        weakHandler.postDelayed(runnable, 1);
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                        return false;
-                    }
-                })
-                .into(holder.productsImage);
     }
 }
