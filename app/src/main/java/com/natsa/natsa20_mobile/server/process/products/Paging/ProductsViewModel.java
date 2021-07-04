@@ -12,10 +12,11 @@ public class ProductsViewModel extends ViewModel {
 
     LiveData productsPagedList;
     LiveData<PageKeyedDataSource<Integer, Data>> liveDataSource;
+    ProductsDSFactory productsDSFactory;
 
     public LiveData ProductsViewModel() {
 
-        ProductsDSFactory productsDSFactory = new ProductsDSFactory();
+        productsDSFactory = new ProductsDSFactory();
         liveDataSource = productsDSFactory.getItemLiveDataSource();
 
         PagedList.Config config =
@@ -26,5 +27,11 @@ public class ProductsViewModel extends ViewModel {
 
         return productsPagedList = (new LivePagedListBuilder(productsDSFactory, config)).build();
 
+    }
+
+    public void refresh() {
+        if (productsDSFactory.getItemLiveDataSource().getValue() != null) {
+            productsDSFactory.getItemLiveDataSource().getValue().invalidate();
+        }
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
@@ -20,13 +21,13 @@ import android.view.ViewGroup;
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
 import com.natsa.natsa20_mobile.model.products.products.Data;
-import com.natsa.natsa20_mobile.server.process.products.GetProducts;
+import com.natsa.natsa20_mobile.server.process.products.Paging.ProductsDSFactory;
 import com.natsa.natsa20_mobile.server.process.products.Paging.ProductsViewModel;
 
 public class ProductsFragment extends Fragment {
 
     ProductsAdapter adapter;
-    GetProducts getProducts = new GetProducts();
+    ProductsViewModel productsViewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,7 +38,7 @@ public class ProductsFragment extends Fragment {
         adapter = new ProductsAdapter(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ProductsViewModel productsViewModel = ViewModelProviders.of(this).get(ProductsViewModel.class);
+        productsViewModel = ViewModelProviders.of(this).get(ProductsViewModel.class);
 
         productsViewModel.ProductsViewModel().observe(getActivity(), new Observer<PagedList<Data>>() {
             @Override
@@ -52,7 +53,7 @@ public class ProductsFragment extends Fragment {
 
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swipeRefresh);
         pullToRefresh.setOnRefreshListener(() -> {
-            getProducts.getProductsFromApi(adapter);
+            productsViewModel.refresh();
             new Handler(Looper.getMainLooper()).postDelayed(() -> pullToRefresh.setRefreshing(false), 700);
         });
 
@@ -61,6 +62,6 @@ public class ProductsFragment extends Fragment {
 
     public void onResume() {
         super.onResume();
-        getProducts.getProductsFromApi(adapter);
+        productsViewModel.refresh();
     }
 }
