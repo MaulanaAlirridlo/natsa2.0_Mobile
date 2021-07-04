@@ -39,4 +39,12 @@ public class Data {
 
     private Photo photo;
 
+
+    public boolean equals(Object anObject) {
+        if (this == anObject) {
+            return true;
+        }
+        return false;
+    }
+
 }

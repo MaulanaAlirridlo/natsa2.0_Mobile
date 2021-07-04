@@ -2,7 +2,11 @@ package com.natsa.natsa20_mobile.fragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -15,7 +19,9 @@ import android.view.ViewGroup;
 
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
+import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.server.process.products.GetProducts;
+import com.natsa.natsa20_mobile.server.process.products.Paging.ProductsViewModel;
 
 public class ProductsFragment extends Fragment {
 
@@ -28,9 +34,20 @@ public class ProductsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_products, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.productsRecyclerView);
-        adapter = new ProductsAdapter(getContext(), GetProducts.getProductsDataList());
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
+        adapter = new ProductsAdapter(getContext());
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        ProductsViewModel productsViewModel = ViewModelProviders.of(this).get(ProductsViewModel.class);
+
+        productsViewModel.ProductsViewModel().observe(getActivity(), new Observer<PagedList<Data>>() {
+            @Override
+            public void onChanged(@Nullable PagedList<Data> items) {
+                adapter.submitList(items);
+            }
+        });
+
+        recyclerView.setAdapter(adapter);
+
         recyclerView.setAdapter(adapter);
 
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swipeRefresh);

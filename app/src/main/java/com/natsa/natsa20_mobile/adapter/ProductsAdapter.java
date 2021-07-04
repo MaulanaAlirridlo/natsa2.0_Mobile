@@ -1,5 +1,6 @@
 package com.natsa.natsa20_mobile.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.paging.PagedListAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.badoo.mobile.util.WeakHandler;
@@ -25,15 +28,14 @@ import com.natsa.natsa20_mobile.server.Server;
 
 import java.util.List;
 
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
+public class ProductsAdapter extends PagedListAdapter<Data, ProductsAdapter.ProductsViewHolder> {
 
     private final Context context;
-    private final List<Data> productsDataList;
     private showDetailSawahListener showDetailSawahListener;
 
-    public ProductsAdapter(Context context, List<Data> productsDataList) {
+    public ProductsAdapter(Context context) {
+        super(DIFF_CALLBACK);
         this.context = context;
-        this.productsDataList = productsDataList;
     }
 
     @NonNull
@@ -46,26 +48,21 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
     @Override
     public void onBindViewHolder(@NonNull ProductsViewHolder holder, int position) {
-        if (productsDataList.get(position).getPhoto() != null) {
+        if (getItem(position).getPhoto() != null) {
             new GlideLoader().glideLoader(holder.itemView, holder.productsImage,
-                    Server.storage + productsDataList.get(position).getPhoto()
+                    Server.storage + getItem(position).getPhoto()
                             .getPhoto_path());
         } else {
             holder.productsImage.setImageResource(R.drawable.no_image);
         }
-        holder.productsTitle.setText(productsDataList.get(position).getTitle());
-        holder.productsPrice.setText(String.valueOf(productsDataList.get(position).getHarga()));
+        holder.productsTitle.setText(getItem(position).getTitle());
+        holder.productsPrice.setText(String.valueOf(getItem(position).getHarga()));
 
         try {
             showDetailSawahListener = (ProductsAdapter.showDetailSawahListener) context;
         } catch (ClassCastException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return (productsDataList != null) ? productsDataList.size() : 0;
     }
 
     public class ProductsViewHolder extends RecyclerView.ViewHolder {
@@ -84,7 +81,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
             v.setOnClickListener(v1 -> {
                 position = getAdapterPosition();
-                id = productsDataList.get(position).getId();
+                id = getItem(position).getId();
                 show(id);
             });
 
@@ -99,4 +96,17 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     public interface showDetailSawahListener {
         void showDetailSawah(int id);
     }
+
+    private static DiffUtil.ItemCallback<Data> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<Data>() {
+                @Override
+                public boolean areItemsTheSame(Data oldData, Data newData) {
+                    return oldData.getId() == newData.getId();
+                }
+
+                @Override
+                public boolean areContentsTheSame(Data oldData, Data newData) {
+                    return oldData.equals(newData);
+                }
+            };
 }

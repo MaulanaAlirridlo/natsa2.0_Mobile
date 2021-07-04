@@ -23,6 +23,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface RouteAPI {
 
@@ -45,11 +46,21 @@ public interface RouteAPI {
     Call<LogoutRespone> Logout(@Header("Authorization") String token);
 
 
+    //dynamic product url
+    @GET
+    Call<Products> getProductsFromDynamicUrl(@Url String url);
+
     //product
     @Headers({"Accept: application/json"})
     @GET(Server.riceFields)
     Call<Products> getRiceFields();
 
+    //pagination
+    @Headers({"Accept: application/json"})
+    @GET(Server.riceFields)
+    Call<Products> getRiceFieldsPerPage(@Query("page") int page);
+
+    //show product
     @Headers({"Accept: application/json"})
     @GET(Server.product+"{id}")
     Call<Product> showRiceField(@Path("id") int id);
