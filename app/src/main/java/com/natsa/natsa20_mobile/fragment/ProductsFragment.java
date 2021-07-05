@@ -20,7 +20,7 @@ import android.view.ViewGroup;
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
 import com.natsa.natsa20_mobile.model.products.products.Data;
-import com.natsa.natsa20_mobile.server.process.products.Paging.products.ProductsViewModel;
+import com.natsa.natsa20_mobile.server.process.Paging.products.ProductsViewModel;
 
 public class ProductsFragment extends Fragment {
 

@@ -88,6 +88,10 @@ public interface RouteAPI {
     Call<GetBookmarkRespone> getBookmark(@Header("Authorization") String token);
 
     @Headers({"Accept: application/json"})
+    @GET(Server.bookmarks)
+    Call<GetBookmarkRespone> getBookmarkPerPage(@Header("Authorization") String token, @Query("page") int page);
+
+    @Headers({"Accept: application/json"})
     @DELETE(Server.bookmarks+"{bookmarkId}")
     Call<DeleteBookmarkRespone> deleteBookmark(@Header("Authorization") String token, @Path("bookmarkId") int bookmarkId);
 

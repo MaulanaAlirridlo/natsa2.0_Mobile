@@ -1,4 +1,4 @@
-package com.natsa.natsa20_mobile.server.process.products.Paging.products.user_products;
+package com.natsa.natsa20_mobile.server.process.Paging.products.user_products;
 
 import android.app.Application;
 import android.content.Context;

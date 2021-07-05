@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.paging.PagedListAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.badoo.mobile.util.WeakHandler;
@@ -32,14 +34,13 @@ import com.natsa.natsa20_mobile.server.process.bookmark.GetBookmark;
 
 import java.util.List;
 
-public class BookmarkAdapater extends RecyclerView.Adapter<BookmarkAdapater.BookmarkViewHolder> {
+public class BookmarkAdapater extends PagedListAdapter<Data, BookmarkAdapater.BookmarkViewHolder> {
 
     private final Context context;
-    private final List<Data> bookmarkDataList;
 
-    public BookmarkAdapater(Context context, List<Data> bookmarkDataList) {
+    public BookmarkAdapater(Context context) {
+        super(DIFF_CALLBACK);
         this.context = context;
-        this.bookmarkDataList = bookmarkDataList;
     }
 
     @NonNull
@@ -52,15 +53,15 @@ public class BookmarkAdapater extends RecyclerView.Adapter<BookmarkAdapater.Book
 
     @Override
     public void onBindViewHolder(@NonNull BookmarkViewHolder holder, int position) {
-        if (bookmarkDataList.get(position).getPhoto() != null) {
+        if (getItem(position).getPhoto() != null) {
             new GlideLoader().glideLoader(holder.itemView, holder.productsImage,
-                    Server.storage + bookmarkDataList.get(position).getPhoto()
+                    Server.storage + getItem(position).getPhoto()
                             .getPhoto_path());
         } else {
             holder.productsImage.setImageResource(R.drawable.no_image);
         }
-        holder.productsTitle.setText(bookmarkDataList.get(position).getTitle());
-        holder.productsPrice.setText(String.valueOf(bookmarkDataList.get(position).getHarga()));
+        holder.productsTitle.setText(getItem(position).getTitle());
+        holder.productsPrice.setText(String.valueOf(getItem(position).getHarga()));
         holder.deleteBookmark.setOnClickListener(v -> {
             AlertDialog dialog = new AlertDialog.Builder(context)
                     .setMessage("Apakah anda yakin ingin menghapusnya?")
@@ -69,7 +70,7 @@ public class BookmarkAdapater extends RecyclerView.Adapter<BookmarkAdapater.Book
 
                         public void onClick(DialogInterface dialog, int whichButton) {
                             new DeleteBookmark().deleteBookmarkProcess(
-                                    bookmarkDataList.get(position).getBookmarks_id(),
+                                    getItem(position).getBookmarks_id(),
                                     context);
                             new GetBookmark().getBookmarkFromApi(BookmarkAdapater.this, context);
                         }
@@ -89,11 +90,6 @@ public class BookmarkAdapater extends RecyclerView.Adapter<BookmarkAdapater.Book
         });
     }
 
-    @Override
-    public int getItemCount() {
-        return (bookmarkDataList != null) ? bookmarkDataList.size() : 0;
-    }
-
     public class BookmarkViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView productsImage;
@@ -107,4 +103,17 @@ public class BookmarkAdapater extends RecyclerView.Adapter<BookmarkAdapater.Book
             deleteBookmark = v.findViewById(R.id.delete_bookmark);
         }
     }
+
+    private static DiffUtil.ItemCallback<Data> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<Data>() {
+                @Override
+                public boolean areItemsTheSame(Data oldData, Data newData) {
+                    return oldData.getId() == newData.getId();
+                }
+
+                @Override
+                public boolean areContentsTheSame(Data oldData, Data newData) {
+                    return oldData.equals(newData);
+                }
+            };
 }

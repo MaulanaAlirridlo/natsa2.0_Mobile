@@ -1,11 +1,8 @@
-package com.natsa.natsa20_mobile.server.process.products.Paging.products.user_products;
-
-import android.content.Context;
+package com.natsa.natsa20_mobile.server.process.Paging.products;
 
 import androidx.annotation.NonNull;
 import androidx.paging.PageKeyedDataSource;
 
-import com.natsa.natsa20_mobile.helper.Preferences;
 import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.model.products.products.Products;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
@@ -14,16 +11,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserProductsDS  extends PageKeyedDataSource<Integer, Data> {
-    Context context;
-
-    public UserProductsDS(Context context) {
-        this.context = context;
-    }
-
+public class ProductsDataSource extends PageKeyedDataSource<Integer, Data> {
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Data> callback) {
-        RetrofitBuilder.endPoint().getUserRiceFieldsPerPage(Preferences.getId(context), 1)
+        RetrofitBuilder.endPoint().getRiceFieldsPerPage(1)
                 .enqueue(new Callback<Products>() {
                     @Override
                     public void onResponse(@NonNull Call<Products> call, @NonNull Response<Products> response) {
@@ -42,7 +33,7 @@ public class UserProductsDS  extends PageKeyedDataSource<Integer, Data> {
 
     @Override
     public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Data> callback) {
-        RetrofitBuilder.endPoint().getUserRiceFieldsPerPage(Preferences.getId(context), params.key)
+        RetrofitBuilder.endPoint().getRiceFieldsPerPage(params.key)
                 .enqueue(new Callback<Products>() {
                     @Override
                     public void onResponse(@NonNull Call<Products> call, @NonNull Response<Products> response) {
@@ -62,7 +53,7 @@ public class UserProductsDS  extends PageKeyedDataSource<Integer, Data> {
 
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Data> callback) {
-        RetrofitBuilder.endPoint().getUserRiceFieldsPerPage(Preferences.getId(context), params.key)
+        RetrofitBuilder.endPoint().getRiceFieldsPerPage(params.key)
                 .enqueue(new Callback<Products>() {
                     @Override
                     public void onResponse(@NonNull Call<Products> call, @NonNull Response<Products> response) {

@@ -24,10 +24,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.UserProductsadapter;
 import com.natsa.natsa20_mobile.model.products.products.Data;
-import com.natsa.natsa20_mobile.server.process.products.GetUserProducts;
-import com.natsa.natsa20_mobile.helper.Preferences;
-import com.natsa.natsa20_mobile.server.process.products.Paging.products.ProductsViewModel;
-import com.natsa.natsa20_mobile.server.process.products.Paging.products.user_products.UserProductsVM;
+import com.natsa.natsa20_mobile.server.process.Paging.products.user_products.UserProductsVM;
 
 public class JualSewakanFragment extends Fragment {
 

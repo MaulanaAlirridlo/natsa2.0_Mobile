@@ -1,4 +1,4 @@
-package com.natsa.natsa20_mobile.server.process.products.Paging.products;
+package com.natsa.natsa20_mobile.server.process.Paging.products;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;

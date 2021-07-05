@@ -64,4 +64,11 @@ public class Data {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public boolean equals(Object anObject) {
+        if (this == anObject) {
+            return true;
+        }
+        return false;
+    }
 }
