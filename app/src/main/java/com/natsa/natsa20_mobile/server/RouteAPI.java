@@ -70,6 +70,10 @@ public interface RouteAPI {
     @GET(Server.riceFields)
     Call<Products> getUserRiceFields(@Query("filter[user_id]") int id);
 
+    @Headers({"Accept: application/json"})
+    @GET(Server.riceFields)
+    Call<Products> getUserRiceFieldsPerPage(@Query("filter[user_id]") int id, @Query("page") int page);
+
     //add user product
 
 

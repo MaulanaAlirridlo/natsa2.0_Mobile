@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.paging.PagedListAdapter;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.badoo.mobile.util.WeakHandler;
@@ -27,14 +29,13 @@ import com.natsa.natsa20_mobile.server.Server;
 
 import java.util.List;
 
-public class UserProductsadapter extends RecyclerView.Adapter<UserProductsadapter.UserProductsViewHolder> {
+public class UserProductsadapter extends PagedListAdapter<Data, UserProductsadapter.UserProductsViewHolder> {
 
     private final Context context;
-    private final List<Data> userProductsDataList;
 
-    public UserProductsadapter(Context context, List<Data> userProductsDataList) {
+    public UserProductsadapter(Context context) {
+        super(DIFF_CALLBACK);
         this.context = context;
-        this.userProductsDataList = userProductsDataList;
     }
 
     @NonNull
@@ -47,16 +48,16 @@ public class UserProductsadapter extends RecyclerView.Adapter<UserProductsadapte
 
     @Override
     public void onBindViewHolder(@NonNull UserProductsViewHolder holder, int position) {
-        if (userProductsDataList.get(position).getPhoto() != null) {
+        if (getItem(position).getPhoto() != null) {
             new GlideLoader().glideLoader(holder.itemView, holder.productsImage,
-                    Server.storage + userProductsDataList.get(position).getPhoto()
+                    Server.storage + getItem(position).getPhoto()
                             .getPhoto_path());
         } else {
             holder.productsImage.setImageResource(R.drawable.no_image);
 
         }
-        holder.productsTitle.setText(userProductsDataList.get(position).getTitle());
-        holder.productsPrice.setText(String.valueOf(userProductsDataList.get(position).getHarga()));
+        holder.productsTitle.setText(getItem(position).getTitle());
+        holder.productsPrice.setText(String.valueOf(getItem(position).getHarga()));
         holder.lihatProduct.setOnClickListener(v -> {
 
         });
@@ -71,7 +72,7 @@ public class UserProductsadapter extends RecyclerView.Adapter<UserProductsadapte
 //
 //                        public void onClick(DialogInterface dialog, int whichButton) {
 //                            new DeleteBookmark().deleteBookmarkProcess(
-//                                    userProductsDataList.get(position).getBookmarks_id(),
+//                                    getItem()(position).getBookmarks_id(),
 //                                    context);
 //                            new GetBookmark().getBookmarkFromApi(BookmarkAdapater.this, context);
 //                        }})
@@ -88,11 +89,6 @@ public class UserProductsadapter extends RecyclerView.Adapter<UserProductsadapte
 //            });
 //            dialog.show();
         });
-    }
-
-    @Override
-    public int getItemCount() {
-        return (userProductsDataList != null) ? userProductsDataList.size() : 0;
     }
 
     public class UserProductsViewHolder extends RecyclerView.ViewHolder {
@@ -118,7 +114,7 @@ public class UserProductsadapter extends RecyclerView.Adapter<UserProductsadapte
         final Runnable runnable = () -> glideLoader(holder, position);
 
         Glide.with(context)
-                .load(Server.storage + userProductsDataList.get(position).getPhoto().getPhoto_path())
+                .load(Server.storage + getItem(position).getPhoto().getPhoto_path())
                 .centerCrop()
                 .listener(new RequestListener<Drawable>() {
                     @Override
@@ -134,4 +130,17 @@ public class UserProductsadapter extends RecyclerView.Adapter<UserProductsadapte
                 })
                 .into(holder.productsImage);
     }
+
+    private static DiffUtil.ItemCallback<Data> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<Data>() {
+                @Override
+                public boolean areItemsTheSame(Data oldData, Data newData) {
+                    return oldData.getId() == newData.getId();
+                }
+
+                @Override
+                public boolean areContentsTheSame(Data oldData, Data newData) {
+                    return oldData.equals(newData);
+                }
+            };
 }
