@@ -15,6 +15,9 @@ public class Server {
     public static final String login = users+"login/";
     public static final String logout = users+"logout/";
 
+    //history
+    public static final String history = "history/";
+
     //bookmark
     public static final String bookmarks = "bookmarks/";
 

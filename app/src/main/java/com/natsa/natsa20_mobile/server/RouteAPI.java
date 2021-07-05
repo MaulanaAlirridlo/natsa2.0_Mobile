@@ -77,6 +77,11 @@ public interface RouteAPI {
     //add user product
 
 
+    //history
+    @Headers({"Accept: application/json"})
+    @GET(Server.history)
+    Call<Products> getHistoryPerPage(@Header("Authorization") String token, @Query("page") int page);
+
 
     //bookmarks
     @Headers({"Accept: application/json"})

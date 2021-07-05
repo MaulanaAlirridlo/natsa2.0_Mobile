@@ -22,14 +22,14 @@ import android.view.ViewGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.natsa.natsa20_mobile.R;
-import com.natsa.natsa20_mobile.adapter.UserProductsadapter;
+import com.natsa.natsa20_mobile.adapter.UserProductsAdapter;
 import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.server.process.Paging.products.user_products.UserProductsVM;
 
 public class JualSewakanFragment extends Fragment {
 
     FloatingActionButton showAddProductForm;
-    UserProductsadapter adapter;
+    UserProductsAdapter adapter;
     UserProductsVM userProductsVM;
     Context context;
 
@@ -43,7 +43,7 @@ public class JualSewakanFragment extends Fragment {
 
 
         RecyclerView recyclerView = view.findViewById(R.id.jual_sewakan_recycler_view);
-        adapter = new UserProductsadapter(context);
+        adapter = new UserProductsAdapter(context);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         userProductsVM = ViewModelProviders.of(this).get(UserProductsVM.class);
 

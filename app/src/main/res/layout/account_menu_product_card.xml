@@ -32,13 +32,21 @@
                 android:layout_gravity="end">
 
                 <TextView
-                    android:id="@+id/show_makelar"
+                    android:id="@+id/lihat_product"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/makelar" />
+                    android:text="@string/lihat" />
 
                 <TextView
-                    android:id="@+id/delete_bookmark"
+                    android:id="@+id/edit_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/edit" />
+
+                <TextView
+                    android:id="@+id/delete_product"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"

@@ -1,11 +1,8 @@
 package com.natsa.natsa20_mobile.adapter;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,26 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.badoo.mobile.util.WeakHandler;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.model.bookmark.get_bookmark.Data;
-import com.natsa.natsa20_mobile.model.products.product.RiceField;
 import com.natsa.natsa20_mobile.server.Server;
 import com.natsa.natsa20_mobile.server.process.bookmark.DeleteBookmark;
 import com.natsa.natsa20_mobile.server.process.bookmark.GetBookmark;
-
-import java.util.List;
 
 public class BookmarkAdapater extends PagedListAdapter<Data, BookmarkAdapater.BookmarkViewHolder> {
 
@@ -47,7 +34,7 @@ public class BookmarkAdapater extends PagedListAdapter<Data, BookmarkAdapater.Bo
     @Override
     public BookmarkViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.bookmark_card, parent, false);
+        View view = layoutInflater.inflate(R.layout.account_menu_product_card, parent, false);
         return new BookmarkViewHolder(view);
     }
 
@@ -66,16 +53,16 @@ public class BookmarkAdapater extends PagedListAdapter<Data, BookmarkAdapater.Bo
             AlertDialog dialog = new AlertDialog.Builder(context)
                     .setMessage("Apakah anda yakin ingin menghapusnya?")
                     .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setNegativeButton("Tidak", null)
                     .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int whichButton) {
                             new DeleteBookmark().deleteBookmarkProcess(
                                     getItem(position).getBookmarks_id(),
                                     context);
-                            new GetBookmark().getBookmarkFromApi(BookmarkAdapater.this, context);
+
                         }
                     })
-                    .setNegativeButton("Tidak", null)
                     .create();
             dialog.setOnShowListener(new DialogInterface.OnShowListener() {
                 @Override
@@ -100,7 +87,7 @@ public class BookmarkAdapater extends PagedListAdapter<Data, BookmarkAdapater.Bo
             productsImage = v.findViewById(R.id.productsImage);
             productsTitle = v.findViewById(R.id.productsTitle);
             productsPrice = v.findViewById(R.id.productsPrice);
-            deleteBookmark = v.findViewById(R.id.delete_bookmark);
+            deleteBookmark = v.findViewById(R.id.delete_product);
         }
     }
 

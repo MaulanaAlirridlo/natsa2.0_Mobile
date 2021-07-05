@@ -19,9 +19,9 @@ public class BookmarksDSFactory extends DataSource.Factory {
 
     @Override
     public DataSource create() {
-        BookmarksDataSource productsDataSource = new BookmarksDataSource(context);
-        bookmarksLiveDataSource.postValue(productsDataSource);
-        return productsDataSource;
+        BookmarksDataSource bookmarksDataSource = new BookmarksDataSource(context);
+        bookmarksLiveDataSource.postValue(bookmarksDataSource);
+        return bookmarksDataSource;
     }
 
     public MutableLiveData<PageKeyedDataSource<Integer, Data>> getItemLiveDataSource() {

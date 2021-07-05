@@ -1,4 +1,4 @@
-package com.natsa.natsa20_mobile.server.process.Paging.bookmark;
+package com.natsa.natsa20_mobile.server.process.Paging.history;
 
 import android.app.Application;
 import android.content.Context;
@@ -9,24 +9,24 @@ import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PageKeyedDataSource;
 import androidx.paging.PagedList;
 
-import com.natsa.natsa20_mobile.model.bookmark.get_bookmark.Data;
+import com.natsa.natsa20_mobile.model.products.products.Data;
 
-public class BookmarksViewModel extends AndroidViewModel {
+public class HistoryViewModel extends AndroidViewModel {
 
     Context context;
     LiveData productsPagedList;
     LiveData<PageKeyedDataSource<Integer, Data>> liveDataSource;
-    BookmarksDSFactory bookmarksDSFactory;
+    HistoryDSFactory historyDSFactory;
 
-    public BookmarksViewModel(Application application){
+    public HistoryViewModel(Application application){
         super(application);
         this.context = application.getApplicationContext();
     }
 
-    public LiveData BookmarksViewModel() {
+    public LiveData HistoryViewModel() {
 
-        bookmarksDSFactory = new BookmarksDSFactory(context);
-        liveDataSource = bookmarksDSFactory.getItemLiveDataSource();
+        historyDSFactory = new HistoryDSFactory(context);
+        liveDataSource = historyDSFactory.getItemLiveDataSource();
 
         PagedList.Config config =
                 (new PagedList.Config.Builder())
@@ -34,13 +34,13 @@ public class BookmarksViewModel extends AndroidViewModel {
                         .setPageSize(5)
                         .build();
 
-        return productsPagedList = (new LivePagedListBuilder(bookmarksDSFactory, config)).build();
+        return productsPagedList = (new LivePagedListBuilder(historyDSFactory, config)).build();
 
     }
 
     public void refresh() {
-        if (bookmarksDSFactory.getItemLiveDataSource().getValue() != null) {
-            bookmarksDSFactory.getItemLiveDataSource().getValue().invalidate();
+        if (historyDSFactory.getItemLiveDataSource().getValue() != null) {
+            historyDSFactory.getItemLiveDataSource().getValue().invalidate();
         }
     }
 }

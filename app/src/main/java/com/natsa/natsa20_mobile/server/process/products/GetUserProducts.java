@@ -1,9 +1,6 @@
 package com.natsa.natsa20_mobile.server.process.products;
 
-import androidx.annotation.NonNull;
-
-import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
-import com.natsa.natsa20_mobile.adapter.UserProductsadapter;
+import com.natsa.natsa20_mobile.adapter.UserProductsAdapter;
 import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.model.products.products.Products;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
@@ -22,13 +19,13 @@ public class GetUserProducts {
         return userProductsDataList;
     }
 
-    public void setUserProductsDataList(List<Data> products, UserProductsadapter adapter) {
+    public void setUserProductsDataList(List<Data> products, UserProductsAdapter adapter) {
         userProductsDataList.clear();
         userProductsDataList.addAll(products);
         adapter.notifyDataSetChanged();
     }
 
-    public void getUserProductsFromApi(UserProductsadapter adapter, int id) {
+    public void getUserProductsFromApi(UserProductsAdapter adapter, int id) {
         RetrofitBuilder.endPoint().getUserRiceFields(id)
                 .enqueue(new Callback<Products>() {
                     @Override
