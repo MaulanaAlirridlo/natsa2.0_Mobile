@@ -11,6 +11,7 @@ public class Preferences {
     private static final String EMAIL = "email";
     private static final String USERNAME = "username";
     private static final String KTP = "ktp";
+    private static final String NO_HP = "no_hp";
     private static final String PHOTO_URL = "profile_photo_url";
 
 
@@ -78,6 +79,16 @@ public class Preferences {
         return getSharedPreference(context).getString(KTP, null);
     }
 
+    public static void setNoHp(Context context, String noHp) {
+        SharedPreferences.Editor editor = getSharedPreference(context).edit();
+        editor.putString(NO_HP, noHp);
+        editor.apply();
+    }
+
+    public static String getNoHp(Context context) {
+        return getSharedPreference(context).getString(NO_HP, null);
+    }
+
     public static void setPhotoUrl(Context context, String photoUrl) {
         SharedPreferences.Editor editor = getSharedPreference(context).edit();
         editor.putString(PHOTO_URL, photoUrl);
@@ -89,7 +100,7 @@ public class Preferences {
     }
 
     public static void setUser(Context context, String token, int id, String name, String email,
-                               String username, String ktp, String photoUrl) {
+                               String username, String ktp, String noHp, String photoUrl) {
         SharedPreferences.Editor editor = getSharedPreference(context).edit();
         editor.putString(TOKEN, token);
         editor.putInt(ID, id);
@@ -97,6 +108,7 @@ public class Preferences {
         editor.putString(EMAIL, email);
         editor.putString(USERNAME, username);
         editor.putString(KTP, ktp);
+        editor.putString(NO_HP, noHp);
         editor.putString(PHOTO_URL, photoUrl);
         editor.apply();
     }

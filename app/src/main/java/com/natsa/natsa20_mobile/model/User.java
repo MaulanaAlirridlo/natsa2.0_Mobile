@@ -1,4 +1,4 @@
-package com.natsa.natsa20_mobile.model.bookmark.get_bookmark;
+package com.natsa.natsa20_mobile.model;
 
 public class User {
     private int id;
@@ -12,6 +12,7 @@ public class User {
     private String role;
     private String username;
     private String ktp;
+    private String no_hp;
     private String profile_photo_url;
 
     public int getId() {
@@ -100,6 +101,14 @@ public class User {
 
     public void setKtp(String ktp) {
         this.ktp = ktp;
+    }
+
+    public String getNo_hp() {
+        return no_hp;
+    }
+
+    public void setNo_hp(String no_hp) {
+        this.no_hp = no_hp;
     }
 
     public String getProfile_photo_url() {

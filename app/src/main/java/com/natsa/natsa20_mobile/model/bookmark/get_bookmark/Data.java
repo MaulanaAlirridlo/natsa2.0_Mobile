@@ -1,5 +1,7 @@
 package com.natsa.natsa20_mobile.model.bookmark.get_bookmark;
 
+import com.natsa.natsa20_mobile.model.User;
+
 public class Data {
     private int id;
     private String title;
