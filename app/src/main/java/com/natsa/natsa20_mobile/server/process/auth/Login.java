@@ -6,7 +6,7 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 
 import com.natsa.natsa20_mobile.activity.MainActivity;
-import com.natsa.natsa20_mobile.model.User;
+import com.natsa.natsa20_mobile.model.user.User;
 import com.natsa.natsa20_mobile.model.auth.login.LoginForm;
 import com.natsa.natsa20_mobile.model.auth.login.LoginRespone;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;

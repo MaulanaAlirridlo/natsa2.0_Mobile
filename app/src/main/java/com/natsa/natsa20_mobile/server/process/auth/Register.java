@@ -23,7 +23,6 @@ public class Register {
         registerForm = new RegisterForm(name, email, password, password_confirmation, username, ktp);
     }
 
-
     public void RegisterProcess(Activity activity) {
         RetrofitBuilder.endPoint().Register(registerForm)
                 .enqueue(new Callback<RegisterRespone>() {
@@ -35,7 +34,7 @@ public class Register {
                             RegisterRespone.User resUser = res.getUser();
                             Preferences.setUser(activity.getApplicationContext(), res.getToken(),
                                     resUser.getId(), resUser.getName(), resUser.getEmail(),
-                                    resUser.getUsername(), resUser.getKtp(),
+                                    resUser.getUsername(), resUser.getKtp(), null,
                                     resUser.getProfile_photo_url());
                             Intent i = new Intent(activity, MainActivity.class);
                             activity.startActivity(i);

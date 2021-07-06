@@ -1,4 +1,4 @@
-package com.natsa.natsa20_mobile.model;
+package com.natsa.natsa20_mobile.model.user;
 
 public class User {
     private int id;

@@ -113,6 +113,19 @@ public class Preferences {
         editor.apply();
     }
 
+    public static void setUser(Context context, int id, String name, String email,
+                               String username, String ktp, String noHp, String photoUrl) {
+        SharedPreferences.Editor editor = getSharedPreference(context).edit();
+        editor.putInt(ID, id);
+        editor.putString(NAME, name);
+        editor.putString(EMAIL, email);
+        editor.putString(USERNAME, username);
+        editor.putString(KTP, ktp);
+        editor.putString(NO_HP, noHp);
+        editor.putString(PHOTO_URL, photoUrl);
+        editor.apply();
+    }
+
     public static void removeUser(Context context) {
         SharedPreferences.Editor editor = getSharedPreference(context).edit();
         editor.remove(TOKEN);

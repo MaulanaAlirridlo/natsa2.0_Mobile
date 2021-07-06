@@ -1,6 +1,6 @@
 package com.natsa.natsa20_mobile.model.auth.login;
 
-import com.natsa.natsa20_mobile.model.User;
+import com.natsa.natsa20_mobile.model.user.User;
 
 public class LoginRespone {
     private User user;

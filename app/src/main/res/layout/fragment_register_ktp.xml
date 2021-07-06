@@ -20,6 +20,7 @@
         android:imeOptions="actionNext"
         android:importantForAutofill="no"
         android:inputType="text"
-        android:maxLines="1" />
+        android:maxLines="1"
+        android:maxLength="16"/>
 
 </LinearLayout>
