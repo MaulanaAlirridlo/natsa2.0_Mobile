@@ -1,5 +1,7 @@
 package com.natsa.natsa20_mobile.server;
 
+import com.natsa.natsa20_mobile.model.user.GetLoginUser;
+import com.natsa.natsa20_mobile.model.user.User;
 import com.natsa.natsa20_mobile.model.auth.login.LoginForm;
 import com.natsa.natsa20_mobile.model.auth.login.LoginRespone;
 import com.natsa.natsa20_mobile.model.auth.logout.LogoutRespone;
@@ -28,7 +30,9 @@ import retrofit2.http.Url;
 public interface RouteAPI {
 
     //user
-
+    @Headers({"Accept: application/json"})
+    @GET(Server.userDetails)
+    Call<GetLoginUser> getLoginUser(@Header("Authorization") String token);
 
     //register
     @Headers({"Accept: application/json"})

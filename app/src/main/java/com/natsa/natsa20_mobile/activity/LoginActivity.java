@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.natsa.natsa20_mobile.R;
+import com.natsa.natsa20_mobile.server.process.User.GetUser;
 import com.natsa.natsa20_mobile.server.process.auth.Login;
 import com.natsa.natsa20_mobile.helper.Preferences;
 
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         context = getApplicationContext();
 
         if (Preferences.isLogin(context)) {
+            new GetUser().getUserFromApiWithoutSetView(context);
             startMainActivity();
         }
     }

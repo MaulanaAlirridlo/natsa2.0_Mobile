@@ -46,6 +46,16 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/username" />
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/email" />
 
             <EditText
@@ -53,15 +63,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/username" />
-
-            <EditText
-                android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -76,10 +77,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/role" />
+                android:text="@string/no_hp" />
 
             <EditText
-                android:id="@+id/role"
+                android:id="@+id/no_hp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:enabled="false" />

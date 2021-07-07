@@ -10,10 +10,12 @@ public class Server {
     public static final String product = "product/";
 
     //user
+    public static final String user = "user/";
     public static final String users = "users/";
     public static final String register = users+"register/";
     public static final String login = users+"login/";
     public static final String logout = users+"logout/";
+    public static final String userDetails = user+"details/";
 
     //history
     public static final String history = "history/";
