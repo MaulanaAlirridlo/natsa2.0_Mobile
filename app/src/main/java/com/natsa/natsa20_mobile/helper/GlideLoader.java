@@ -38,4 +38,28 @@ public class GlideLoader {
                 })
                 .into(imageView);
     }
+
+    public void glideImageRoundedLoader(View view, ImageView imageView, String imgLocation) {
+
+        final WeakHandler weakHandler = new WeakHandler();
+        final Runnable runnable = () -> glideLoader(view, imageView, imgLocation);
+
+        Glide.with(view)
+                .load(imgLocation)
+                .centerCrop()
+                .circleCrop()
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        weakHandler.postDelayed(runnable, 1);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        return false;
+                    }
+                })
+                .into(imageView);
+    }
 }

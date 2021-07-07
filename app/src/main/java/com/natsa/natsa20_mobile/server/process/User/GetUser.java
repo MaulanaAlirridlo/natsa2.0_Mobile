@@ -40,7 +40,7 @@ public class GetUser {
                                     data.getEmail(), data.getUsername(), data.getKtp(),
                                     data.getNo_hp(),
                                     data.getProfile_photo_url());
-                            new GlideLoader().glideLoader(view, photoProfile, data.getProfile_photo_url());
+                            new GlideLoader().glideImageRoundedLoader(view, photoProfile, data.getProfile_photo_url());
                             name.setText(data.getName());
                             username.setText(data.getUsername());
                             email.setText(data.getEmail());
