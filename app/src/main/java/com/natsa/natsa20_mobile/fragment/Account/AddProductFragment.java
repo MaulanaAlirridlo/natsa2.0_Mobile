@@ -105,7 +105,7 @@ public class AddProductFragment extends Fragment {
             intent.setType("image/*");
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            activityResultLauncher.launch(Intent.createChooser(intent, "Select File"));
+            openGaleryActivityResultLauncher.launch(Intent.createChooser(intent, "Select File"));
         });
 
         addButton.setOnClickListener(v -> {
@@ -115,7 +115,7 @@ public class AddProductFragment extends Fragment {
         return view;
     }
 
-    ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+    ActivityResultLauncher<Intent> openGaleryActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -154,12 +154,8 @@ public class AddProductFragment extends Fragment {
                     AttachmentListData attachmentListData = new AttachmentListData();
                     attachmentListData.setImageName(returnCursor.getString(nameIndex));
                     attachmentListData.setImageUri(returnUri.toString());
-                    Log.d("TAG", "setData: "+returnUri.toString());
                     newAttachmentList.add(attachmentListData);
                 }
             });
-
-
-
 
 }

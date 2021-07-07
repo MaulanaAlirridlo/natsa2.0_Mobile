@@ -1,22 +1,44 @@
 package com.natsa.natsa20_mobile.activity;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.OpenableColumns;
+import android.speech.RecognizerIntent;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.natsa.natsa20_mobile.R;
+import com.natsa.natsa20_mobile.adapter.AttachmentListAdapter;
+import com.natsa.natsa20_mobile.model.AttachmentListData;
 import com.natsa.natsa20_mobile.server.process.auth.Logout;
 import com.natsa.natsa20_mobile.helper.Preferences;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     LinearLayout menu, search, accountBeforeLogin, accountAfterLogin;
-    ImageView showMenu, showSearch, showBookmark, showAccountMenu;
+    ImageView showMenu, showSearch, showBookmark, showAccountMenu, mic, clearInput;
     TextView showSawah, showAbout, showFaq, showContact, showRegister, showLogin, showDashboard, logout;
+    EditText searchInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +68,12 @@ public class MainActivity extends AppCompatActivity {
         showLogin = findViewById(R.id.show_login);
         showDashboard = findViewById(R.id.show_dashboard);
         logout = findViewById(R.id.logout);
+        searchInput = findViewById(R.id.searchInput);
+        mic = findViewById(R.id.mic);
+        clearInput = findViewById(R.id.clear_input);
     }
 
-    // onClick function
+    // event listener function
     private void setOnclickListener() {
         showMenu.setOnClickListener(v -> {
             if (menu.getVisibility() == LinearLayout.GONE) {
@@ -136,6 +161,53 @@ public class MainActivity extends AppCompatActivity {
             new Logout().LogoutProcess(MainActivity.this);
 
         });
+
+        searchInput.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() != 0) {
+                    mic.setVisibility(View.GONE);
+                    clearInput.setVisibility(View.VISIBLE);
+                } else {
+                    mic.setVisibility(View.VISIBLE);
+                    clearInput.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        searchInput.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        mic.setOnClickListener(v -> {
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                    RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            openMicActivityResultLauncher.launch(Intent.createChooser(intent, "Get Voice"));
+        });
+
+        clearInput.setOnClickListener(v -> {
+            searchInput.setText("");
+        });
+
+
     }
 
     //helper funtion
@@ -175,4 +247,16 @@ public class MainActivity extends AppCompatActivity {
             accountAfterLogin.setVisibility(LinearLayout.GONE);
         }
     }
+
+    ActivityResultLauncher<Intent> openMicActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    List<String> results = result.getData().getStringArrayListExtra(
+                            RecognizerIntent.EXTRA_RESULTS);
+                    String spokenText = results.get(0);
+                    searchInput.setText(spokenText);
+                }
+            });
 }

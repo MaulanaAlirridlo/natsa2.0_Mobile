@@ -20,7 +20,7 @@
             android:id="@+id/productsImage"
             android:layout_width="match_parent"
             android:layout_height="260dp"
-            android:src="@drawable/bg"
+            android:src="@drawable/no_image"
             android:contentDescription="@string/productsimage" />
         <TextView
             android:id="@+id/productsTitle"
