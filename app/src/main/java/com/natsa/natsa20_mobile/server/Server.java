@@ -8,6 +8,7 @@ public class Server {
     //sawah
     public static final String riceFields = "riceFields/";
     public static final String product = "product/";
+    public static final String searchProduct = riceFields+"search/";
 
     //user
     public static final String user = "user/";

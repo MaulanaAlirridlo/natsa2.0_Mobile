@@ -1,5 +1,6 @@
 package com.natsa.natsa20_mobile.server;
 
+import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.model.user.GetLoginUser;
 import com.natsa.natsa20_mobile.model.user.User;
 import com.natsa.natsa20_mobile.model.auth.login.LoginForm;
@@ -49,15 +50,21 @@ public interface RouteAPI {
     @POST(Server.logout)
     Call<LogoutRespone> Logout(@Header("Authorization") String token);
 
-
-    //dynamic product url
-    @GET
-    Call<Products> getProductsFromDynamicUrl(@Url String url);
-
+    
     //product
     @Headers({"Accept: application/json"})
     @GET(Server.riceFields)
     Call<Products> getRiceFields();
+
+    //dynamic product url
+    @Headers({"Accept: application/json"})
+    @GET
+    Call<Products> getProductsFromDynamicUrl(@Url String url);
+
+    //search ricefield with paging
+    @Headers({"Accept: application/json"})
+    @GET(Server.searchProduct+"{search}")
+    Call<Products> getRiceFieldsSearchResult(@Path("search") String search, @Query("page") int page);
 
     //pagination
     @Headers({"Accept: application/json"})

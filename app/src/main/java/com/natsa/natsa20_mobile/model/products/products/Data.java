@@ -4,6 +4,8 @@ public class Data {
     private int id;
     private String title;
     private int harga;
+    private String regions;
+    private Photo photo;
 
     public int getId() {
         return id;
@@ -29,6 +31,14 @@ public class Data {
         this.harga = harga;
     }
 
+    public String getRegions() {
+        return regions;
+    }
+
+    public void setRegions(String regions) {
+        this.regions = regions;
+    }
+
     public Photo getPhoto() {
         return photo;
     }
@@ -36,9 +46,6 @@ public class Data {
     public void setPhoto(Photo photo) {
         this.photo = photo;
     }
-
-    private Photo photo;
-
 
     public boolean equals(Object anObject) {
         if (this == anObject) {

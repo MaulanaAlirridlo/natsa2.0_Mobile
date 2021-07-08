@@ -1,5 +1,6 @@
 package com.natsa.natsa20_mobile.fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,9 +14,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
@@ -26,7 +29,10 @@ public class ProductsFragment extends Fragment {
 
     ProductsAdapter adapter;
     ProductsViewModel productsViewModel;
+    TextView searchKeyword, noData;
+    String keyword;
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -35,12 +41,23 @@ public class ProductsFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.productsRecyclerView);
         adapter = new ProductsAdapter(getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        searchKeyword = view.findViewById(R.id.search_keyword);
+        noData = view.findViewById(R.id.no_data);
+        keyword = getActivity().getIntent().getExtras().getString("keyword");
+
+        if (keyword == null) {
+            searchKeyword.setVisibility(TextView.GONE);
+        } else {
+            searchKeyword.setText("Menampilakan hasil dari '" + keyword + "'");
+        }
 
         productsViewModel = ViewModelProviders.of(this).get(ProductsViewModel.class);
+        productsViewModel.customConstructor(keyword, noData);
 
         productsViewModel.ProductsViewModel().observe(getActivity(), new Observer<PagedList<Data>>() {
             @Override
             public void onChanged(@Nullable PagedList<Data> items) {
+                Log.d("TAG", "onChanged: "+items.getLoadedCount());
                 adapter.submitList(items);
             }
         });

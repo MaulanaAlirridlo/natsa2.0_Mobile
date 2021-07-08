@@ -5,14 +5,9 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.OpenableColumns;
 import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,12 +20,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.natsa.natsa20_mobile.R;
-import com.natsa.natsa20_mobile.adapter.AttachmentListAdapter;
-import com.natsa.natsa20_mobile.model.AttachmentListData;
 import com.natsa.natsa20_mobile.server.process.auth.Logout;
 import com.natsa.natsa20_mobile.helper.Preferences;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -189,7 +181,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-
+                    Intent i = new Intent(MainActivity.this, BackActivity.class);
+                    i.putExtra("page", "sawah");
+                    i.putExtra("keyword", searchInput.getText().toString());
+                    startActivity(i);
+                    checkSearchVisibility();
                     return true;
                 }
                 return false;
@@ -256,7 +252,11 @@ public class MainActivity extends AppCompatActivity {
                     List<String> results = result.getData().getStringArrayListExtra(
                             RecognizerIntent.EXTRA_RESULTS);
                     String spokenText = results.get(0);
-                    searchInput.setText(spokenText);
+                    Intent i = new Intent(MainActivity.this, BackActivity.class);
+                    i.putExtra("page", "sawah");
+                    i.putExtra("keyword", spokenText);
+                    startActivity(i);
+                    checkSearchVisibility();
                 }
             });
 }
