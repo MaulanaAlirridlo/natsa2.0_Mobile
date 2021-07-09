@@ -12,21 +12,29 @@ import androidx.paging.PagedList;
 import com.natsa.natsa20_mobile.model.products.products.Data;
 
 public class ProductsViewModel extends ViewModel {
-    String keyword;
+    String keyword, sort;
+    Integer maxharga, minharga, maxluas, minluas;
     LiveData productsPagedList;
     LiveData<PageKeyedDataSource<Integer, Data>> liveDataSource;
     ProductsDSFactory productsDSFactory;
     TextView noData;
 
-    public void customConstructor(@Nullable String keyword, TextView noData) {
+    public void customConstructor(@Nullable String keyword, @Nullable Integer maxharga,
+                                  @Nullable Integer minharga, @Nullable Integer maxluas,
+                                  @Nullable Integer minluas, @Nullable String sort, TextView noData) {
         this.keyword = keyword;
+        this.sort = sort;
+        this.maxharga = maxharga;
+        this.minharga = minharga;
+        this.maxluas = maxluas;
+        this.minluas = minluas;
         this.noData = noData;
     }
 
 
     public LiveData ProductsViewModel() {
 
-        productsDSFactory = new ProductsDSFactory(keyword, noData);
+        productsDSFactory = new ProductsDSFactory(keyword, maxharga, minharga, maxluas, minluas, sort, noData);
         liveDataSource = productsDSFactory.getItemLiveDataSource();
 
         PagedList.Config config =

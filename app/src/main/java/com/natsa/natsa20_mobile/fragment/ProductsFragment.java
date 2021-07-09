@@ -32,7 +32,8 @@ public class ProductsFragment extends Fragment {
     ProductsAdapter adapter;
     ProductsViewModel productsViewModel;
     TextView searchKeyword, noData;
-    String keyword;
+    String keyword, sort;
+    Integer maxharga, minharga, maxluas, minluas;
     ImageView showFilter;
     LinearLayout filter;
 
@@ -50,6 +51,10 @@ public class ProductsFragment extends Fragment {
         showFilter = view.findViewById(R.id.show_filter);
         filter = view.findViewById(R.id.filter);
         keyword = getActivity().getIntent().getExtras().getString("keyword");
+        maxharga = null;
+        minharga = null;
+        maxluas = null;
+        minluas = null;
 
         if (keyword == null) {
             searchKeyword.setVisibility(TextView.GONE);
@@ -58,12 +63,11 @@ public class ProductsFragment extends Fragment {
         }
 
         productsViewModel = ViewModelProviders.of(this).get(ProductsViewModel.class);
-        productsViewModel.customConstructor(keyword, noData);
+        productsViewModel.customConstructor(keyword, maxharga, minharga, maxluas, minluas, sort, noData);
 
         productsViewModel.ProductsViewModel().observe(getActivity(), new Observer<PagedList<Data>>() {
             @Override
             public void onChanged(@Nullable PagedList<Data> items) {
-                Log.d("TAG", "onChanged: "+items.getLoadedCount());
                 adapter.submitList(items);
             }
         });

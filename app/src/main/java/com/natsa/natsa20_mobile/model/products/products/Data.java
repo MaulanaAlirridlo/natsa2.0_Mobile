@@ -4,6 +4,8 @@ public class Data {
     private int id;
     private String title;
     private int harga;
+    private int user_id;
+    private int luas;
     private String regions;
     private Photo photo;
 
@@ -29,6 +31,22 @@ public class Data {
 
     public void setHarga(int harga) {
         this.harga = harga;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public int getLuas() {
+        return luas;
+    }
+
+    public void setLuas(int luas) {
+        this.luas = luas;
     }
 
     public String getRegions() {

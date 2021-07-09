@@ -1,5 +1,7 @@
 package com.natsa.natsa20_mobile.server;
 
+import androidx.annotation.Nullable;
+
 import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.model.user.GetLoginUser;
 import com.natsa.natsa20_mobile.model.user.User;
@@ -56,6 +58,19 @@ public interface RouteAPI {
     @GET(Server.riceFields)
     Call<Products> getRiceFields();
 
+    //pagination
+    @Headers({"Accept: application/json"})
+    @GET(Server.riceFields)
+    Call<Products> getRiceFieldsPerPage(
+            @Nullable @Query("region") String region,
+            @Nullable @Query("maxharga") Integer maxharga,
+            @Nullable @Query("minharga") Integer minharga,
+            @Nullable @Query("maxluas") Integer maxluas,
+            @Nullable @Query("minluas") Integer minluas,
+            @Nullable @Query("sort") String sort,
+            @Query("page") Integer page
+    );
+
     //dynamic product url
     @Headers({"Accept: application/json"})
     @GET
@@ -65,11 +80,6 @@ public interface RouteAPI {
     @Headers({"Accept: application/json"})
     @GET(Server.searchProduct+"{search}")
     Call<Products> getRiceFieldsSearchResult(@Path("search") String search, @Query("page") int page);
-
-    //pagination
-    @Headers({"Accept: application/json"})
-    @GET(Server.riceFields)
-    Call<Products> getRiceFieldsPerPage(@Query("page") int page);
 
     //show product
     @Headers({"Accept: application/json"})

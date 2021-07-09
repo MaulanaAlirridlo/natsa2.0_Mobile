@@ -70,23 +70,23 @@ public class GetProducts {
 
     // if need data list from a page
     // input page number
-    public void getProductsPerPageFromApi(ProductsAdapter adapter, int page) {
-        RetrofitBuilder.endPoint().getRiceFieldsPerPage(page)
-                .enqueue(new Callback<Products>() {
-                    @Override
-                    public void onResponse(@NonNull Call<Products> call, @NonNull Response<Products> response) {
-                        if (response.isSuccessful()) {
-                            assert response.body() != null;
-                            List<Data> data = response.body().getRiceField().getData();
-                            setProducts(data, adapter);
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<Products> call, @NonNull Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
-    }
+//    public void getProductsPerPageFromApi(ProductsAdapter adapter, int page) {
+//        RetrofitBuilder.endPoint().getRiceFieldsPerPage(page)
+//                .enqueue(new Callback<Products>() {
+//                    @Override
+//                    public void onResponse(@NonNull Call<Products> call, @NonNull Response<Products> response) {
+//                        if (response.isSuccessful()) {
+//                            assert response.body() != null;
+//                            List<Data> data = response.body().getRiceField().getData();
+//                            setProducts(data, adapter);
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(@NonNull Call<Products> call, @NonNull Throwable t) {
+//                        t.printStackTrace();
+//                    }
+//                });
+//    }
 
 }
