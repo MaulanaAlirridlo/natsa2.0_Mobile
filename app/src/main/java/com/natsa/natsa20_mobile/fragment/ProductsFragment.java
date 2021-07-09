@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.natsa.natsa20_mobile.R;
@@ -31,6 +33,8 @@ public class ProductsFragment extends Fragment {
     ProductsViewModel productsViewModel;
     TextView searchKeyword, noData;
     String keyword;
+    ImageView showFilter;
+    LinearLayout filter;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -43,6 +47,8 @@ public class ProductsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         searchKeyword = view.findViewById(R.id.search_keyword);
         noData = view.findViewById(R.id.no_data);
+        showFilter = view.findViewById(R.id.show_filter);
+        filter = view.findViewById(R.id.filter);
         keyword = getActivity().getIntent().getExtras().getString("keyword");
 
         if (keyword == null) {
@@ -63,6 +69,14 @@ public class ProductsFragment extends Fragment {
         });
 
         recyclerView.setAdapter(adapter);
+
+        showFilter.setOnClickListener(v -> {
+            if (filter.getVisibility() == TextView.GONE) {
+                filter.setVisibility(TextView.VISIBLE);
+            } else {
+                filter.setVisibility(TextView.GONE);
+            }
+        });
 
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swipeRefresh);
         pullToRefresh.setOnRefreshListener(() -> {
