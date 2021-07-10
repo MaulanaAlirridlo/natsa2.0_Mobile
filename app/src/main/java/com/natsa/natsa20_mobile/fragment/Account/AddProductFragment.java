@@ -57,7 +57,7 @@ public class AddProductFragment extends Fragment {
         harga = view.findViewById(R.id.harga);
         luas = view.findViewById(R.id.luas);
         alamat = view.findViewById(R.id.alamat);
-        deskripsi = view.findViewById(R.id.desktipsi);
+        deskripsi = view.findViewById(R.id.deskripsi);
         maps = view.findViewById(R.id.maps);
         sertifikasi = view.findViewById(R.id.sertifikasi);
         tipe = view.findViewById(R.id.tipe);

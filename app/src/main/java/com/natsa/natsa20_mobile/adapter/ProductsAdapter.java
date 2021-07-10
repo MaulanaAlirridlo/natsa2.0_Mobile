@@ -57,6 +57,7 @@ public class ProductsAdapter extends PagedListAdapter<Data, ProductsAdapter.Prod
         }
         holder.productsTitle.setText(getItem(position).getTitle());
         holder.productsPrice.setText(String.valueOf(getItem(position).getHarga()));
+        holder.productsRegion.setText(getItem(position).getRegions());
 
         try {
             showDetailSawahListener = (ProductsAdapter.showDetailSawahListener) context;
@@ -68,7 +69,7 @@ public class ProductsAdapter extends PagedListAdapter<Data, ProductsAdapter.Prod
     public class ProductsViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView productsImage;
-        private final TextView productsTitle, productsPrice;
+        private final TextView productsTitle, productsPrice, productsRegion;
         private int position;
         private int id;
         View itemView;
@@ -78,6 +79,7 @@ public class ProductsAdapter extends PagedListAdapter<Data, ProductsAdapter.Prod
             productsImage = v.findViewById(R.id.productsImage);
             productsTitle = v.findViewById(R.id.productsTitle);
             productsPrice = v.findViewById(R.id.productsPrice);
+            productsRegion = v.findViewById(R.id.product_region);
 
             v.setOnClickListener(v1 -> {
                 position = getAdapterPosition();

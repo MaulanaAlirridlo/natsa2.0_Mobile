@@ -1,6 +1,8 @@
 package com.natsa.natsa20_mobile.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.natsa.natsa20_mobile.R;
+import com.natsa.natsa20_mobile.model.products.product.Product;
 import com.natsa.natsa20_mobile.model.products.product.RiceField;
 import com.natsa.natsa20_mobile.server.process.bookmark.AddBookmark;
 import com.natsa.natsa20_mobile.server.process.products.GetProduct;
@@ -38,6 +41,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return new ProductAdapter.ProductViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ProductAdapter.ProductViewHolder holder, int position) {
         SliderView sliderView = holder.sliderView;
@@ -45,15 +49,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         sliderView.setAutoCycle(false);
         sliderView.setSliderAdapter(productImageAdapter);
 
-        holder.productTitle.setText(productDataList.get(position).getTitle());
-        holder.productPrice.setText(String.valueOf(productDataList.get(position).getHarga()));
-        holder.address.setText(productDataList.get(position).getAlamat());
-//        holder.region.setText(productDataList.get(position).getAlamat());
-        holder.certification.setText(productDataList.get(position).getSertifikasi());
-        holder.type.setText(productDataList.get(position).getTipe());
-//        holder.category.setText(productDataList.get(position).getTipe());
+        RiceField product = productDataList.get(position);
+
+        holder.productTitle.setText(product.getTitle());
+        holder.productPrice.setText(String.valueOf(product.getHarga()));
+        holder.address.setText(product.getAlamat());
+//        Log.d("TAG", "onBindViewHolder: "+product.getUser());
+//        holder.region.setText(product.getRegion().getProvinsi()+", "+product.getRegion().getKabupaten());
+        holder.description.setText(product.getDeskripsi());
+        holder.certification.setText(product.getSertifikasi().toUpperCase());
+        holder.type.setText(product.getTipe());
+//        holder.category.setText(product.getVestige().getVestige()+", "+product.getIrrigation().getIrrigation());
         holder.addBookmarkButton.setOnClickListener(v -> {
-            new AddBookmark().addBookmarkProcess(productDataList.get(position).getId(), context);
+            new AddBookmark().addBookmarkProcess(product.getId(), context);
         });
     }
 
@@ -64,11 +72,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView productTitle, productPrice, address,
-        //            region,
-        certification, type
-//        , category
-                ;
+        private final TextView productTitle, productPrice, address, region, description, certification,
+                type, category;
         private final Button addBookmarkButton;
         private final SliderView sliderView;
 
@@ -77,10 +82,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             productTitle = view.findViewById(R.id.productTitle);
             productPrice = view.findViewById(R.id.productPrice);
             address = view.findViewById(R.id.address);
-//        region = view.findViewById(R.id.region);
+            region = view.findViewById(R.id.region);
+            description = view.findViewById(R.id.description);
             certification = view.findViewById(R.id.certification);
             type = view.findViewById(R.id.type);
-//        category = view.findViewById(R.id.category);
+            category = view.findViewById(R.id.category);
             addBookmarkButton = view.findViewById(R.id.addBookmarkButton);
             sliderView = view.findViewById(R.id.imageSlider);
         }

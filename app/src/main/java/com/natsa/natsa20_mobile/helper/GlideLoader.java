@@ -28,17 +28,19 @@ public class GlideLoader {
 
         final WeakHandler weakHandler = new WeakHandler();
         final Runnable runnable = () -> glideProcess(view, imageView, imgLocation);
+        final Runnable runnableWithError = () -> glideProcessWithError(view, imageView, imgLocation);
 
         Glide.with(view)
                 .load(imgLocation)
                 .centerCrop()
-                .error(R.drawable.ic_error)
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        if (countImageLoaded <= 10) {
+                        if (countImageLoaded < 10) {
                             weakHandler.postDelayed(runnable, 100);
                             countImageLoaded++;
+                        } else if (countImageLoaded == 10) {
+                            weakHandler.postDelayed(runnableWithError, 100);
                         }
                         return false;
                     }
@@ -51,6 +53,14 @@ public class GlideLoader {
                 .into(imageView);
     }
 
+    private void glideProcessWithError(View view, ImageView imageView, String imgLocation) {
+        Glide.with(view)
+                .load(imgLocation)
+                .centerCrop()
+                .error(R.drawable.ic_error)
+                .into(imageView);
+    }
+
     public void glideImageRoundedLoader(View view, ImageView imageView, String imgLocation) {
         countRoundedImageLoaded = 0;
         glideImageRoundedProcess(view, imageView, imgLocation);
@@ -59,6 +69,7 @@ public class GlideLoader {
     private void glideImageRoundedProcess(View view, ImageView imageView, String imgLocation){
         final WeakHandler weakHandler = new WeakHandler();
         final Runnable runnable = () -> glideImageRoundedProcess(view, imageView, imgLocation);
+        final Runnable runnableWithError = () -> glideImageRoundedProcessWithError(view, imageView, imgLocation);
 
         Glide.with(view)
                 .load(imgLocation)
@@ -68,9 +79,11 @@ public class GlideLoader {
                 .listener(new RequestListener<Drawable>() {
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                        if (countRoundedImageLoaded <= 10) {
+                        if (countRoundedImageLoaded < 10) {
                             weakHandler.postDelayed(runnable, 100);
                             countRoundedImageLoaded++;
+                        } else if (countRoundedImageLoaded == 10) {
+                            weakHandler.postDelayed(runnableWithError, 100);
                         }
                         return false;
                     }
@@ -80,6 +93,15 @@ public class GlideLoader {
                         return false;
                     }
                 })
+                .into(imageView);
+    }
+
+    private void glideImageRoundedProcessWithError(View view, ImageView imageView, String imgLocation) {
+        Glide.with(view)
+                .load(imgLocation)
+                .centerCrop()
+                .circleCrop()
+                .error(R.drawable.ic_error)
                 .into(imageView);
     }
 }

@@ -1,5 +1,7 @@
 package com.natsa.natsa20_mobile.server.process.products;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.natsa.natsa20_mobile.adapter.ProductAdapter;
@@ -66,6 +68,7 @@ public class GetProduct {
                             assert response.body() != null;
                             Product res = response.body();
                             RiceField riceField = res.getRiceField();
+                            Log.d("TAG", "onResponse: "+riceField.getId()+riceField.getUser());
                             List<Photos> photos = riceField.getPhotos();
                             List<RandomRiceFields> randomRiceFields = res.getRandomRiceFields();
                             setProductImageList(photos, productImageAdapter);

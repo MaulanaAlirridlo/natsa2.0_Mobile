@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.natsa.natsa20_mobile.R;
+import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.server.process.auth.Logout;
 import com.natsa.natsa20_mobile.helper.Preferences;
 
@@ -38,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         init();
+        new GlideLoader().glideImageRoundedLoader(showAccountMenu, showAccountMenu,
+                Preferences.getPhotoUrl(getApplicationContext()));
         setOnclickListener();
     }
 

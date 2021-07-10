@@ -32,6 +32,7 @@ import com.natsa.natsa20_mobile.fragment.EmailFragment;
 import com.natsa.natsa20_mobile.fragment.FaqFragment;
 import com.natsa.natsa20_mobile.fragment.ProductFragment;
 import com.natsa.natsa20_mobile.fragment.ProductsFragment;
+import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.server.process.auth.Logout;
 import com.natsa.natsa20_mobile.helper.Preferences;
 
@@ -54,6 +55,8 @@ public class BackActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_back);
 
         init();
+        new GlideLoader().glideImageRoundedLoader(showAccountMenu, showAccountMenu,
+                Preferences.getPhotoUrl(getApplicationContext()));
         setOnclickListener();
 
         page = getIntent().getExtras().getString("page");

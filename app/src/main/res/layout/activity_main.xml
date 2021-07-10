@@ -48,7 +48,7 @@
         <ImageView
             android:id="@+id/show_account_menu"
             android:layout_width="55dp"
-            android:layout_height="25dp"
+            android:layout_height="35dp"
             android:contentDescription="@string/account"
             app:srcCompat="@drawable/ic_account" />
 

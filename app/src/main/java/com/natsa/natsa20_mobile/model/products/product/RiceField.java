@@ -1,5 +1,7 @@
 package com.natsa.natsa20_mobile.model.products.product;
 
+import com.natsa.natsa20_mobile.model.user.User;
+
 import java.util.List;
 
 public class RiceField {
@@ -9,6 +11,7 @@ public class RiceField {
     private int luas;
     private String alamat;
     private String maps;
+    private String vector;
     private String deskripsi;
     private String sertifikasi;
     private String tipe;
@@ -18,7 +21,13 @@ public class RiceField {
     private int vestige_id;
     private int irrigation_id;
     private int region_id;
+    private String ketersediaan;
+    private User user;
+    private com.natsa.natsa20_mobile.model.vestiges.Data vestige;
+    private com.natsa.natsa20_mobile.model.irrigations.Data irrigation;
+    private com.natsa.natsa20_mobile.model.regions.Data region;
     private List<Photos> photos;
+
 
     public int getId() {
         return id;
@@ -138,6 +147,54 @@ public class RiceField {
 
     public void setRegion_id(int region_id) {
         this.region_id = region_id;
+    }
+
+    public String getVector() {
+        return vector;
+    }
+
+    public void setVector(String vector) {
+        this.vector = vector;
+    }
+
+    public String getKetersediaan() {
+        return ketersediaan;
+    }
+
+    public void setKetersediaan(String ketersediaan) {
+        this.ketersediaan = ketersediaan;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public com.natsa.natsa20_mobile.model.vestiges.Data getVestige() {
+        return vestige;
+    }
+
+    public void setVestige(com.natsa.natsa20_mobile.model.vestiges.Data vestige) {
+        this.vestige = vestige;
+    }
+
+    public com.natsa.natsa20_mobile.model.irrigations.Data getIrrigation() {
+        return irrigation;
+    }
+
+    public void setIrrigation(com.natsa.natsa20_mobile.model.irrigations.Data irrigation) {
+        this.irrigation = irrigation;
+    }
+
+    public com.natsa.natsa20_mobile.model.regions.Data getRegion() {
+        return region;
+    }
+
+    public void setRegion(com.natsa.natsa20_mobile.model.regions.Data region) {
+        this.region = region;
     }
 
     public List<Photos> getPhotos() {

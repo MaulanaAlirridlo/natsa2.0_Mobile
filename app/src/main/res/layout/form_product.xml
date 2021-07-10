@@ -98,7 +98,7 @@
             android:text="@string/deskripsi" />
 
         <EditText
-            android:id="@+id/desktipsi"
+            android:id="@+id/deskripsi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
