@@ -1,7 +1,5 @@
 # NatSa - Mobile
 
-# NatSa - Laravel 8.0+ Jetstream and Tailwind CSS
-
 Project ini Dibuat dengan Android Studio
 
 ## Requirements
