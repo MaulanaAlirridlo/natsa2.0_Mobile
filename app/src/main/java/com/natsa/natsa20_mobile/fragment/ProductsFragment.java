@@ -18,14 +18,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
 import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.server.process.Paging.products.ProductsViewModel;
+import com.natsa.natsa20_mobile.server.process.regions.GetRegions;
 
 public class ProductsFragment extends Fragment {
 
@@ -36,6 +40,7 @@ public class ProductsFragment extends Fragment {
     Integer maxharga, minharga, maxluas, minluas;
     ImageView showFilter;
     LinearLayout filter;
+    Spinner sortSelection;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -55,6 +60,17 @@ public class ProductsFragment extends Fragment {
         minharga = null;
         maxluas = null;
         minluas = null;
+        sortSelection = view.findViewById(R.id.sort_selection);
+
+        String[] sortSelectionList = new String[]{
+                "Urut Berdasarkan", "Judul Up", "Judul Down", "Harga Up", "Harga Down", "Luas Up", "Luas Down"
+        };
+
+        ArrayAdapter<String> sortAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, sortSelectionList);
+
+        sortSelection.setAdapter(sortAdapter);
+
 
         if (keyword == null) {
             searchKeyword.setVisibility(TextView.GONE);
@@ -79,6 +95,49 @@ public class ProductsFragment extends Fragment {
                 filter.setVisibility(TextView.VISIBLE);
             } else {
                 filter.setVisibility(TextView.GONE);
+            }
+        });
+
+        sortSelection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sort = sortSelection.getSelectedItem().toString();
+                switch (sort){
+                    case "Judul Up":
+                        sort = "title";
+                        break;
+                    case "Judul Down":
+                        sort = "-title";
+                        break;
+                    case "Harga Up":
+                        sort = "harga";
+                        break;
+                    case "Harga Down":
+                        sort = "-harga";
+                        break;
+                    case "Luas Up":
+                        sort = "luas";
+                        break;
+                    case "Luas Down" :
+                        sort = "-luas";
+                        break;
+                    default:
+                        sort = "";
+                        break;
+                }
+                productsViewModel.customConstructor(keyword, maxharga, minharga, maxluas, minluas, sort, noData);
+
+                productsViewModel.ProductsViewModel().observe(getActivity(), new Observer<PagedList<Data>>() {
+                    @Override
+                    public void onChanged(@Nullable PagedList<Data> items) {
+                        adapter.submitList(items);
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
