@@ -11,19 +11,25 @@ import com.natsa.natsa20_mobile.model.products.products.Data;
 
 public class ProductsDSFactory extends DataSource.Factory {
 
-    String keyword, sort;
-    Integer maxharga, minharga, maxluas, minluas;
+    String keyword, tipe, sertifikasi, sort;
+    Integer maxharga, minharga, maxluas, minluas, idBekasSawah, idIrigasi;
     TextView noData;
 
-    public ProductsDSFactory(@Nullable String keyword, @Nullable Integer maxharga,
-                              @Nullable Integer minharga, @Nullable Integer maxluas,
-                              @Nullable Integer minluas, @Nullable String sort, TextView noData) {
+    public ProductsDSFactory(@Nullable String keyword, @Nullable String tipe,
+                             @Nullable String sertifikasi, @Nullable Integer maxluas,
+                             @Nullable Integer minluas, @Nullable Integer maxharga,
+                             @Nullable Integer minharga, @Nullable Integer idBekasSawah,
+                             @Nullable Integer idIrigasi, @Nullable String sort, TextView noData) {
         this.keyword = keyword;
+        this.tipe = tipe;
+        this.sertifikasi = sertifikasi;
         this.sort = sort;
         this.maxharga = maxharga;
         this.minharga = minharga;
         this.maxluas = maxluas;
         this.minluas = minluas;
+        this.idBekasSawah = idBekasSawah;
+        this.idIrigasi = idIrigasi;
         this.noData = noData;
     }
 
@@ -32,8 +38,8 @@ public class ProductsDSFactory extends DataSource.Factory {
 
     @Override
     public DataSource create() {
-        ProductsDataSource productsDataSource = new ProductsDataSource(keyword, maxharga, minharga,
-                maxluas, minluas, sort, noData);
+        ProductsDataSource productsDataSource = new ProductsDataSource(keyword, tipe, sertifikasi,
+                maxluas, minluas, maxharga, minharga, idBekasSawah, idIrigasi, sort, noData);
         productsLiveDataSource.postValue(productsDataSource);
         return productsDataSource;
     }

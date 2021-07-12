@@ -18,25 +18,32 @@ import retrofit2.Response;
 
 public class ProductsDataSource extends PageKeyedDataSource<Integer, Data> {
 
-    String keyword, sort;
-    Integer maxharga, minharga, maxluas, minluas;
+    String keyword, tipe, sertifikasi, sort;
+    Integer maxharga, minharga, maxluas, minluas, idBekasSawah, idIrigasi;
     TextView noData;
 
-    public ProductsDataSource(@Nullable String keyword, @Nullable Integer maxharga,
-                              @Nullable Integer minharga, @Nullable Integer maxluas,
-                              @Nullable Integer minluas, @Nullable String sort, TextView noData) {
+    public ProductsDataSource(@Nullable String keyword, @Nullable String tipe,
+                              @Nullable String sertifikasi, @Nullable Integer maxluas,
+                              @Nullable Integer minluas, @Nullable Integer maxharga,
+                              @Nullable Integer minharga, @Nullable Integer idBekasSawah,
+                              @Nullable Integer idIrigasi, @Nullable String sort, TextView noData) {
         this.keyword = keyword;
+        this.tipe = tipe;
+        this.sertifikasi = sertifikasi;
         this.sort = sort;
         this.maxharga = maxharga;
         this.minharga = minharga;
         this.maxluas = maxluas;
         this.minluas = minluas;
+        this.idBekasSawah = idBekasSawah;
+        this.idIrigasi = idIrigasi;
         this.noData = noData;
     }
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, Data> callback) {
-        RetrofitBuilder.endPoint().getRiceFieldsPerPage(keyword, maxharga, minharga, maxluas, minluas, sort, 1)
+        RetrofitBuilder.endPoint().getRiceFieldsPerPage(keyword, tipe, sertifikasi, maxluas, minluas, maxharga,
+                minharga, idBekasSawah, idIrigasi, sort, 1)
                 .enqueue(new Callback<Products>() {
                     @Override
                     public void onResponse(@NonNull Call<Products> call, @NonNull Response<Products> response) {
@@ -59,7 +66,8 @@ public class ProductsDataSource extends PageKeyedDataSource<Integer, Data> {
 
     @Override
     public void loadBefore(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Data> callback) {
-        RetrofitBuilder.endPoint().getRiceFieldsPerPage(keyword, maxharga, minharga, maxluas, minluas, sort, params.key)
+        RetrofitBuilder.endPoint().getRiceFieldsPerPage(keyword, tipe, sertifikasi, maxluas, minluas, maxharga,
+                minharga, idBekasSawah, idIrigasi, sort, params.key)
                 .enqueue(new Callback<Products>() {
                     @Override
                     public void onResponse(@NonNull Call<Products> call, @NonNull Response<Products> response) {
@@ -79,7 +87,8 @@ public class ProductsDataSource extends PageKeyedDataSource<Integer, Data> {
 
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, Data> callback) {
-        RetrofitBuilder.endPoint().getRiceFieldsPerPage(keyword, maxharga, minharga, maxluas, minluas, sort, params.key)
+        RetrofitBuilder.endPoint().getRiceFieldsPerPage(keyword, tipe, sertifikasi, maxluas, minluas, maxharga,
+                minharga, idBekasSawah, idIrigasi, sort, params.key)
                 .enqueue(new Callback<Products>() {
                     @Override
                     public void onResponse(@NonNull Call<Products> call, @NonNull Response<Products> response) {

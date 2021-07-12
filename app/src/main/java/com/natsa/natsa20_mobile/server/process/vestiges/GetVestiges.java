@@ -17,16 +17,23 @@ import retrofit2.Response;
 public class GetVestiges {
 
     public static List<String> vestigesStringList = new ArrayList<>();
+    public static List<Integer> vestigesIdList = new ArrayList<>();
 
     public static List<String> getVestigesStringList() {
         return vestigesStringList;
     }
+    public static List<Integer> getVestigesIdList() {
+        return vestigesIdList;
+    }
 
     public void setProducts(List<Data> vestigesDataList, ArrayAdapter<String> adapter) {
         vestigesStringList.clear();
+        vestigesIdList.clear();
         vestigesStringList.add("---");
+        vestigesIdList.add(null);
         for (Iterator<Data> i = vestigesDataList.iterator(); i.hasNext();) {
             Data vestige = i.next();
+            vestigesIdList.add(vestige.getId());
             vestigesStringList.add(vestige.getVestige());
         }
         adapter.notifyDataSetChanged();

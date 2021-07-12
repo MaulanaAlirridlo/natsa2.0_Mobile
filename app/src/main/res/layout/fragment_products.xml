@@ -39,6 +39,108 @@
                     android:padding="5dp"
                     app:srcCompat="@drawable/ic_filter" />
 
+                <LinearLayout
+                    android:id="@+id/filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/jenis_sawah" />
+
+                    <Spinner
+                        android:id="@+id/tipe_selection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sertifikasi" />
+
+                    <Spinner
+                        android:id="@+id/sertifikasi_selection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/luas" />
+
+                    <EditText
+                        android:id="@+id/min_luas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/min_luas"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:id="@+id/max_luas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:hint="@string/max_luas"
+                        android:inputType="number" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/harga" />
+
+                    <EditText
+                        android:id="@+id/min_harga"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/min_harga"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:id="@+id/max_harga"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:hint="@string/max_harga"
+                        android:inputType="number" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/bekas_sawah" />
+
+                    <Spinner
+                        android:id="@+id/bekas_sawah_selection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/jenis_irigasi" />
+
+                    <Spinner
+                        android:id="@+id/jenis_irigasi_selection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp" />
+
+                    <Button
+                        android:id="@+id/apply_filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:text="@string/terapkan"
+                        android:textColor="@color/black" />
+
+                </LinearLayout>
+
                 <Spinner
                     android:id="@+id/sort_selection"
                     android:layout_width="200dp"
@@ -46,20 +148,8 @@
                     android:layout_gravity="end"
                     android:layout_marginEnd="5dp"
                     android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="5dp" />
 
-                <LinearLayout
-                    android:id="@+id/filter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/m" />
-
-                </LinearLayout>
 
                 <TextView
                     android:id="@+id/no_data"

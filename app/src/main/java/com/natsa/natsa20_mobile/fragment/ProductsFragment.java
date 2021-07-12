@@ -14,12 +14,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -29,18 +30,21 @@ import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
 import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.server.process.Paging.products.ProductsViewModel;
-import com.natsa.natsa20_mobile.server.process.regions.GetRegions;
+import com.natsa.natsa20_mobile.server.process.irrigations.GetIrrigations;
+import com.natsa.natsa20_mobile.server.process.vestiges.GetVestiges;
 
 public class ProductsFragment extends Fragment {
 
     ProductsAdapter adapter;
     ProductsViewModel productsViewModel;
     TextView searchKeyword, noData;
-    String keyword, sort;
-    Integer maxharga, minharga, maxluas, minluas;
+    String keyword, tipe, sertifikasi, sort;
+    Integer maxluas, minluas, maxharga, minharga, idBekasSawah, idIrigasi;
     ImageView showFilter;
     LinearLayout filter;
-    Spinner sortSelection;
+    Spinner typeSelection, sertifikasiSelection, bekasSawahSelection, irigasiSelection, sortSelection;
+    EditText maxluasInput, minluasInput, maxhargaInput, minhargaInput;
+    Button applyFilter;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -56,19 +60,62 @@ public class ProductsFragment extends Fragment {
         showFilter = view.findViewById(R.id.show_filter);
         filter = view.findViewById(R.id.filter);
         keyword = getActivity().getIntent().getExtras().getString("keyword");
-        maxharga = null;
-        minharga = null;
-        maxluas = null;
-        minluas = null;
+        typeSelection = view.findViewById(R.id.tipe_selection);
+        sertifikasiSelection = view.findViewById(R.id.sertifikasi_selection);
+        maxluasInput = view.findViewById(R.id.max_luas);
+        minluasInput = view.findViewById(R.id.min_luas);
+        maxhargaInput =view.findViewById(R.id.max_harga);
+        minhargaInput = view.findViewById(R.id.min_harga);
+        bekasSawahSelection = view.findViewById(R.id.bekas_sawah_selection);
+        irigasiSelection = view.findViewById(R.id.jenis_irigasi_selection);
         sortSelection = view.findViewById(R.id.sort_selection);
+        applyFilter = view.findViewById(R.id.apply_filter);
+
+        String[] typeSelectionListValue = new String[]{
+                "", "jual", "sewa"
+        };
+
+        String[] typeSelectionList = new String[]{
+                "---", "Dijual", "Disewakan"
+        };
+
+        String[] sertifikasiSelectionListValue = new String[]{
+                "", "shm", "sgb", "adat", "lainnya"
+        };
+
+        String[] sertifikasiSelectionList = new String[]{
+                "---", "SHM", "SGB", "Adat", "Lainnya"
+        };
+
+        String[] sortSelectionListValue = new String[]{
+                "", "title", "-title", "harga", "-harga", "luas", "-luas"
+        };
 
         String[] sortSelectionList = new String[]{
                 "Urut Berdasarkan", "Judul Up", "Judul Down", "Harga Up", "Harga Down", "Luas Up", "Luas Down"
         };
 
+        ArrayAdapter<String> typeAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, typeSelectionList);
+
+        ArrayAdapter<String> sertifikasiAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, sertifikasiSelectionList);
+
+        ArrayAdapter<String> bekasSawahAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, GetVestiges.getVestigesStringList());
+
+        ArrayAdapter<String> irigasiSawahAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, GetIrrigations.getIrrigationsStringList());
+
         ArrayAdapter<String> sortAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, sortSelectionList);
 
+        typeSelection.setAdapter(typeAdapter);
+        sertifikasiSelection.setAdapter(sertifikasiAdapter);
+        new GetVestiges().getVestigesFromApi(bekasSawahAdapter);
+        bekasSawahSelection.setAdapter(bekasSawahAdapter);
+        new GetIrrigations().getIrrigationsFromApi(irigasiSawahAdapter);
+        irigasiSelection.setAdapter(irigasiSawahAdapter);
         sortSelection.setAdapter(sortAdapter);
 
 
@@ -79,7 +126,8 @@ public class ProductsFragment extends Fragment {
         }
 
         productsViewModel = ViewModelProviders.of(this).get(ProductsViewModel.class);
-        productsViewModel.customConstructor(keyword, maxharga, minharga, maxluas, minluas, sort, noData);
+        productsViewModel.customConstructor(keyword, tipe, sertifikasi,
+                maxluas, minluas, maxharga, minharga, idBekasSawah, idIrigasi, sort, noData);
 
         productsViewModel.ProductsViewModel().observe(getActivity(), new Observer<PagedList<Data>>() {
             @Override
@@ -91,41 +139,19 @@ public class ProductsFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         showFilter.setOnClickListener(v -> {
-            if (filter.getVisibility() == TextView.GONE) {
-                filter.setVisibility(TextView.VISIBLE);
+            if (filter.getVisibility() == LinearLayout.GONE) {
+                filter.setVisibility(LinearLayout.VISIBLE);
             } else {
-                filter.setVisibility(TextView.GONE);
+                filter.setVisibility(LinearLayout.GONE);
             }
         });
 
         sortSelection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                sort = sortSelection.getSelectedItem().toString();
-                switch (sort){
-                    case "Judul Up":
-                        sort = "title";
-                        break;
-                    case "Judul Down":
-                        sort = "-title";
-                        break;
-                    case "Harga Up":
-                        sort = "harga";
-                        break;
-                    case "Harga Down":
-                        sort = "-harga";
-                        break;
-                    case "Luas Up":
-                        sort = "luas";
-                        break;
-                    case "Luas Down" :
-                        sort = "-luas";
-                        break;
-                    default:
-                        sort = "";
-                        break;
-                }
-                productsViewModel.customConstructor(keyword, maxharga, minharga, maxluas, minluas, sort, noData);
+                sort = sortSelectionListValue[position];
+                productsViewModel.customConstructor(keyword, tipe, sertifikasi,
+                        maxluas, minluas, maxharga, minharga, idBekasSawah, idIrigasi, sort, noData);
 
                 productsViewModel.ProductsViewModel().observe(getActivity(), new Observer<PagedList<Data>>() {
                     @Override
@@ -139,6 +165,34 @@ public class ProductsFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+        });
+
+        applyFilter.setOnClickListener(v -> {
+
+            tipe = typeSelectionListValue[typeSelection.getSelectedItemPosition()];
+            sertifikasi = sertifikasiSelectionListValue[sertifikasiSelection.getSelectedItemPosition()];
+            maxluas = maxluasInput.getText().toString().equals("") ? null :
+                    Integer.parseInt(maxluasInput.getText().toString());
+            minluas = minluasInput.getText().toString().equals("") ? null :
+                    Integer.parseInt(minluasInput.getText().toString());
+            maxharga = maxhargaInput.getText().toString().equals("") ? null :
+                    Integer.parseInt(maxhargaInput.getText().toString());
+            minharga = minhargaInput.getText().toString().equals("") ? null :
+                    Integer.parseInt(minhargaInput.getText().toString());
+            idBekasSawah = GetVestiges.getVestigesIdList().get(bekasSawahSelection.getSelectedItemPosition());
+            idIrigasi = GetIrrigations.getIrrigationsIdList().get(irigasiSelection.getSelectedItemPosition());
+
+            productsViewModel.customConstructor(keyword, tipe, sertifikasi,
+                    maxluas, minluas, maxharga, minharga, idBekasSawah, idIrigasi, sort, noData);
+
+            productsViewModel.ProductsViewModel().observe(getActivity(), new Observer<PagedList<Data>>() {
+                @Override
+                public void onChanged(@Nullable PagedList<Data> items) {
+                    adapter.submitList(items);
+                }
+            });
+
+            filter.setVisibility(LinearLayout.GONE);
         });
 
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swipeRefresh);

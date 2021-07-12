@@ -63,10 +63,14 @@ public interface RouteAPI {
     @GET(Server.riceFields)
     Call<Products> getRiceFieldsPerPage(
             @Nullable @Query("region") String region,
-            @Nullable @Query("maxharga") Integer maxharga,
-            @Nullable @Query("minharga") Integer minharga,
+            @Nullable @Query("filter[tipe]") String tipe,
+            @Nullable @Query("filter[sertifikasi]") String sertifikasi,
             @Nullable @Query("maxluas") Integer maxluas,
             @Nullable @Query("minluas") Integer minluas,
+            @Nullable @Query("maxharga") Integer maxharga,
+            @Nullable @Query("minharga") Integer minharga,
+            @Nullable @Query("filter[vestige_id]") Integer vestige_id,
+            @Nullable @Query("filter[irrigation_id]") Integer irrigation_id,
             @Nullable @Query("sort") String sort,
             @Query("page") Integer page
     );

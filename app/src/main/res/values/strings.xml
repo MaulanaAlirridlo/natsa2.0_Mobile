@@ -98,4 +98,11 @@
     <string name="no_hp">No HP</string>
     <string name="clear">Clear</string>
     <string name="tidak_ada_data">Tidak ada data</string>
+    <string name="jenis_sawah">Jenis Sawah</string>
+    <string name="min_harga">Min Harga</string>
+    <string name="max_harga">Max Harga</string>
+    <string name="min_luas">Min Luas</string>
+    <string name="max_luas">Max Luas</string>
+    <string name="jenis_irigasi">Jenis Irigasi</string>
+    <string name="terapkan">Terapkan</string>
 </resources>
