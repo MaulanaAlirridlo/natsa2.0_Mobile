@@ -1,5 +1,7 @@
 package com.natsa.natsa20_mobile.model.vestiges;
 
+import com.natsa.natsa20_mobile.model.Status;
+
 import java.util.List;
 
 public class Vestiges {

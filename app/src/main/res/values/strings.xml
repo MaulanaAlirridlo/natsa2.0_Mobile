@@ -105,4 +105,6 @@
     <string name="max_luas">Max Luas</string>
     <string name="jenis_irigasi">Jenis Irigasi</string>
     <string name="terapkan">Terapkan</string>
+    <string name="bergabung_sejak">Bergabung sejak</string>
+    <string name="sosmed">Sosmed</string>
 </resources>

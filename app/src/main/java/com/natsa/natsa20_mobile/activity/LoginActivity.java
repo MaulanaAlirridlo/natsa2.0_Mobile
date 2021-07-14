@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         context = getApplicationContext();
 
         if (Preferences.isLogin(context)) {
-            new GetUser().getUserFromApiWithoutSetView(context);
+            new GetUser().getLoginUserFromApiWithoutSetView(context);
             startMainActivity();
         }
     }

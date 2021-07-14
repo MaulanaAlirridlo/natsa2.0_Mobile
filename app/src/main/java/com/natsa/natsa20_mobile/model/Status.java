@@ -1,4 +1,4 @@
-package com.natsa.natsa20_mobile.model.products.products;
+package com.natsa.natsa20_mobile.model;
 
 public class Status {
     private int code;

@@ -1,5 +1,7 @@
 package com.natsa.natsa20_mobile.model.bookmark.delete_bookmark;
 
+import com.natsa.natsa20_mobile.model.Status;
+
 public class DeleteBookmarkRespone {
     private Status status;
     private int riceField;

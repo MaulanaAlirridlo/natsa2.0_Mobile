@@ -1,5 +1,7 @@
 package com.natsa.natsa20_mobile.model.products.products;
 
+import com.natsa.natsa20_mobile.model.Status;
+
 public class Products {
 
     private Status status;

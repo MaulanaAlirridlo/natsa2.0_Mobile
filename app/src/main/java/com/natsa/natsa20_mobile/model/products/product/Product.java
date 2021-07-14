@@ -1,5 +1,7 @@
 package com.natsa.natsa20_mobile.model.products.product;
 
+import com.natsa.natsa20_mobile.model.Status;
+
 import java.util.List;
 
 public class Product {

@@ -1,5 +1,7 @@
 package com.natsa.natsa20_mobile.model.bookmark.add_bookmark.add_bookmark_respone;
 
+import com.natsa.natsa20_mobile.model.Status;
+
 public class AddBookmarkRespone {
     private Status status;
     private RiceField riceField;

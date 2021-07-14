@@ -7,9 +7,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.natsa.natsa20_mobile.adapter.ProductAdapter;
 import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.helper.Preferences;
+import com.natsa.natsa20_mobile.model.products.product.RiceField;
 import com.natsa.natsa20_mobile.model.user.GetLoginUser;
+import com.natsa.natsa20_mobile.model.user.GetUserRes;
 import com.natsa.natsa20_mobile.model.user.User;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
 
@@ -21,14 +24,46 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class GetUser {
-    public void getUserFromApi(Context context,
-                               View view,
-                               ImageView photoProfile,
-                               TextView name,
-                               TextView username,
-                               TextView email,
-                               TextView ktp,
-                               TextView noHp) {
+
+    private final static List<User> userData = new ArrayList<>();
+
+    public static List<User> getUserData() {
+        return userData;
+    }
+
+    public static void setUserData(List<User> user, ProductAdapter productAdapter) {
+        userData.clear();
+        userData.addAll(user);
+        productAdapter.notifyDataSetChanged();
+    }
+
+    public void getUserFromApi(Integer id, ProductAdapter productAdapter) {
+        RetrofitBuilder.endPoint().getUser(id)
+                .enqueue(new Callback<GetUserRes>() {
+                    @Override
+                    public void onResponse(Call<GetUserRes> call, Response<GetUserRes> response) {
+                        if (response.isSuccessful()) {
+                            assert response.body() != null;
+                            List<User> user = response.body().getUsers();
+                            setUserData(user, productAdapter);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<GetUserRes> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
+
+    public void getLoginUserFromApi(Context context,
+                                    View view,
+                                    ImageView photoProfile,
+                                    TextView name,
+                                    TextView username,
+                                    TextView email,
+                                    TextView ktp,
+                                    TextView noHp) {
         RetrofitBuilder.endPoint().getLoginUser("Bearer " + Preferences.getToken(context))
                 .enqueue(new Callback<GetLoginUser>() {
                     @Override
@@ -56,7 +91,7 @@ public class GetUser {
                 });
     }
 
-    public void getUserFromApiWithoutSetView(Context context) {
+    public void getLoginUserFromApiWithoutSetView(Context context) {
         RetrofitBuilder.endPoint().getLoginUser("Bearer " + Preferences.getToken(context))
                 .enqueue(new Callback<GetLoginUser>() {
                     @Override

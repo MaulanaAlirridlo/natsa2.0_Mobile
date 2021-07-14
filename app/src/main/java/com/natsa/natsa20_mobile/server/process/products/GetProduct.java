@@ -12,6 +12,7 @@ import com.natsa.natsa20_mobile.model.products.product.Product;
 import com.natsa.natsa20_mobile.model.products.product.RandomRiceFields;
 import com.natsa.natsa20_mobile.model.products.product.RiceField;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
+import com.natsa.natsa20_mobile.server.process.User.GetUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ import retrofit2.Response;
 public class GetProduct {
 
     private final static List<RiceField> productList = new ArrayList<>();
-    private final static List<Photos> productImageList = new ArrayList<Photos>();
+    private final static List<Photos> productImageList = new ArrayList<>();
     private final static List<RandomRiceFields> randomRiceFieldsList = new ArrayList<>();
 
     public static List<RiceField> getProductList() {
@@ -68,7 +69,7 @@ public class GetProduct {
                             assert response.body() != null;
                             Product res = response.body();
                             RiceField riceField = res.getRiceField();
-                            Log.d("TAG", "onResponse: "+riceField.getId()+riceField.getUser());
+                            new GetUser().getUserFromApi(riceField.getUser_id(), productAdapter);
                             List<Photos> photos = riceField.getPhotos();
                             List<RandomRiceFields> randomRiceFields = res.getRandomRiceFields();
                             setProductImageList(photos, productImageAdapter);

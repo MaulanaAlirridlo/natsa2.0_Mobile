@@ -1,5 +1,7 @@
 package com.natsa.natsa20_mobile.model.bookmark.get_bookmark;
 
+import com.natsa.natsa20_mobile.model.Status;
+
 public class GetBookmarkRespone {
     private Status status;
     private Bookmarks bookmarks;

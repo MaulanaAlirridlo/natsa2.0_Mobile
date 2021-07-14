@@ -11,4 +11,5 @@
     <color name="bg1">#c5d9c5</color>
     <color name="bg2">#f4ccc4</color>
     <color name="bg3">#afa08d</color>
+    <color name="card_bg">#14F4CCC4</color>
 </resources>

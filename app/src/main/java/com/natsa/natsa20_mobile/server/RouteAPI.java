@@ -2,9 +2,8 @@ package com.natsa.natsa20_mobile.server;
 
 import androidx.annotation.Nullable;
 
-import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.model.user.GetLoginUser;
-import com.natsa.natsa20_mobile.model.user.User;
+import com.natsa.natsa20_mobile.model.user.GetUserRes;
 import com.natsa.natsa20_mobile.model.auth.login.LoginForm;
 import com.natsa.natsa20_mobile.model.auth.login.LoginRespone;
 import com.natsa.natsa20_mobile.model.auth.logout.LogoutRespone;
@@ -36,6 +35,11 @@ public interface RouteAPI {
     @Headers({"Accept: application/json"})
     @GET(Server.userDetails)
     Call<GetLoginUser> getLoginUser(@Header("Authorization") String token);
+
+    //show user
+    @Headers({"Accept: application/json"})
+    @GET(Server.users+"{userId}")
+    Call<GetUserRes> getUser(@Path("userId") Integer id);
 
     //register
     @Headers({"Accept: application/json"})
