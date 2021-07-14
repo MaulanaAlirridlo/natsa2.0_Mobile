@@ -32,7 +32,7 @@ public class ProfileFragment extends Fragment {
         ktp = view.findViewById(R.id.ktp);
         noHp = view.findViewById(R.id.no_hp);
 
-        new GetUser().getLoginUserFromApi(getContext(), view, photoProfile, name, username, email, ktp, noHp);
+        new GetUser().getLoginUserFromApi(getActivity(), view, photoProfile, name, username, email, ktp, noHp);
 
         return view;
     }

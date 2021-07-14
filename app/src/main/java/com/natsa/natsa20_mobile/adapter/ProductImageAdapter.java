@@ -1,5 +1,6 @@
 package com.natsa.natsa20_mobile.adapter;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,9 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductImageAdapter extends SliderViewAdapter<ProductImageAdapter.SliderAdapterVH> {
-    private List<Photos> sliderItems = new ArrayList<>();
+    Activity activity;
+    List<Photos> sliderItems = new ArrayList<>();
 
-    public ProductImageAdapter(List<Photos> sliderItems) {
+    public ProductImageAdapter(Activity activity, List<Photos> sliderItems) {
+        this.activity = activity;
         this.sliderItems = sliderItems;
     }
 
@@ -40,7 +43,7 @@ public class ProductImageAdapter extends SliderViewAdapter<ProductImageAdapter.S
     @Override
     public void onBindViewHolder(SliderAdapterVH holder, final int position) {
         if (sliderItems.get(position) != null){
-            new GlideLoader().glideLoader(holder.itemView, holder.imageViewBackground,
+            new GlideLoader().glideLoader(activity, holder.itemView, holder.imageViewBackground,
                     Server.storage + sliderItems.get(position).getPhoto_path());
         } else {
             holder.imageViewBackground.setImageResource(R.drawable.no_image);

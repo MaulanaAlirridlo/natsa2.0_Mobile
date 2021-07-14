@@ -53,7 +53,7 @@ public class ProductsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_products, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.productsRecyclerView);
-        adapter = new ProductsAdapter(getContext());
+        adapter = new ProductsAdapter(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         searchKeyword = view.findViewById(R.id.search_keyword);
         noData = view.findViewById(R.id.no_data);

@@ -1,5 +1,6 @@
 package com.natsa.natsa20_mobile.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -18,6 +19,7 @@ import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.ProductAdapter;
 import com.natsa.natsa20_mobile.adapter.ProductImageAdapter;
 import com.natsa.natsa20_mobile.adapter.RandomRiceFieldsAdapter;
+import com.natsa.natsa20_mobile.server.process.User.GetUser;
 import com.natsa.natsa20_mobile.server.process.products.GetProduct;
 import com.smarteist.autoimageslider.SliderView;
 
@@ -33,12 +35,13 @@ public class ProductFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_product, container, false);
-        Context context = getContext();
+        Activity activity = getActivity();
 
         //show product
         RecyclerView productRecyclerView = view.findViewById(R.id.productRecyclerView);
-        productImageAdapter = new ProductImageAdapter(GetProduct.getProductImageList());
-        productAdapter = new ProductAdapter(context, GetProduct.getProductList(), productImageAdapter);
+        productImageAdapter = new ProductImageAdapter(getActivity(), GetProduct.getProductImageList());
+        productAdapter = new ProductAdapter(activity, GetProduct.getProductList(), GetUser.getUserData(),
+                productImageAdapter);
         RecyclerView.LayoutManager productLayoutManager = new LinearLayoutManager(getActivity());
         productRecyclerView.setLayoutManager(productLayoutManager);
         productRecyclerView.setAdapter(productAdapter);
@@ -46,7 +49,7 @@ public class ProductFragment extends Fragment {
 
         //show random rice fields
         RecyclerView randomRiceFieldsRecyclerView = view.findViewById(R.id.randomRiceFieldsRecyclerView);
-        randomRiceFieldsAdapter = new RandomRiceFieldsAdapter(context, GetProduct.getRandomRiceFieldsList());
+        randomRiceFieldsAdapter = new RandomRiceFieldsAdapter(activity, GetProduct.getRandomRiceFieldsList());
         RecyclerView.LayoutManager randomRiceFieldsLayoutManager = new LinearLayoutManager(getActivity());
         randomRiceFieldsRecyclerView.setLayoutManager(randomRiceFieldsLayoutManager);
         randomRiceFieldsRecyclerView.setAdapter(randomRiceFieldsAdapter);

@@ -1,5 +1,6 @@
 package com.natsa.natsa20_mobile.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +20,11 @@ import com.natsa.natsa20_mobile.server.Server;
 
 public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdapter.UserProductsViewHolder> {
 
-    private final Context context;
+    private final Activity activity;
 
-    public UserProductsAdapter(Context context) {
+    public UserProductsAdapter(Activity activity) {
         super(DIFF_CALLBACK);
-        this.context = context;
+        this.activity = activity;
     }
 
     @NonNull
@@ -37,7 +38,7 @@ public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdap
     @Override
     public void onBindViewHolder(@NonNull UserProductsViewHolder holder, int position) {
         if (getItem(position).getPhoto() != null) {
-            new GlideLoader().glideLoader(holder.itemView, holder.productsImage,
+            new GlideLoader().glideLoader(activity, holder.itemView, holder.productsImage,
                     Server.storage + getItem(position).getPhoto()
                             .getPhoto_path());
         } else {
@@ -53,7 +54,7 @@ public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdap
 
         });
         holder.deleteProduct.setOnClickListener(v -> {
-//            AlertDialog dialog = new AlertDialog.Builder(context)
+//            AlertDialog dialog = new AlertDialog.Builder(activity)
 //                    .setMessage("Apakah anda yakin ingin menghapusnya?")
 //                    .setIcon(android.R.drawable.ic_dialog_alert)
 //                    .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
@@ -61,8 +62,8 @@ public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdap
 //                        public void onClick(DialogInterface dialog, int whichButton) {
 //                            new DeleteBookmark().deleteBookmarkProcess(
 //                                    getItem()(position).getBookmarks_id(),
-//                                    context);
-//                            new GetBookmark().getBookmarkFromApi(BookmarkAdapater.this, context);
+//                                    activity);
+//                            new GetBookmark().getBookmarkFromApi(BookmarkAdapater.this, activity);
 //                        }})
 //                    .setNegativeButton("Tidak", null)
 //                    .create();
@@ -70,8 +71,8 @@ public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdap
 //                @Override
 //                public void onShow(DialogInterface a) {
 //                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
-//                            context.getResources().getColor(R.color.black));
-//                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(context.getResources()
+//                            activity.getResources().getColor(R.color.black));
+//                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(activity.getResources()
 //                            .getColor(R.color.black));
 //                }
 //            });

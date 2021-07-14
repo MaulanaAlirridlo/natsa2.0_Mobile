@@ -1,5 +1,6 @@
 package com.natsa.natsa20_mobile.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -27,12 +28,12 @@ import java.util.List;
 
 public class RandomRiceFieldsAdapter extends RecyclerView.Adapter<RandomRiceFieldsAdapter.RandomRiceFieldsViewHolder> {
 
-    private final Context context;
+    private final Activity activity;
     private final List<RandomRiceFields> randomRiceFieldsDataList;
     private showDetailSawahListener showDetailSawahListener;
 
-    public RandomRiceFieldsAdapter(Context context, List<RandomRiceFields> randomRiceFieldsDataList) {
-        this.context = context;
+    public RandomRiceFieldsAdapter(Activity activity, List<RandomRiceFields> randomRiceFieldsDataList) {
+        this.activity = activity;
         this.randomRiceFieldsDataList = randomRiceFieldsDataList;
     }
 
@@ -47,7 +48,7 @@ public class RandomRiceFieldsAdapter extends RecyclerView.Adapter<RandomRiceFiel
     @Override
     public void onBindViewHolder(@NonNull RandomRiceFieldsViewHolder holder, int position) {
         if (randomRiceFieldsDataList.get(position).getPhoto() != null) {
-            new GlideLoader().glideLoader(holder.itemView, holder.productsImage,
+            new GlideLoader().glideLoader(activity, holder.itemView, holder.productsImage,
                     Server.storage + randomRiceFieldsDataList.get(position).getPhoto().getPhoto_path());
         } else {
             holder.productsImage.setImageResource(R.drawable.no_image);
@@ -56,7 +57,7 @@ public class RandomRiceFieldsAdapter extends RecyclerView.Adapter<RandomRiceFiel
         holder.productsPrice.setText(String.valueOf(randomRiceFieldsDataList.get(position).getHarga()));
 
         try {
-            showDetailSawahListener = (RandomRiceFieldsAdapter.showDetailSawahListener) context;
+            showDetailSawahListener = (RandomRiceFieldsAdapter.showDetailSawahListener) activity;
         } catch (ClassCastException e) {
             e.printStackTrace();
         }

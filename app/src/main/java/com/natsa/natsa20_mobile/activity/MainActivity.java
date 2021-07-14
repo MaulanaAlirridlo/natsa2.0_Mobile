@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         init();
-        new GlideLoader().glideImageRoundedLoader(showAccountMenu, showAccountMenu,
+        new GlideLoader().glideImageRoundedLoader(MainActivity.this, showAccountMenu, showAccountMenu,
                 Preferences.getPhotoUrl(getApplicationContext()));
         setOnclickListener();
     }

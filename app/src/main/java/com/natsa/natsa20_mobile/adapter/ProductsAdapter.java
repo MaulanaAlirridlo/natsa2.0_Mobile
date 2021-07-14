@@ -1,6 +1,7 @@
 package com.natsa.natsa20_mobile.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -30,12 +31,12 @@ import java.util.List;
 
 public class ProductsAdapter extends PagedListAdapter<Data, ProductsAdapter.ProductsViewHolder> {
 
-    private final Context context;
+    private final Activity activity;
     private showDetailSawahListener showDetailSawahListener;
 
-    public ProductsAdapter(Context context) {
+    public ProductsAdapter(Activity activity) {
         super(DIFF_CALLBACK);
-        this.context = context;
+        this.activity = activity;
     }
 
     @NonNull
@@ -49,7 +50,7 @@ public class ProductsAdapter extends PagedListAdapter<Data, ProductsAdapter.Prod
     @Override
     public void onBindViewHolder(@NonNull ProductsViewHolder holder, int position) {
         if (getItem(position).getPhoto() != null) {
-            new GlideLoader().glideLoader(holder.itemView, holder.productsImage,
+            new GlideLoader().glideLoader(activity, holder.itemView, holder.productsImage,
                     Server.storage + getItem(position).getPhoto()
                             .getPhoto_path());
         } else {
@@ -60,7 +61,7 @@ public class ProductsAdapter extends PagedListAdapter<Data, ProductsAdapter.Prod
         holder.productsRegion.setText(getItem(position).getRegions());
 
         try {
-            showDetailSawahListener = (ProductsAdapter.showDetailSawahListener) context;
+            showDetailSawahListener = (ProductsAdapter.showDetailSawahListener) activity;
         } catch (ClassCastException e) {
             e.printStackTrace();
         }

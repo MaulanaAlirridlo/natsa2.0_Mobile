@@ -141,7 +141,7 @@ public class AddProductFragment extends Fragment {
 
                 private void generateNewAttachmentList(ArrayList<AttachmentListData> newAttachmentList) {
                     newAttachmentListView.setHasFixedSize(false);
-                    attachmentListAdapter = new AttachmentListAdapter(newAttachmentList);
+                    attachmentListAdapter = new AttachmentListAdapter(getActivity(), newAttachmentList);
                     LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getContext());
                     newAttachmentListView.setLayoutManager(MyLayoutManager);
                     newAttachmentListView.setAdapter(attachmentListAdapter);

@@ -55,7 +55,7 @@ public class BackActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_back);
 
         init();
-        new GlideLoader().glideImageRoundedLoader(showAccountMenu, showAccountMenu,
+        new GlideLoader().glideImageRoundedLoader(BackActivity.this, showAccountMenu, showAccountMenu,
                 Preferences.getPhotoUrl(getApplicationContext()));
         setOnclickListener();
 

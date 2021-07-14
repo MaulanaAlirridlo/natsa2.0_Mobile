@@ -1,5 +1,6 @@
 package com.natsa.natsa20_mobile.adapter;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,13 @@ import com.natsa.natsa20_mobile.model.AttachmentListData;
 import java.util.ArrayList;
 
 public class AttachmentListAdapter extends RecyclerView.Adapter<AttachmentListAdapter.AttachmentListViewHolder> {
-    public ArrayList<AttachmentListData> newAttachmentList;
+    ArrayList<AttachmentListData> newAttachmentList;
+    Activity activity;
 
 
-    public AttachmentListAdapter(ArrayList<AttachmentListData> list) {
+    public AttachmentListAdapter(Activity activity, ArrayList<AttachmentListData> list) {
         this.newAttachmentList = list;
+        this.activity = activity;
     }
 
     @Override
@@ -37,7 +40,7 @@ public class AttachmentListAdapter extends RecyclerView.Adapter<AttachmentListAd
         holder.attachedImageName.setText((newAttachmentList.get(position).getImageName()));
         String userImage = newAttachmentList.get(position).getImageUri();
         if (!userImage.isEmpty()) {
-            new GlideLoader().glideLoader(holder.itemView, holder.attachedImageId, userImage);
+            new GlideLoader().glideLoader(activity ,holder.itemView, holder.attachedImageId, userImage);
         }
     }
 

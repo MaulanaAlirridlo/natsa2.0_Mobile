@@ -1,6 +1,5 @@
 package com.natsa.natsa20_mobile.fragment.Account;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -20,18 +19,12 @@ import android.view.ViewGroup;
 
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.BookmarkAdapater;
-import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
 import com.natsa.natsa20_mobile.model.bookmark.get_bookmark.Data;
 import com.natsa.natsa20_mobile.server.process.Paging.bookmark.BookmarksViewModel;
-import com.natsa.natsa20_mobile.server.process.Paging.products.user_products.UserProductsVM;
-import com.natsa.natsa20_mobile.server.process.bookmark.GetBookmark;
-import com.natsa.natsa20_mobile.server.process.products.GetProducts;
 
 public class BookmarkFragment extends Fragment {
 
     private BookmarkAdapater adapter;
-    private GetBookmark getBookmark = new GetBookmark();
-    private Context context;
     BookmarksViewModel bookmarksViewModel;
 
     @Override
@@ -40,10 +33,9 @@ public class BookmarkFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_bookmark, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.productsRecyclerView);
-        context = getContext();
-        adapter = new BookmarkAdapater(context);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         bookmarksViewModel = ViewModelProviders.of(this).get(BookmarksViewModel.class);
+        adapter = new BookmarkAdapater(getActivity(), bookmarksViewModel);
         bookmarksViewModel.BookmarksViewModel().observe(getActivity(), new Observer<PagedList<Data>>() {
             @Override
             public void onChanged(@Nullable PagedList<Data> items) {

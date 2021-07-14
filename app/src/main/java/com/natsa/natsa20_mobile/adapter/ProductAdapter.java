@@ -1,20 +1,26 @@
 package com.natsa.natsa20_mobile.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.natsa.natsa20_mobile.R;
+import com.natsa.natsa20_mobile.helper.DateFormater;
+import com.natsa.natsa20_mobile.helper.GlideLoader;
+import com.natsa.natsa20_mobile.helper.Preferences;
 import com.natsa.natsa20_mobile.model.products.product.Product;
 import com.natsa.natsa20_mobile.model.products.product.RiceField;
+import com.natsa.natsa20_mobile.model.user.User;
 import com.natsa.natsa20_mobile.server.process.bookmark.AddBookmark;
 import com.natsa.natsa20_mobile.server.process.products.GetProduct;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
@@ -23,13 +29,16 @@ import com.smarteist.autoimageslider.SliderView;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
-    private final Context context;
+    private final Activity activity;
     private final List<RiceField> productDataList;
+    private final List<User> userData;
     private final ProductImageAdapter productImageAdapter;
 
-    public ProductAdapter(Context context, List<RiceField> productsDataList, ProductImageAdapter productImageAdapter) {
-        this.context = context;
+    public ProductAdapter(Activity activity, List<RiceField> productsDataList, List<User> userData,
+                          ProductImageAdapter productImageAdapter) {
+        this.activity = activity;
         this.productDataList = productsDataList;
+        this.userData = userData;
         this.productImageAdapter = productImageAdapter;
     }
 
@@ -61,8 +70,24 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.type.setText(product.getTipe());
 //        holder.category.setText(product.getVestige().getVestige()+", "+product.getIrrigation().getIrrigation());
         holder.addBookmarkButton.setOnClickListener(v -> {
-            new AddBookmark().addBookmarkProcess(product.getId(), context);
+            new AddBookmark().addBookmarkProcess(product.getId(), activity);
         });
+
+        if (userData.size() > 0){
+            User user = userData.get(position);
+            holder.makelarName.setText(user.getName());
+            holder.makelarEmail.setText(user.getEmail());
+            if (Preferences.isLogin(activity)){
+                holder.makelarNoHp.setText(user.getNo_hp() == null ? "Tidak ada no Hp" : user.getNo_hp());
+
+            } else {
+                holder.makelarNoHp.setText("Harap login terlebih dahulu");
+                holder.makelarSosmed.setText("Harap login terlebih dahulu");
+            }
+            holder.makelarCreated.setText(new DateFormater().parseDateToddMMMyyyy(user.getCreated_at()));
+            new GlideLoader().glideImageRoundedLoader(activity, holder.itemView, holder.makelarPhoto,
+                    user.getProfile_photo_url());
+        }
     }
 
     @Override
@@ -73,9 +98,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public class ProductViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView productTitle, productPrice, address, region, description, certification,
-                type, category;
+                type, category, makelarName, makelarEmail, makelarNoHp, makelarCreated, makelarSosmed;
         private final Button addBookmarkButton;
         private final SliderView sliderView;
+        final ImageView makelarPhoto;
 
         public ProductViewHolder(View view) {
             super(view);
@@ -89,6 +115,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             category = view.findViewById(R.id.category);
             addBookmarkButton = view.findViewById(R.id.addBookmarkButton);
             sliderView = view.findViewById(R.id.imageSlider);
+            makelarName = view.findViewById(R.id.makelar_name);
+            makelarEmail = view.findViewById(R.id.makelar_email);
+            makelarNoHp = view.findViewById(R.id.makelar_no_hp);
+            makelarCreated = view.findViewById(R.id.makelar_created);
+            makelarSosmed = view.findViewById(R.id.makelar_sosmed);
+            makelarPhoto = view.findViewById(R.id.makelar_photo);
         }
     }
 

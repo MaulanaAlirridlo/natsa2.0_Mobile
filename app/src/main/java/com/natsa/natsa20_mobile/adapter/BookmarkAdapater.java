@@ -1,5 +1,6 @@
 package com.natsa.natsa20_mobile.adapter;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,16 +19,19 @@ import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.model.bookmark.get_bookmark.Data;
 import com.natsa.natsa20_mobile.server.Server;
+import com.natsa.natsa20_mobile.server.process.Paging.bookmark.BookmarksViewModel;
 import com.natsa.natsa20_mobile.server.process.bookmark.DeleteBookmark;
 import com.natsa.natsa20_mobile.server.process.bookmark.GetBookmark;
 
 public class BookmarkAdapater extends PagedListAdapter<Data, BookmarkAdapater.BookmarkViewHolder> {
 
-    private final Context context;
+    final Activity activity;
+    final BookmarksViewModel bookmarksViewModel;
 
-    public BookmarkAdapater(Context context) {
+    public BookmarkAdapater(Activity activity, BookmarksViewModel bookmarksViewModel) {
         super(DIFF_CALLBACK);
-        this.context = context;
+        this.activity = activity;
+        this.bookmarksViewModel = bookmarksViewModel;
     }
 
     @NonNull
@@ -41,7 +45,7 @@ public class BookmarkAdapater extends PagedListAdapter<Data, BookmarkAdapater.Bo
     @Override
     public void onBindViewHolder(@NonNull BookmarkViewHolder holder, int position) {
         if (getItem(position).getPhoto() != null) {
-            new GlideLoader().glideLoader(holder.itemView, holder.productsImage,
+            new GlideLoader().glideLoader(activity, holder.itemView, holder.productsImage,
                     Server.storage + getItem(position).getPhoto()
                             .getPhoto_path());
         } else {
@@ -50,7 +54,7 @@ public class BookmarkAdapater extends PagedListAdapter<Data, BookmarkAdapater.Bo
         holder.productsTitle.setText(getItem(position).getTitle());
         holder.productsPrice.setText(String.valueOf(getItem(position).getHarga()));
         holder.deleteBookmark.setOnClickListener(v -> {
-            AlertDialog dialog = new AlertDialog.Builder(context)
+            AlertDialog dialog = new AlertDialog.Builder(activity)
                     .setMessage("Apakah anda yakin ingin menghapusnya?")
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setNegativeButton("Tidak", null)
@@ -59,8 +63,8 @@ public class BookmarkAdapater extends PagedListAdapter<Data, BookmarkAdapater.Bo
                         public void onClick(DialogInterface dialog, int whichButton) {
                             new DeleteBookmark().deleteBookmarkProcess(
                                     getItem(position).getBookmarks_id(),
-                                    context);
-
+                                    activity);
+                            bookmarksViewModel.refresh();
                         }
                     })
                     .create();
@@ -68,8 +72,8 @@ public class BookmarkAdapater extends PagedListAdapter<Data, BookmarkAdapater.Bo
                 @Override
                 public void onShow(DialogInterface a) {
                     dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
-                            context.getResources().getColor(R.color.black));
-                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(context.getResources()
+                            activity.getResources().getColor(R.color.black));
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(activity.getResources()
                             .getColor(R.color.black));
                 }
             });

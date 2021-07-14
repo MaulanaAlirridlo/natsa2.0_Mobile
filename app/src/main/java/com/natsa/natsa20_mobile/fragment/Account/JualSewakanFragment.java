@@ -31,19 +31,17 @@ public class JualSewakanFragment extends Fragment {
     FloatingActionButton showAddProductForm;
     UserProductsAdapter adapter;
     UserProductsVM userProductsVM;
-    Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_jual_sewakan, container, false);
 
-        context = getContext();
         showAddProductForm = view.findViewById(R.id.show_add_product_form);
 
 
         RecyclerView recyclerView = view.findViewById(R.id.jual_sewakan_recycler_view);
-        adapter = new UserProductsAdapter(context);
+        adapter = new UserProductsAdapter(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         userProductsVM = ViewModelProviders.of(this).get(UserProductsVM.class);
 
