@@ -39,7 +39,6 @@
                 android:id="@+id/editButoon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:text="@string/edit"
                 android:layout_toLeftOf="@+id/deleteButton"
                 android:layout_toStartOf="@+id/deleteButton" />
@@ -47,7 +46,6 @@
                 android:id="@+id/deleteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
                 android:text="@string/delete"
                 android:layout_marginLeft="10dp"
                 android:layout_marginStart="10dp"

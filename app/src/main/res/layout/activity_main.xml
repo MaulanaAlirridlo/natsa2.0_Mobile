@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        android:background="@color/white"
+        android:background="@color/bg_main"
         android:orientation="vertical"
         android:translationZ="9999dp"
         android:visibility="gone"
@@ -70,33 +70,45 @@
             android:id="@+id/show_sawah"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
             android:text="@string/sawah"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/show_about"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
             android:text="@string/about"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/show_faq"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
             android:text="@string/faq"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/show_contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="5dp"
             android:text="@string/contact"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </LinearLayout>
     <!--    end of menu     -->
 
@@ -107,7 +119,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
         android:layout_gravity="center"
-        android:background="@color/white"
+        android:background="@color/bg_main"
         android:orientation="horizontal"
         android:padding="16dp"
         android:translationZ="9999dp"
@@ -154,7 +166,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        android:background="@color/white"
+        android:background="@color/bg_main"
         android:orientation="vertical"
         android:translationZ="9999dp"
         android:visibility="gone">
@@ -165,7 +177,7 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:text="@string/sign_up"
-            android:textColor="@color/black" />
+            android:textColor="@color/font_color" />
 
         <TextView
             android:id="@+id/show_login"
@@ -173,7 +185,7 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:text="@string/sign_in"
-            android:textColor="@color/black" />
+            android:textColor="@color/font_color" />
     </LinearLayout>
 
     <LinearLayout
@@ -181,7 +193,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        android:background="@color/white"
+        android:background="@color/bg_main"
         android:orientation="vertical"
         android:translationZ="9999dp"
         android:visibility="gone">
@@ -192,7 +204,7 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:text="@string/account"
-            android:textColor="@color/black" />
+            android:textColor="@color/font_color" />
 
         <TextView
             android:id="@+id/logout"
@@ -200,7 +212,7 @@
             android:layout_height="wrap_content"
             android:padding="12dp"
             android:text="@string/logout"
-            android:textColor="@color/black" />
+            android:textColor="@color/font_color" />
     </LinearLayout>
     <!--    end of account  -->
 
@@ -244,8 +256,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="@string/lihat_sekarang"
-                    android:textColor="@color/black" />
+                    android:text="@string/lihat_sekarang" />
 
             </LinearLayout>
 
@@ -275,8 +286,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="@string/lihat_sekarang"
-                    android:textColor="@color/black" />
+                    android:text="@string/lihat_sekarang" />
 
             </LinearLayout>
 
@@ -306,8 +316,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="@string/lihat_sekarang"
-                    android:textColor="@color/black" />
+                    android:text="@string/lihat_sekarang" />
 
             </LinearLayout>
 

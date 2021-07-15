@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/bg_main"
     tools:context=".fragment.Account.BookmarkFragment">
 
     <LinearLayout
@@ -89,8 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/save"
-                android:textColor="@color/black" />
+                android:text="@string/save" />
 
         </LinearLayout>
 
@@ -144,8 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/save"
-                android:textColor="@color/black" />
+                android:text="@string/save" />
 
 
         </LinearLayout>
@@ -170,8 +168,7 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/delete_account"
-                android:textColor="@color/black"/>
+                android:text="@string/delete_account" />
 
         </LinearLayout>
 

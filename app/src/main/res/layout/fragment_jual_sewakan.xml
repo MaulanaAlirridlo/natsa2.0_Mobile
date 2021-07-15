@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/bg_main"
     tools:context=".fragment.Account.BookmarkFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -19,7 +19,7 @@
         android:clickable="true"
         android:contentDescription="@string/bottom_sheet_behavior"
         android:focusable="true"
-        app:backgroundTint="@color/white"
+        app:backgroundTint="@color/bg_main"
         app:srcCompat="@drawable/ic_add" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

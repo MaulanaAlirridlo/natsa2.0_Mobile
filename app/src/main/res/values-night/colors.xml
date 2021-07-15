@@ -7,15 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="primary">@color/white</color>
+    <color name="primary">#424242</color>
     <color name="secondary">#2B0F07</color>
-    <color name="bg_main">@color/white</color>
+    <color name="bg_main">#303030</color>
     <color name="bg1">#c5d9c5</color>
     <color name="bg2">#f4ccc4</color>
     <color name="bg3">#afa08d</color>
     <color name="bg4">#ffd4c7</color>
     <color name="card_bg">#14F4CCC4</color>
-    <color name="font_color">@color/black</color>
+    <color name="font_color">@color/white</color>
 
 
 </resources>

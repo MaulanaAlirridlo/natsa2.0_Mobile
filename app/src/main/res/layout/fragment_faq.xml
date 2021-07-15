@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/bg_main"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     tools:context=".fragment.FaqFragment">
@@ -17,8 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pertanyaan_1"
-            android:textSize="20sp" />
+            android:text="@string/pertanyaan_1" />
 
         <TextView
             android:id="@+id/plusPertanyaan1"
@@ -26,7 +25,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:text="@string/plus_symbol"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <TextView
@@ -48,8 +47,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pertanyaan_2"
-            android:textSize="20sp" />
+            android:text="@string/pertanyaan_2" />
 
         <TextView
             android:id="@+id/plusPertanyaan2"
@@ -57,7 +55,7 @@
             android:layout_height="wrap_content"
             android:gravity="right"
             android:text="@string/plus_symbol"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <TextView

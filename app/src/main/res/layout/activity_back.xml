@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
         android:layout_gravity="center"
-        android:background="@color/white"
+        android:background="@color/bg_main"
         android:orientation="horizontal"
         android:padding="16dp"
         android:translationZ="9999dp"
@@ -115,7 +115,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        android:background="@color/white"
+        android:background="@color/bg_main"
         android:orientation="vertical"
         android:translationZ="9999dp"
         android:visibility="gone">
@@ -125,16 +125,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:text="@string/sign_up"
-            android:textColor="@color/black" />
+            android:textColor="@color/font_color"
+            android:text="@string/sign_up" />
 
         <TextView
             android:id="@+id/show_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:text="@string/sign_in"
-            android:textColor="@color/black" />
+            android:textColor="@color/font_color"
+            android:text="@string/sign_in" />
     </LinearLayout>
 
     <LinearLayout
@@ -142,7 +142,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        android:background="@color/white"
+        android:background="@color/bg_main"
         android:orientation="vertical"
         android:translationZ="9999dp"
         android:visibility="gone">
@@ -152,16 +152,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:text="@string/account"
-            android:textColor="@color/black" />
+            android:textColor="@color/font_color"
+            android:text="@string/account" />
 
         <TextView
             android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="12dp"
-            android:text="@string/logout"
-            android:textColor="@color/black" />
+            android:textColor="@color/font_color"
+            android:text="@string/logout" />
     </LinearLayout>
     <!--    end of account  -->
 
