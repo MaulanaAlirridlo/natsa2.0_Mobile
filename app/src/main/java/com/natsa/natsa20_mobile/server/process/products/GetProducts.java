@@ -2,7 +2,7 @@ package com.natsa.natsa20_mobile.server.process.products;
 
 import androidx.annotation.NonNull;
 
-import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
+import com.natsa.natsa20_mobile.adapter.ProductsAdapterWithPaging;
 import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.model.products.products.Products;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
@@ -22,13 +22,13 @@ public class GetProducts {
         return productsDataList;
     }
 
-    public void setProducts(List<Data> products, ProductsAdapter adapter) {
+    public void setProducts(List<Data> products, ProductsAdapterWithPaging adapter) {
         productsDataList.clear();
         productsDataList.addAll(products);
         adapter.notifyDataSetChanged();
     }
 
-    public void getProductsFromApi(ProductsAdapter adapter) {
+    public void getProductsFromApi(ProductsAdapterWithPaging adapter) {
         RetrofitBuilder.endPoint().getRiceFields()
                 .enqueue(new Callback<Products>() {
                     @Override
@@ -49,7 +49,7 @@ public class GetProducts {
 
     // if need data from full url.
     // ex: http://192.168.1.5:8000/api/RiceFields?page=1
-    public void getProductsFromApiWithDynamicUrl(ProductsAdapter adapter, String url) {
+    public void getProductsFromApiWithDynamicUrl(ProductsAdapterWithPaging adapter, String url) {
         RetrofitBuilder.endPoint().getProductsFromDynamicUrl(url)
                 .enqueue(new Callback<Products>() {
                     @Override

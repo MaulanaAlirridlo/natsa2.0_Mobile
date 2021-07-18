@@ -27,7 +27,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.natsa.natsa20_mobile.R;
-import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
+import com.natsa.natsa20_mobile.adapter.ProductsAdapterWithPaging;
 import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.server.process.Paging.products.ProductsViewModel;
 import com.natsa.natsa20_mobile.server.process.irrigations.GetIrrigations;
@@ -35,7 +35,7 @@ import com.natsa.natsa20_mobile.server.process.vestiges.GetVestiges;
 
 public class ProductsFragment extends Fragment {
 
-    ProductsAdapter adapter;
+    ProductsAdapterWithPaging adapter;
     ProductsViewModel productsViewModel;
     TextView searchKeyword, noData;
     String keyword, tipe, sertifikasi, sort;
@@ -53,7 +53,7 @@ public class ProductsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_products, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.productsRecyclerView);
-        adapter = new ProductsAdapter(getActivity());
+        adapter = new ProductsAdapterWithPaging(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         searchKeyword = view.findViewById(R.id.search_keyword);
         noData = view.findViewById(R.id.no_data);

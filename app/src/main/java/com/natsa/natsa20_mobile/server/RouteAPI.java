@@ -2,6 +2,7 @@ package com.natsa.natsa20_mobile.server;
 
 import androidx.annotation.Nullable;
 
+import com.natsa.natsa20_mobile.model.MakelarResponse;
 import com.natsa.natsa20_mobile.model.user.GetLoginUser;
 import com.natsa.natsa20_mobile.model.user.GetUserRes;
 import com.natsa.natsa20_mobile.model.auth.login.LoginForm;
@@ -56,6 +57,10 @@ public interface RouteAPI {
     @POST(Server.logout)
     Call<LogoutRespone> Logout(@Header("Authorization") String token);
 
+    //get makelar
+    @Headers({"Accept: application/json"})
+    @GET(Server.makelar+"{id}")
+    Call<MakelarResponse> getMakelar(@Header("Authorization") String token, @Path("id") Integer id);
     
     //product
     @Headers({"Accept: application/json"})

@@ -13,7 +13,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -24,12 +23,14 @@ import android.widget.TextView;
 
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
+import com.natsa.natsa20_mobile.adapter.ProductsAdapterWithPaging;
 import com.natsa.natsa20_mobile.adapter.RandomRiceFieldsAdapter;
 import com.natsa.natsa20_mobile.fragment.AboutFragment;
 import com.natsa.natsa20_mobile.fragment.AccountFragment;
 import com.natsa.natsa20_mobile.fragment.ContactFragment;
 import com.natsa.natsa20_mobile.fragment.EmailFragment;
 import com.natsa.natsa20_mobile.fragment.FaqFragment;
+import com.natsa.natsa20_mobile.fragment.MakelarFragment;
 import com.natsa.natsa20_mobile.fragment.ProductFragment;
 import com.natsa.natsa20_mobile.fragment.ProductsFragment;
 import com.natsa.natsa20_mobile.helper.GlideLoader;
@@ -38,8 +39,8 @@ import com.natsa.natsa20_mobile.helper.Preferences;
 
 import java.util.List;
 
-public class BackActivity extends AppCompatActivity implements
-        ProductsAdapter.showDetailSawahListener,
+public class BackActivity extends AppCompatActivity implements ProductsAdapter.showDetailSawahListener,
+        ProductsAdapterWithPaging.showDetailSawahListener,
         RandomRiceFieldsAdapter.showDetailSawahListener {
 
     String page;
@@ -59,7 +60,8 @@ public class BackActivity extends AppCompatActivity implements
                 Preferences.getPhotoUrl(getApplicationContext()));
         setOnclickListener();
 
-        page = getIntent().getExtras().getString("page");
+        Bundle intentExtra = getIntent().getExtras();
+        page = intentExtra.getString("page");
         switch (page) {
             case "sawah":
                 loadFragment(new ProductsFragment());
@@ -88,6 +90,10 @@ public class BackActivity extends AppCompatActivity implements
             case "account":
                 loadFragment(new AccountFragment());
                 showBookmark.setVisibility(View.GONE);
+                break;
+            case "detailMakelar":
+                loadFragment(new MakelarFragment());
+                title.setText(intentExtra.getString("makelar_name"));
                 break;
         }
     }

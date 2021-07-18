@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.natsa.natsa20_mobile.adapter.MakelarAdapter;
 import com.natsa.natsa20_mobile.adapter.ProductAdapter;
 import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.helper.Preferences;
@@ -32,13 +33,13 @@ public class GetUser {
         return userData;
     }
 
-    public static void setUserData(List<User> user, ProductAdapter productAdapter) {
+    public static void setUserData(List<User> user, MakelarAdapter makelarAdapter) {
         userData.clear();
         userData.addAll(user);
-        productAdapter.notifyDataSetChanged();
+        makelarAdapter.notifyDataSetChanged();
     }
 
-    public void getUserFromApi(Integer id, ProductAdapter productAdapter) {
+    public void getUserFromApi(Integer id, MakelarAdapter makelarAdapter) {
         RetrofitBuilder.endPoint().getUser(id)
                 .enqueue(new Callback<GetUserRes>() {
                     @Override
@@ -46,7 +47,7 @@ public class GetUser {
                         if (response.isSuccessful()) {
                             assert response.body() != null;
                             List<User> user = response.body().getUsers();
-                            setUserData(user, productAdapter);
+                            setUserData(user, makelarAdapter);
                         }
                     }
 

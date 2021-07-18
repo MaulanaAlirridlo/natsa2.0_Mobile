@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.natsa.natsa20_mobile.adapter.MakelarAdapter;
 import com.natsa.natsa20_mobile.adapter.ProductAdapter;
 import com.natsa.natsa20_mobile.adapter.ProductImageAdapter;
 import com.natsa.natsa20_mobile.adapter.RandomRiceFieldsAdapter;
@@ -59,6 +60,7 @@ public class GetProduct {
     }
 
     public void getProductFromApi(int id, ProductAdapter productAdapter,
+                                  MakelarAdapter makelarAdapter,
                                   ProductImageAdapter productImageAdapter,
                                   RandomRiceFieldsAdapter randomRiceFieldsAdapter) {
         RetrofitBuilder.endPoint().showRiceField(id)
@@ -69,7 +71,7 @@ public class GetProduct {
                             assert response.body() != null;
                             Product res = response.body();
                             RiceField riceField = res.getRiceField();
-                            new GetUser().getUserFromApi(riceField.getUser_id(), productAdapter);
+                            new GetUser().getUserFromApi(riceField.getUser_id(), makelarAdapter);
                             List<Photos> photos = riceField.getPhotos();
                             List<RandomRiceFields> randomRiceFields = res.getRandomRiceFields();
                             setProductImageList(photos, productImageAdapter);

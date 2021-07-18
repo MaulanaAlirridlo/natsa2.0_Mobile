@@ -17,50 +17,42 @@ import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.server.Server;
 
-import java.util.List;
-
-public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.ProductsViewHolder> {
+public class ProductsAdapterWithPaging extends PagedListAdapter<Data, ProductsAdapterWithPaging.ProductsViewHolder> {
 
     private final Activity activity;
-    private final List<Data> productsDataList;
-    private ProductsAdapter.showDetailSawahListener showDetailSawahListener;
+    private showDetailSawahListener showDetailSawahListener;
 
-    public ProductsAdapter(Activity activity, List<Data> productsDataList) {
+    public ProductsAdapterWithPaging(Activity activity) {
+        super(DIFF_CALLBACK);
         this.activity = activity;
-        this.productsDataList = productsDataList;
     }
 
     @NonNull
     @Override
-    public ProductsAdapter.ProductsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ProductsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.products_card, parent, false);
-        return new ProductsAdapter.ProductsViewHolder(view);
+        return new ProductsViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductsAdapter.ProductsViewHolder holder, int position) {
-        if (productsDataList.get(position).getPhoto() != null) {
+    public void onBindViewHolder(@NonNull ProductsViewHolder holder, int position) {
+        if (getItem(position).getPhoto() != null) {
             new GlideLoader().glideLoader(activity, holder.itemView, holder.productsImage,
-                    Server.storage + productsDataList.get(position).getPhoto()
+                    Server.storage + getItem(position).getPhoto()
                             .getPhoto_path());
         } else {
             holder.productsImage.setImageResource(R.drawable.no_image);
         }
-        holder.productsTitle.setText(productsDataList.get(position).getTitle());
-        holder.productsPrice.setText(String.valueOf(productsDataList.get(position).getHarga()));
-        holder.productsRegion.setText(productsDataList.get(position).getRegions());
+        holder.productsTitle.setText(getItem(position).getTitle());
+        holder.productsPrice.setText(String.valueOf(getItem(position).getHarga()));
+        holder.productsRegion.setText(getItem(position).getRegions());
 
         try {
-            showDetailSawahListener = (ProductsAdapter.showDetailSawahListener) activity;
+            showDetailSawahListener = (ProductsAdapterWithPaging.showDetailSawahListener) activity;
         } catch (ClassCastException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return (productsDataList != null) ? productsDataList.size() : 0;
     }
 
     public class ProductsViewHolder extends RecyclerView.ViewHolder {
@@ -80,7 +72,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
 
             v.setOnClickListener(v1 -> {
                 position = getAdapterPosition();
-                id = productsDataList.get(position).getId();
+                id = getItem(position).getId();
                 show(id);
             });
 
@@ -95,4 +87,17 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     public interface showDetailSawahListener {
         void showDetailSawah(int id);
     }
+
+    private static DiffUtil.ItemCallback<Data> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<Data>() {
+                @Override
+                public boolean areItemsTheSame(Data oldData, Data newData) {
+                    return oldData.getId() == newData.getId();
+                }
+
+                @Override
+                public boolean areContentsTheSame(Data oldData, Data newData) {
+                    return oldData.equals(newData);
+                }
+            };
 }

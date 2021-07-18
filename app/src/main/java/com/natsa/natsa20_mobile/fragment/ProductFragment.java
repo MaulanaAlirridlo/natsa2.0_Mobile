@@ -14,8 +14,10 @@ import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.natsa.natsa20_mobile.R;
+import com.natsa.natsa20_mobile.adapter.MakelarAdapter;
 import com.natsa.natsa20_mobile.adapter.ProductAdapter;
 import com.natsa.natsa20_mobile.adapter.ProductImageAdapter;
 import com.natsa.natsa20_mobile.adapter.RandomRiceFieldsAdapter;
@@ -26,6 +28,7 @@ import com.smarteist.autoimageslider.SliderView;
 public class ProductFragment extends Fragment {
 
     private ProductAdapter productAdapter;
+    private MakelarAdapter makelarAdapter;
     private RandomRiceFieldsAdapter randomRiceFieldsAdapter;
     private ProductImageAdapter productImageAdapter;
     private final GetProduct getProduct = new GetProduct();
@@ -40,12 +43,18 @@ public class ProductFragment extends Fragment {
         //show product
         RecyclerView productRecyclerView = view.findViewById(R.id.productRecyclerView);
         productImageAdapter = new ProductImageAdapter(getActivity(), GetProduct.getProductImageList());
-        productAdapter = new ProductAdapter(activity, GetProduct.getProductList(), GetUser.getUserData(),
+        productAdapter = new ProductAdapter(activity, GetProduct.getProductList(),
                 productImageAdapter);
         RecyclerView.LayoutManager productLayoutManager = new LinearLayoutManager(getActivity());
         productRecyclerView.setLayoutManager(productLayoutManager);
         productRecyclerView.setAdapter(productAdapter);
-        //end show product
+
+        //show makelar
+        RecyclerView makelarRecyclerView = view.findViewById(R.id.makelarRecyclerView);
+        makelarAdapter = new MakelarAdapter(activity, GetUser.getUserData());
+        RecyclerView.LayoutManager makelarLayoutManager = new LinearLayoutManager(getActivity());
+        makelarRecyclerView.setLayoutManager(makelarLayoutManager);
+        makelarRecyclerView.setAdapter(makelarAdapter);
 
         //show random rice fields
         RecyclerView randomRiceFieldsRecyclerView = view.findViewById(R.id.randomRiceFieldsRecyclerView);
@@ -57,7 +66,7 @@ public class ProductFragment extends Fragment {
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swipeRefresh);
         pullToRefresh.setOnRefreshListener(() -> {
             getProduct.getProductFromApi((Integer) getActivity().getIntent().getExtras().get("id"),
-                    productAdapter, productImageAdapter, randomRiceFieldsAdapter);
+                    productAdapter, makelarAdapter, productImageAdapter, randomRiceFieldsAdapter);
             new Handler(Looper.getMainLooper()).postDelayed(() -> pullToRefresh.setRefreshing(false), 700);
         });
 
@@ -67,6 +76,6 @@ public class ProductFragment extends Fragment {
     public void onResume() {
         super.onResume();
         getProduct.getProductFromApi((Integer) getActivity().getIntent().getExtras().get("id"),
-                productAdapter, productImageAdapter, randomRiceFieldsAdapter);
+                productAdapter, makelarAdapter, productImageAdapter, randomRiceFieldsAdapter);
     }
 }

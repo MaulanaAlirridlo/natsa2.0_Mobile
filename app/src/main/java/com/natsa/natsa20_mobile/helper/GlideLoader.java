@@ -1,15 +1,12 @@
 package com.natsa.natsa20_mobile.helper;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.badoo.mobile.util.WeakHandler;
 import com.bumptech.glide.Glide;
@@ -113,7 +110,6 @@ public class GlideLoader {
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-        Log.d("TAG", "glideImageRoundedProcess: "+activity.isDestroyed());
             if (!activity.isDestroyed()){
                 Glide.with(view)
                         .load(imgLocation)

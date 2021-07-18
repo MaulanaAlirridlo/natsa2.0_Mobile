@@ -8,7 +8,6 @@ import java.util.Date;
 
 public class DateFormater {
     public String parseDateToddMMMyyyy(String time) {
-        Log.d("TAG", "parseDateToddMMMyyyy: "+time);
         String inputPattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSX";
         String outputPattern = "dd MMMM yyyy";
         SimpleDateFormat inputFormat = null;
@@ -23,7 +22,6 @@ public class DateFormater {
         try {
             date = inputFormat.parse(time);
             str = outputFormat.format(date);
-        Log.d("TAG", "parseDateToddMMMyyyy: "+str);
         } catch (ParseException e) {
             e.printStackTrace();
         }
