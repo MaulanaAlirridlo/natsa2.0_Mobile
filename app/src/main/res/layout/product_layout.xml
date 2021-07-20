@@ -15,7 +15,7 @@
         app:sliderIndicatorOrientation="horizontal"
         app:sliderIndicatorPadding="4dp"
         app:sliderIndicatorRadius="1.5dp"
-        app:sliderIndicatorSelectedColor="#5A5A5A"
+        app:sliderIndicatorSelectedColor="#B5B4B4"
         app:sliderIndicatorUnselectedColor="#ECECEC"
         app:sliderScrollTimeInSec="1"
         app:sliderStartAutoCycle="true" />

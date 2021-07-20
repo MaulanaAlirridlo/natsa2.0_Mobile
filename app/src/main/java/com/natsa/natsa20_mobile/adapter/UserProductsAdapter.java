@@ -32,7 +32,6 @@ public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdap
 
     public UserProductsAdapter(Activity activity, UserProductsVM userProductsVM) {
         super(DIFF_CALLBACK);
-        Log.d("TAG", "UserProductsAdapter: "+userProductsVM);
         this.activity = activity;
         this.userProductsVM = userProductsVM;
     }

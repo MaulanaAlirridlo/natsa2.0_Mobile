@@ -22,6 +22,8 @@ import com.natsa.natsa20_mobile.model.vestiges.Vestiges;
 import com.natsa.natsa20_mobile.server.process.irrigations.GetIrrigations;
 import com.natsa.natsa20_mobile.server.process.vestiges.GetVestiges;
 
+import java.util.List;
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -88,10 +90,10 @@ public interface RouteAPI {
             @Part("deskripsi") RequestBody deskripsi,
             @Part("sertifikasi") RequestBody sertifikasi,
             @Part("tipe") RequestBody tipe,
-            @Part("vestiges") RequestBody vestige,
-            @Part("irigation") RequestBody irigation,
+            @Part("vestige") RequestBody vestige,
+            @Part("irrigation") RequestBody irrigation,
             @Part("region") RequestBody region,
-            @Part MultipartBody.Part[] photo
+            @Part List<MultipartBody.Part> photo
             );
 
     //pagination

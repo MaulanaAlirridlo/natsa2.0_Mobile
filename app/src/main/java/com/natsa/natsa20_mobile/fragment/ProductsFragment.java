@@ -71,7 +71,7 @@ public class ProductsFragment extends Fragment {
         sortSelection = view.findViewById(R.id.sort_selection);
         applyFilter = view.findViewById(R.id.apply_filter);
 
-        String[] typeSelectionListValue = new String[]{
+        String[] typeSelectionValueList = new String[]{
                 "", "jual", "sewa"
         };
 
@@ -79,7 +79,7 @@ public class ProductsFragment extends Fragment {
                 "---", "Dijual", "Disewakan"
         };
 
-        String[] sertifikasiSelectionListValue = new String[]{
+        String[] sertifikasiSelectionValueList = new String[]{
                 "", "shm", "sgb", "adat", "lainnya"
         };
 
@@ -87,7 +87,7 @@ public class ProductsFragment extends Fragment {
                 "---", "SHM", "SGB", "Adat", "Lainnya"
         };
 
-        String[] sortSelectionListValue = new String[]{
+        String[] sortSelectionValueList = new String[]{
                 "", "title", "-title", "harga", "-harga", "luas", "-luas"
         };
 
@@ -149,7 +149,7 @@ public class ProductsFragment extends Fragment {
         sortSelection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                sort = sortSelectionListValue[position];
+                sort = sortSelectionValueList[position];
                 productsViewModel.customConstructor(keyword, tipe, sertifikasi,
                         maxluas, minluas, maxharga, minharga, idBekasSawah, idIrigasi, sort, noData);
 
@@ -169,8 +169,8 @@ public class ProductsFragment extends Fragment {
 
         applyFilter.setOnClickListener(v -> {
 
-            tipe = typeSelectionListValue[typeSelection.getSelectedItemPosition()];
-            sertifikasi = sertifikasiSelectionListValue[sertifikasiSelection.getSelectedItemPosition()];
+            tipe = typeSelectionValueList[typeSelection.getSelectedItemPosition()];
+            sertifikasi = sertifikasiSelectionValueList[sertifikasiSelection.getSelectedItemPosition()];
             maxluas = maxluasInput.getText().toString().equals("") ? null :
                     Integer.parseInt(maxluasInput.getText().toString());
             minluas = minluasInput.getText().toString().equals("") ? null :

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.natsa.natsa20_mobile">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Natsa20_Mobile"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.natsa.natsa20_mobile.activity.RegisterActivity"/>
+        <activity android:name="com.natsa.natsa20_mobile.activity.RegisterActivity" />
         <activity android:name="com.natsa.natsa20_mobile.activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

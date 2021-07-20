@@ -1,6 +1,7 @@
 package com.natsa.natsa20_mobile.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +39,9 @@ public class AttachmentListAdapter extends RecyclerView.Adapter<AttachmentListAd
     @Override
     public void onBindViewHolder(final AttachmentListViewHolder holder, int position) {
         holder.attachedImageName.setText((newAttachmentList.get(position).getImageName()));
-        String userImage = newAttachmentList.get(position).getImageUri();
-        if (!userImage.isEmpty()) {
-            new GlideLoader().glideLoader(activity ,holder.itemView, holder.attachedImageId, userImage);
+        AttachmentListData list = newAttachmentList.get(position);
+        if (!list.getImageUri().isEmpty()) {
+            new GlideLoader().glideLoader(activity ,holder.itemView, holder.attachedImageId, list.getImageUri());
         }
     }
 

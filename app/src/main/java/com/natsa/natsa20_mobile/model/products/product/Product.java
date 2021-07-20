@@ -9,6 +9,15 @@ public class Product {
     private Status status;
     private RiceField riceField;
     private List<RandomRiceFields> randomRiceFields;
+    private List<Integer> tes;
+
+    public List<Integer> getTes() {
+        return tes;
+    }
+
+    public void setTes(List<Integer> tes) {
+        this.tes = tes;
+    }
 
     public Status getStatus() {
         return status;

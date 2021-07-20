@@ -16,17 +16,25 @@ import retrofit2.Response;
 
 public class GetRegions {
 
+    public static List<Integer> regionsIdList = new ArrayList<>();
     public static List<String> regionsStringList = new ArrayList<>();
+
+    public static List<Integer> getRegionsIdList() {
+        return regionsIdList;
+    }
 
     public static List<String> getRegionsStringList() {
         return regionsStringList;
     }
 
     public void setProducts(List<Data> regionsDataList, ArrayAdapter<String> adapter) {
+        regionsIdList.clear();
         regionsStringList.clear();
+        regionsIdList.add(null);
         regionsStringList.add("---");
         for (Iterator<Data> i = regionsDataList.iterator(); i.hasNext();) {
             Data region = i.next();
+            regionsIdList.add(region.getId());
             regionsStringList.add(region.getProvinsi()+", "+region.getKabupaten());
         }
         adapter.notifyDataSetChanged();

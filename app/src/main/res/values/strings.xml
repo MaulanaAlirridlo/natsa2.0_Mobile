@@ -75,7 +75,7 @@
     <string name="save">Save</string>
     <string name="current_password">Current Password</string>
     <string name="new_password">New Password</string>
-    <string name="once_your_account_is_deleted_all_of_its_resources_and_data_will_be_permanently_deleted_before_deleting_your_account_please_download_any_data_or_information_that_you_wish_to_retain">Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.</string>
+    <string name="once_your_account_is_deleted_all_of_its_resources_and_data_will_be_permanently_deleted_before_deleting_your_account_please_download_any_data_or_information_that_you_wish_to_retain">Jika melakukan ini semua data akan dihapus tanpa tersisa dari sistem, harap simpan semua data yang ingin anda tetap simpan di tempat penyimpanan lainnya</string>
     <string name="delete_account">DELETE ACCOUNT</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
@@ -110,4 +110,5 @@
     <string name="lihat_makelar">Lihat Makelar</string>
     <string name="sawah_yang_dijual">Sawah yang dijual</string>
     <string name="lupa_password">Lupa password?</string>
+    <string name="hapus_akun">Hapus Akun</string>
 </resources>
