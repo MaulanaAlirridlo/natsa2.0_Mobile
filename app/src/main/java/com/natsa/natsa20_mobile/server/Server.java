@@ -5,6 +5,9 @@ public class Server {
     public static final String urlApi = "http://192.168.1.4:8000/api/";
     public static final String storage = url+"storage/";
 
+    //lupa password
+    public static final String forgetPassword = url+"forgot-password/";
+
     //sawah
     public static final String riceFields = "riceFields/";
     public static final String product = "product/";
