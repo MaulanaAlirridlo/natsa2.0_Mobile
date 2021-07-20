@@ -36,9 +36,9 @@ public class DashboardFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.history_recycler_view);
-        adapter = new HistoryAdapter(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         historyViewModel = ViewModelProviders.of(this).get(HistoryViewModel.class);
+        adapter = new HistoryAdapter(getActivity(), historyViewModel);
 
         historyViewModel.HistoryViewModel().observe(getActivity(), new Observer<PagedList<Data>>() {
             @Override

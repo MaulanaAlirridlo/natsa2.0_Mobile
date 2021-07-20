@@ -1,7 +1,9 @@
 package com.natsa.natsa20_mobile.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +18,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.model.products.products.Data;
+import com.natsa.natsa20_mobile.server.DeleteHistory;
 import com.natsa.natsa20_mobile.server.Server;
+import com.natsa.natsa20_mobile.server.process.Paging.history.HistoryViewModel;
+import com.natsa.natsa20_mobile.server.process.Paging.products.user_products.UserProductsVM;
+import com.natsa.natsa20_mobile.server.process.products.DeleteProduct;
 
 public class HistoryAdapter extends PagedListAdapter<Data, HistoryAdapter.HistoryViewHolder> {
 
     final Activity activity;
+    final HistoryViewModel historyViewModel;
     private HistoryAdapter.showDetailSawahListener showDetailSawahListener;
 
-    public HistoryAdapter(Activity activity) {
+    public HistoryAdapter(Activity activity, HistoryViewModel historyViewModel) {
         super(DIFF_CALLBACK);
         this.activity = activity;
+        this.historyViewModel = historyViewModel;
     }
 
     @NonNull
@@ -57,29 +65,28 @@ public class HistoryAdapter extends PagedListAdapter<Data, HistoryAdapter.Histor
             show(getItem(position).getId());
         });
         holder.deleteProduct.setOnClickListener(v -> {
-//            AlertDialog dialog = new AlertDialog.Builder(activity)
-//                    .setMessage("Apakah anda yakin ingin menghapusnya?")
-//                    .setIcon(android.R.drawable.ic_dialog_alert)
-//                    .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
-//
-//                        public void onClick(DialogInterface dialog, int whichButton) {
-//                            new DeleteBookmark().deleteBookmarkProcess(
-//                                    getItem()(position).getBookmarks_id(),
-//                                    activity);
-//                            new GetBookmark().getBookmarkFromApi(BookmarkAdapater.this, activity);
-//                        }})
-//                    .setNegativeButton("Tidak", null)
-//                    .create();
-//            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-//                @Override
-//                public void onShow(DialogInterface a) {
-//                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
-//                            activity.getResources().getColor(R.color.black));
-//                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(activity.getResources()
-//                            .getColor(R.color.black));
-//                }
-//            });
-//            dialog.show();
+            AlertDialog dialog = new AlertDialog.Builder(activity)
+                    .setMessage("Apakah anda yakin ingin menghapusnya?")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setNegativeButton("Tidak", null)
+                    .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            new DeleteHistory().deleteHistory(activity, getItem(position).getId());
+                            historyViewModel.refresh();
+                        }
+                    })
+                    .create();
+            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface a) {
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
+                            activity.getResources().getColor(R.color.black));
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(activity.getResources()
+                            .getColor(R.color.black));
+                }
+            });
+            dialog.show();
         });
     }
 

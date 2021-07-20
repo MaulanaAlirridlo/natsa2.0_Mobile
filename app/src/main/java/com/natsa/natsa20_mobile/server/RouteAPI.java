@@ -147,6 +147,11 @@ public interface RouteAPI {
     @GET(Server.history)
     Call<Products> getHistoryPerPage(@Header("Authorization") String token, @Query("page") int page);
 
+    //delete history
+    @Headers({"Accept: application/json"})
+    @DELETE(Server.history + "{historyId}")
+    Call<DeleteProductResponse> deleteHistory(@Header("Authorization") String token, @Path("historyId") int id);
+
 
     //bookmarks
     @Headers({"Accept: application/json"})
