@@ -41,9 +41,9 @@ public class JualSewakanFragment extends Fragment {
 
 
         RecyclerView recyclerView = view.findViewById(R.id.jual_sewakan_recycler_view);
-        adapter = new UserProductsAdapter(getActivity());
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         userProductsVM = ViewModelProviders.of(this).get(UserProductsVM.class);
+        adapter = new UserProductsAdapter(getActivity(), userProductsVM);
 
         userProductsVM.UserProductsViewModel().observe(getActivity(), new Observer<PagedList<Data>>() {
             @Override

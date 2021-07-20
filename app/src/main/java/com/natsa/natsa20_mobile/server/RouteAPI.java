@@ -3,6 +3,7 @@ package com.natsa.natsa20_mobile.server;
 import androidx.annotation.Nullable;
 
 import com.natsa.natsa20_mobile.model.MakelarResponse;
+import com.natsa.natsa20_mobile.model.products.DeleteProductResponse;
 import com.natsa.natsa20_mobile.model.user.GetLoginUser;
 import com.natsa.natsa20_mobile.model.user.GetUserRes;
 import com.natsa.natsa20_mobile.model.auth.login.LoginForm;
@@ -18,14 +19,20 @@ import com.natsa.natsa20_mobile.model.products.product.Product;
 import com.natsa.natsa20_mobile.model.products.products.Products;
 import com.natsa.natsa20_mobile.model.regions.Regions;
 import com.natsa.natsa20_mobile.model.vestiges.Vestiges;
+import com.natsa.natsa20_mobile.server.process.irrigations.GetIrrigations;
+import com.natsa.natsa20_mobile.server.process.vestiges.GetVestiges;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
@@ -39,7 +46,7 @@ public interface RouteAPI {
 
     //show user
     @Headers({"Accept: application/json"})
-    @GET(Server.users+"{userId}")
+    @GET(Server.users + "{userId}")
     Call<GetUserRes> getUser(@Path("userId") Integer id);
 
     //register
@@ -59,13 +66,33 @@ public interface RouteAPI {
 
     //get makelar
     @Headers({"Accept: application/json"})
-    @GET(Server.makelar+"{id}")
+    @GET(Server.makelar + "{id}")
     Call<MakelarResponse> getMakelar(@Header("Authorization") String token, @Path("id") Integer id);
-    
+
     //product
     @Headers({"Accept: application/json"})
     @GET(Server.riceFields)
     Call<Products> getRiceFields();
+
+    //add product
+    @Headers({"Accept: application/json"})
+    @Multipart
+    @POST(Server.riceFields)
+    Call<Product> addRiceFields(
+            @Header("Authorization") String token,
+            @Part("title") RequestBody title,
+            @Part("harga") RequestBody harga,
+            @Part("luas") RequestBody luas,
+            @Part("alamat") RequestBody alamat,
+            @Part("maps") RequestBody maps,
+            @Part("deskripsi") RequestBody deskripsi,
+            @Part("sertifikasi") RequestBody sertifikasi,
+            @Part("tipe") RequestBody tipe,
+            @Part("vestiges") RequestBody vestige,
+            @Part("irigation") RequestBody irigation,
+            @Part("region") RequestBody region,
+            @Part MultipartBody.Part[] photo
+            );
 
     //pagination
     @Headers({"Accept: application/json"})
@@ -91,13 +118,19 @@ public interface RouteAPI {
 
     //search ricefield with paging
     @Headers({"Accept: application/json"})
-    @GET(Server.searchProduct+"{search}")
+    @GET(Server.searchProduct + "{search}")
     Call<Products> getRiceFieldsSearchResult(@Path("search") String search, @Query("page") int page);
 
     //show product
     @Headers({"Accept: application/json"})
-    @GET(Server.product+"{id}")
+    @GET(Server.product + "{id}")
     Call<Product> showRiceField(@Path("id") int id);
+
+    //delete product
+    @Headers({"Accept: application/json"})
+    @DELETE(Server.riceFields + "{productId}")
+    Call<DeleteProductResponse> deleteProduct(@Header("Authorization") String token, @Path("productId") int id);
+
 
     //user product
     @Headers({"Accept: application/json"})
@@ -108,8 +141,6 @@ public interface RouteAPI {
     @GET(Server.riceFields)
     Call<Products> getUserRiceFieldsPerPage(@Query("filter[user_id]") int id, @Query("page") int page);
 
-    //add user product
-
 
     //history
     @Headers({"Accept: application/json"})
@@ -119,7 +150,7 @@ public interface RouteAPI {
 
     //bookmarks
     @Headers({"Accept: application/json"})
-    @POST(Server.bookmarks+"{riceFieldId}")
+    @POST(Server.bookmarks + "{riceFieldId}")
     Call<AddBookmarkRespone> addBookmark(@Header("Authorization") String token, @Path("riceFieldId") int riceFieldId);
 
     @Headers({"Accept: application/json"})
@@ -131,7 +162,7 @@ public interface RouteAPI {
     Call<GetBookmarkRespone> getBookmarkPerPage(@Header("Authorization") String token, @Query("page") int page);
 
     @Headers({"Accept: application/json"})
-    @DELETE(Server.bookmarks+"{bookmarkId}")
+    @DELETE(Server.bookmarks + "{bookmarkId}")
     Call<DeleteBookmarkRespone> deleteBookmark(@Header("Authorization") String token, @Path("bookmarkId") int bookmarkId);
 
     //regions

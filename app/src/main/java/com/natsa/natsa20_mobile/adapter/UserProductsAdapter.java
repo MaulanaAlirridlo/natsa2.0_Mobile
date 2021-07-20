@@ -1,7 +1,10 @@
 package com.natsa.natsa20_mobile.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +20,21 @@ import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.server.Server;
+import com.natsa.natsa20_mobile.server.process.Paging.products.user_products.UserProductsVM;
+import com.natsa.natsa20_mobile.server.process.bookmark.DeleteBookmark;
+import com.natsa.natsa20_mobile.server.process.products.DeleteProduct;
 
 public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdapter.UserProductsViewHolder> {
 
     private final Activity activity;
+    final UserProductsVM userProductsVM;
     private UserProductsAdapter.showDetailSawahListener showDetailSawahListener;
 
-    public UserProductsAdapter(Activity activity) {
+    public UserProductsAdapter(Activity activity, UserProductsVM userProductsVM) {
         super(DIFF_CALLBACK);
+        Log.d("TAG", "UserProductsAdapter: "+userProductsVM);
         this.activity = activity;
+        this.userProductsVM = userProductsVM;
     }
 
     @NonNull
@@ -60,29 +69,28 @@ public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdap
 
         });
         holder.deleteProduct.setOnClickListener(v -> {
-//            AlertDialog dialog = new AlertDialog.Builder(activity)
-//                    .setMessage("Apakah anda yakin ingin menghapusnya?")
-//                    .setIcon(android.R.drawable.ic_dialog_alert)
-//                    .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
-//
-//                        public void onClick(DialogInterface dialog, int whichButton) {
-//                            new DeleteBookmark().deleteBookmarkProcess(
-//                                    getItem()(position).getBookmarks_id(),
-//                                    activity);
-//                            new GetBookmark().getBookmarkFromApi(BookmarkAdapater.this, activity);
-//                        }})
-//                    .setNegativeButton("Tidak", null)
-//                    .create();
-//            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
-//                @Override
-//                public void onShow(DialogInterface a) {
-//                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
-//                            activity.getResources().getColor(R.color.black));
-//                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(activity.getResources()
-//                            .getColor(R.color.black));
-//                }
-//            });
-//            dialog.show();
+            AlertDialog dialog = new AlertDialog.Builder(activity)
+                    .setMessage("Apakah anda yakin ingin menghapusnya?")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setNegativeButton("Tidak", null)
+                    .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            new DeleteProduct().deleteProduct(activity, getItem(position).getId());
+                            userProductsVM.refresh();
+                        }
+                    })
+                    .create();
+            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface a) {
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
+                            activity.getResources().getColor(R.color.black));
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(activity.getResources()
+                            .getColor(R.color.black));
+                }
+            });
+            dialog.show();
         });
         holder.ketersediaanProduct.setOnClickListener(v -> {
 
