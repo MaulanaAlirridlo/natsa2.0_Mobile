@@ -21,6 +21,7 @@ import com.natsa.natsa20_mobile.server.Server;
 public class HistoryAdapter extends PagedListAdapter<Data, HistoryAdapter.HistoryViewHolder> {
 
     final Activity activity;
+    private HistoryAdapter.showDetailSawahListener showDetailSawahListener;
 
     public HistoryAdapter(Activity activity) {
         super(DIFF_CALLBACK);
@@ -43,15 +44,17 @@ public class HistoryAdapter extends PagedListAdapter<Data, HistoryAdapter.Histor
                             .getPhoto_path());
         } else {
             holder.productsImage.setImageResource(R.drawable.no_image);
+        }
 
+        try {
+            showDetailSawahListener = (HistoryAdapter.showDetailSawahListener) activity;
+        } catch (ClassCastException e) {
+            e.printStackTrace();
         }
         holder.productsTitle.setText(getItem(position).getTitle());
         holder.productsPrice.setText(String.valueOf(getItem(position).getHarga()));
         holder.lihatProduct.setOnClickListener(v -> {
-
-        });
-        holder.editProduct.setOnClickListener(v -> {
-
+            show(getItem(position).getId());
         });
         holder.deleteProduct.setOnClickListener(v -> {
 //            AlertDialog dialog = new AlertDialog.Builder(activity)
@@ -83,7 +86,7 @@ public class HistoryAdapter extends PagedListAdapter<Data, HistoryAdapter.Histor
     public class HistoryViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView productsImage;
-        private final TextView productsTitle, productsPrice, lihatProduct, editProduct, deleteProduct;
+        private final TextView productsTitle, productsPrice, lihatProduct, deleteProduct;
 
         public HistoryViewHolder(@NonNull View v) {
             super(v);
@@ -91,9 +94,16 @@ public class HistoryAdapter extends PagedListAdapter<Data, HistoryAdapter.Histor
             productsTitle = v.findViewById(R.id.productsTitle);
             productsPrice = v.findViewById(R.id.productsPrice);
             lihatProduct = v.findViewById(R.id.lihat_product);
-            editProduct = v.findViewById(R.id.edit_product);
             deleteProduct = v.findViewById(R.id.delete_product);
         }
+    }
+
+    private void show(final int id) {
+        showDetailSawahListener.showDetailSawah(id);
+    }
+
+    public interface showDetailSawahListener {
+        void showDetailSawah(int id);
     }
 
     private static DiffUtil.ItemCallback<Data> DIFF_CALLBACK =

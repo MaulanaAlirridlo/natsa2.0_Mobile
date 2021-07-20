@@ -27,6 +27,7 @@ public class BookmarkAdapater extends PagedListAdapter<Data, BookmarkAdapater.Bo
 
     final Activity activity;
     final BookmarksViewModel bookmarksViewModel;
+    private BookmarkAdapater.showDetailSawahListener showDetailSawahListener;
 
     public BookmarkAdapater(Activity activity, BookmarksViewModel bookmarksViewModel) {
         super(DIFF_CALLBACK);
@@ -51,8 +52,18 @@ public class BookmarkAdapater extends PagedListAdapter<Data, BookmarkAdapater.Bo
         } else {
             holder.productsImage.setImageResource(R.drawable.no_image);
         }
+
+        try {
+            showDetailSawahListener = (BookmarkAdapater.showDetailSawahListener) activity;
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+        }
+
         holder.productsTitle.setText(getItem(position).getTitle());
         holder.productsPrice.setText(String.valueOf(getItem(position).getHarga()));
+        holder.lihatProduct.setOnClickListener(v -> {
+            show(getItem(position).getId());
+        });
         holder.deleteBookmark.setOnClickListener(v -> {
             AlertDialog dialog = new AlertDialog.Builder(activity)
                     .setMessage("Apakah anda yakin ingin menghapusnya?")
@@ -84,7 +95,7 @@ public class BookmarkAdapater extends PagedListAdapter<Data, BookmarkAdapater.Bo
     public class BookmarkViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView productsImage;
-        private final TextView productsTitle, productsPrice, deleteBookmark;
+        private final TextView productsTitle, productsPrice, deleteBookmark, lihatProduct;
 
         public BookmarkViewHolder(@NonNull View v) {
             super(v);
@@ -92,7 +103,16 @@ public class BookmarkAdapater extends PagedListAdapter<Data, BookmarkAdapater.Bo
             productsTitle = v.findViewById(R.id.productsTitle);
             productsPrice = v.findViewById(R.id.productsPrice);
             deleteBookmark = v.findViewById(R.id.delete_product);
+            lihatProduct = v.findViewById(R.id.lihat_product);
         }
+    }
+
+    private void show(final int id) {
+        showDetailSawahListener.showDetailSawah(id);
+    }
+
+    public interface showDetailSawahListener {
+        void showDetailSawah(int id);
     }
 
     private static DiffUtil.ItemCallback<Data> DIFF_CALLBACK =

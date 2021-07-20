@@ -22,9 +22,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.natsa.natsa20_mobile.R;
+import com.natsa.natsa20_mobile.adapter.BookmarkAdapater;
+import com.natsa.natsa20_mobile.adapter.HistoryAdapter;
 import com.natsa.natsa20_mobile.adapter.ProductsAdapter;
 import com.natsa.natsa20_mobile.adapter.ProductsAdapterWithPaging;
 import com.natsa.natsa20_mobile.adapter.RandomRiceFieldsAdapter;
+import com.natsa.natsa20_mobile.adapter.UserProductsAdapter;
 import com.natsa.natsa20_mobile.fragment.AboutFragment;
 import com.natsa.natsa20_mobile.fragment.AccountFragment;
 import com.natsa.natsa20_mobile.fragment.ContactFragment;
@@ -41,7 +44,10 @@ import java.util.List;
 
 public class BackActivity extends AppCompatActivity implements ProductsAdapter.showDetailSawahListener,
         ProductsAdapterWithPaging.showDetailSawahListener,
-        RandomRiceFieldsAdapter.showDetailSawahListener {
+        RandomRiceFieldsAdapter.showDetailSawahListener,
+        UserProductsAdapter.showDetailSawahListener,
+        HistoryAdapter.showDetailSawahListener,
+        BookmarkAdapater.showDetailSawahListener {
 
     String page;
     LinearLayout search, accountBeforeLogin, accountAfterLogin;

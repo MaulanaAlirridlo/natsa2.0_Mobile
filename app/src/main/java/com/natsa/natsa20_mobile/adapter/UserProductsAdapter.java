@@ -21,6 +21,7 @@ import com.natsa.natsa20_mobile.server.Server;
 public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdapter.UserProductsViewHolder> {
 
     private final Activity activity;
+    private UserProductsAdapter.showDetailSawahListener showDetailSawahListener;
 
     public UserProductsAdapter(Activity activity) {
         super(DIFF_CALLBACK);
@@ -45,10 +46,15 @@ public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdap
             holder.productsImage.setImageResource(R.drawable.no_image);
 
         }
+        try {
+            showDetailSawahListener = (UserProductsAdapter.showDetailSawahListener) activity;
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+        }
         holder.productsTitle.setText(getItem(position).getTitle());
         holder.productsPrice.setText(String.valueOf(getItem(position).getHarga()));
         holder.lihatProduct.setOnClickListener(v -> {
-
+            show(getItem(position).getId());
         });
         holder.editProduct.setOnClickListener(v -> {
 
@@ -78,12 +84,16 @@ public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdap
 //            });
 //            dialog.show();
         });
+        holder.ketersediaanProduct.setOnClickListener(v -> {
+
+        });
     }
 
     public class UserProductsViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView productsImage;
-        private final TextView productsTitle, productsPrice, lihatProduct, editProduct, deleteProduct;
+        private final TextView productsTitle, productsPrice, lihatProduct, editProduct, deleteProduct,
+                ketersediaanProduct;
 
         public UserProductsViewHolder(@NonNull View v) {
             super(v);
@@ -93,7 +103,16 @@ public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdap
             lihatProduct = v.findViewById(R.id.lihat_product);
             editProduct = v.findViewById(R.id.edit_product);
             deleteProduct = v.findViewById(R.id.delete_product);
+            ketersediaanProduct = v.findViewById(R.id.available_toggler);
         }
+    }
+
+    private void show(final int id) {
+        showDetailSawahListener.showDetailSawah(id);
+    }
+
+    public interface showDetailSawahListener {
+        void showDetailSawah(int id);
     }
 
     private static DiffUtil.ItemCallback<Data> DIFF_CALLBACK =
