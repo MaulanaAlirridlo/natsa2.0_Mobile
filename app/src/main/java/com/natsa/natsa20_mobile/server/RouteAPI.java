@@ -3,7 +3,9 @@ package com.natsa.natsa20_mobile.server;
 import androidx.annotation.Nullable;
 
 import com.natsa.natsa20_mobile.model.MakelarResponse;
+import com.natsa.natsa20_mobile.model.products.DeletePhotoResponse;
 import com.natsa.natsa20_mobile.model.products.DeleteProductResponse;
+import com.natsa.natsa20_mobile.model.products.UpdateResponse;
 import com.natsa.natsa20_mobile.model.products.get_ricefield.GetRiceFieldResponse;
 import com.natsa.natsa20_mobile.model.user.GetLoginUser;
 import com.natsa.natsa20_mobile.model.user.GetUserRes;
@@ -132,10 +134,37 @@ public interface RouteAPI {
     @GET(Server.riceFields + "{id}")
     Call<GetRiceFieldResponse> showRiceField(@Path("id") int id);
 
+    //update product
+    @Headers({"Accept: application/json"})
+    @Multipart
+    @POST(Server.riceFields+"{id}")
+    Call<UpdateResponse> updateRiceFields(
+            @Path("id") int id,
+            @Query("_method") String method,
+            @Header("Authorization") String token,
+            @Part("title") RequestBody title,
+            @Part("harga") RequestBody harga,
+            @Part("luas") RequestBody luas,
+            @Part("alamat") RequestBody alamat,
+            @Part("maps") RequestBody maps,
+            @Part("deskripsi") RequestBody deskripsi,
+            @Part("sertifikasi") RequestBody sertifikasi,
+            @Part("tipe") RequestBody tipe,
+            @Part("vestige") RequestBody vestige,
+            @Part("irrigation") RequestBody irrigation,
+            @Part("region") RequestBody region,
+            @Part List<MultipartBody.Part> photo
+    );
+
     //delete product
     @Headers({"Accept: application/json"})
     @DELETE(Server.riceFields + "{productId}")
     Call<DeleteProductResponse> deleteProduct(@Header("Authorization") String token, @Path("productId") int id);
+
+    //delete photo product
+    @Headers({"Accept: application/json"})
+    @DELETE(Server.deletePhoto + "{id}")
+    Call<DeletePhotoResponse> deletePhotoProduct(@Header("Authorization") String token, @Path("id") Integer id);
 
 
     //user product

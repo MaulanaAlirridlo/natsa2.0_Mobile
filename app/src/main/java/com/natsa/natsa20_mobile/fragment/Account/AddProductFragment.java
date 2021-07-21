@@ -40,7 +40,9 @@ import com.natsa.natsa20_mobile.adapter.AttachmentListAdapter;
 import com.natsa.natsa20_mobile.model.AttachmentListData;
 import com.natsa.natsa20_mobile.server.process.irrigations.GetIrrigations;
 import com.natsa.natsa20_mobile.server.process.products.AddProduct;
+import com.natsa.natsa20_mobile.server.process.products.DeletePhoto;
 import com.natsa.natsa20_mobile.server.process.products.GetRiceField;
+import com.natsa.natsa20_mobile.server.process.products.UpdateProduct;
 import com.natsa.natsa20_mobile.server.process.regions.GetRegions;
 import com.natsa.natsa20_mobile.server.process.vestiges.GetVestiges;
 
@@ -153,6 +155,10 @@ public class AddProductFragment extends Fragment {
             openGalery();
         });
 
+        new GetRegions().getRegionsFromApi(daerahAdapter);
+        new GetVestiges().getVestigesFromApi(bekasSawahAdapter);
+        new GetIrrigations().getIrrigationsFromApi(irigasiSawahAdapter);
+
         if (isEdit) {
             addButton.setText("Update");
             showAttachmentListView.setVisibility(RecyclerView.VISIBLE);
@@ -169,6 +175,10 @@ public class AddProductFragment extends Fragment {
             irigasiSawahValueAdapter = new ArrayAdapter<String>(getActivity(),
                     android.R.layout.simple_spinner_item, GetIrrigations.getIrrigationsStringIdList());
 
+            new GetRiceField().getRiceFieldFromApi(idSawah, showAttachmentList, showAttachmentListAdapter,
+                    sertifikasiValueAdapter, tipeValueAdapter, daerahValueAdapter, bekasSawahValueAdapter,
+                    irigasiSawahValueAdapter);
+
             addButton.setOnClickListener(v -> {
                 updateData();
             });
@@ -184,21 +194,14 @@ public class AddProductFragment extends Fragment {
             new GetVestiges().getVestigesFromApi(bekasSawahAdapter);
             new GetIrrigations().getIrrigationsFromApi(irigasiSawahAdapter);
             new Handler(Looper.getMainLooper()).postDelayed(() -> pullToRefresh.setRefreshing(false), 700);
+            if (isEdit){
+                new GetRiceField().getRiceFieldFromApi(idSawah, showAttachmentList, showAttachmentListAdapter,
+                        sertifikasiValueAdapter, tipeValueAdapter, daerahValueAdapter, bekasSawahValueAdapter,
+                        irigasiSawahValueAdapter);
+            }
         });
 
         return view;
-    }
-
-    public void onResume() {
-        super.onResume();
-        new GetRegions().getRegionsFromApi(daerahAdapter);
-        new GetVestiges().getVestigesFromApi(bekasSawahAdapter);
-        new GetIrrigations().getIrrigationsFromApi(irigasiSawahAdapter);
-        if (isEdit) {
-            new GetRiceField().getRiceFieldFromApi(idSawah, showAttachmentList, showAttachmentListAdapter,
-                    sertifikasiValueAdapter, tipeValueAdapter, daerahValueAdapter, bekasSawahValueAdapter,
-                    irigasiSawahValueAdapter);
-        }
     }
 
     private void openGalery() {
@@ -290,7 +293,37 @@ public class AddProductFragment extends Fragment {
     }
 
     private void updateData() {
+        List<MultipartBody.Part> productImagesParts = new ArrayList<>();
 
+        for (Integer id : riceFieldDeletedIdList) {
+            new DeletePhoto().deletePhoto(getActivity(), id);
+        }
+
+        for (int index = 0; index < newAttachmentList.size(); index++) {
+            File file = new File(newAttachmentList.get(index).getImagePath());
+            RequestBody body = RequestBody.create(MediaType.parse("image/*"), file);
+            productImagesParts.add(MultipartBody.Part.createFormData("photo[]",
+                    file.getName(), body));
+        }
+
+        new UpdateProduct(getActivity()).addProductToServer(
+                idSawah,
+                RequestBody.create(MediaType.parse("text/plain"), judul.getText().toString()),
+                RequestBody.create(MediaType.parse("text/plain"), harga.getText().toString()),
+                RequestBody.create(MediaType.parse("text/plain"), luas.getText().toString()),
+                RequestBody.create(MediaType.parse("text/plain"), alamat.getText().toString()),
+                RequestBody.create(MediaType.parse("text/plain"), "NULL"),
+                RequestBody.create(MediaType.parse("text/plain"), deskripsi.getText().toString()),
+                RequestBody.create(MediaType.parse("text/plain"), sertifikasiSelectionValueList[sertifikasi.getSelectedItemPosition()]),
+                RequestBody.create(MediaType.parse("text/plain"), typeSelectionValueList[tipe.getSelectedItemPosition()]),
+                RequestBody.create(MediaType.parse("text/plain"), GetVestiges.getVestigesIdList().get(bekasSawah.getSelectedItemPosition()) == null
+                        ? "" : GetVestiges.getVestigesIdList().get(bekasSawah.getSelectedItemPosition()).toString()),
+                RequestBody.create(MediaType.parse("text/plain"), GetIrrigations.getIrrigationsIdList().get(irigasiSawah.getSelectedItemPosition()) == null
+                        ? "" : GetIrrigations.getIrrigationsIdList().get(irigasiSawah.getSelectedItemPosition()).toString()),
+                RequestBody.create(MediaType.parse("text/plain"), GetRegions.getRegionsIdList().get(daerah.getSelectedItemPosition()) == null
+                        ? "" : GetRegions.getRegionsIdList().get(daerah.getSelectedItemPosition()).toString()),
+                productImagesParts
+        );
     }
 
     private void generateNewAttachmentList(ArrayList<AttachmentListData> newAttachmentList) {

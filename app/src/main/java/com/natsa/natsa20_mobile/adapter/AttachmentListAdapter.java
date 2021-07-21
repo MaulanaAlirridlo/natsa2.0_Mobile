@@ -44,7 +44,7 @@ public class AttachmentListAdapter extends RecyclerView.Adapter<AttachmentListAd
         holder.attachedImageName.setText((attachmentList.get(position).getImageName()));
         AttachmentListData list = attachmentList.get(position);
         if (!list.getImageUri().isEmpty()) {
-            new GlideLoader().glideLoader(activity ,holder.itemView, holder.attachedImageId, list.getImageUri());
+            new GlideLoader().glideLoader(activity, holder.itemView, holder.attachedImageId, list.getImageUri());
         }
     }
 
@@ -67,11 +67,11 @@ public class AttachmentListAdapter extends RecyclerView.Adapter<AttachmentListAd
             cancelAttachment = view.findViewById(R.id.cancelAttachment);
             itemView = view;
 
-            int pos = getAdapterPosition();
             if (isShow) {
                 cancelAttachment.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        int pos = getAdapterPosition();
                         AddProductFragment.addRiceFieldDeletedIdList(attachmentList.get(pos).getId());
                         attachmentList.remove(pos);
                         notifyDataSetChanged();
@@ -82,6 +82,7 @@ public class AttachmentListAdapter extends RecyclerView.Adapter<AttachmentListAd
                 cancelAttachment.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        int pos = getAdapterPosition();
                         attachmentList.remove(pos);
                         notifyDataSetChanged();
                     }

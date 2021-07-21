@@ -12,6 +12,7 @@ public class Server {
     public static final String riceFields = "riceFields/";
     public static final String product = "product/";
     public static final String searchProduct = riceFields+"search/";
+    public static final String deletePhoto = riceFields+"delete/photo/";
 
     //user
     public static final String user = "user/";

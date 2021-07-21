@@ -60,6 +60,7 @@ public class GetRiceField {
                             Integer i = 1;
                             for (Photo photo : riceField.getPhotos()) {
                                 AttachmentListData attachmentData = new AttachmentListData();
+                                attachmentData.setId(photo.getId());
                                 attachmentData.setImageName(i.toString());
                                 attachmentData.setImageUri(Server.storage + photo.getPhoto_path());
                                 attachmentListData.add(attachmentData);
@@ -67,7 +68,6 @@ public class GetRiceField {
                             }
                             attachmentListAdapter.notifyDataSetChanged();
                         }
-                        Log.d("TAG", "onResponse: "+response.message());
                     }
 
                     @Override
