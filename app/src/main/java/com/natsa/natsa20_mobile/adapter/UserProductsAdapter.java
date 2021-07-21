@@ -12,11 +12,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.natsa.natsa20_mobile.R;
+import com.natsa.natsa20_mobile.fragment.Account.AddProductFragment;
 import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.model.products.products.Data;
 import com.natsa.natsa20_mobile.server.Server;
@@ -65,7 +69,10 @@ public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdap
             show(getItem(position).getId());
         });
         holder.editProduct.setOnClickListener(v -> {
-
+            FragmentManager fm = ((AppCompatActivity) activity).getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fm.beginTransaction();
+            fragmentTransaction.replace(R.id.accountFrameLayout, new AddProductFragment(getItem(position).getId()));
+            fragmentTransaction.commit();
         });
         holder.deleteProduct.setOnClickListener(v -> {
             AlertDialog dialog = new AlertDialog.Builder(activity)

@@ -3,6 +3,9 @@ package com.natsa.natsa20_mobile.model;
 import android.net.Uri;
 
 public class AttachmentListData {
+
+    private Integer id;
+
     private String imageName;
 
     private String imageUri;
@@ -10,6 +13,14 @@ public class AttachmentListData {
     private String imagePath;
 
     private Uri realUri;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getImageName() {
         return imageName;

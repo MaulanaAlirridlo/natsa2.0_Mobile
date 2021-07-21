@@ -3,6 +3,7 @@ package com.natsa.natsa20_mobile.server.process.products;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.natsa.natsa20_mobile.activity.BackActivity;
 import com.natsa.natsa20_mobile.helper.Preferences;
@@ -40,7 +41,6 @@ public class AddProduct {
             RequestBody region,
             List<MultipartBody.Part> photo
     ) {
-        Log.d("TAG", "addProductToServer: "+photo.size());
         RetrofitBuilder.endPoint().addRiceFields(
                 "Bearer " + Preferences.getToken(activity),
                 title, harga, luas, alamat, maps, deskripsi, sertifikasi, tipe, vestige, irigation,
@@ -48,13 +48,14 @@ public class AddProduct {
         ).enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {
-                Log.d("TAG", "onResponse: "+response.code()+" "+response.message());
                 if (response.isSuccessful()){
-                Log.d("TAG", "onResponse: "+ response.body().getTes().size());
                     Intent i = new Intent(activity, BackActivity.class);
                     i.putExtra("page", "detailSawah");
                     i.putExtra("id", response.body().getRiceField().getId());
                     activity.startActivity(i);
+                } else {
+                    Toast.makeText(activity, response.code() == 422 ? "Silahkan cek ulang data" :
+                            response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 

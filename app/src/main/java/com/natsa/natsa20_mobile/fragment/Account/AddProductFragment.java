@@ -1,6 +1,7 @@
 package com.natsa.natsa20_mobile.fragment.Account;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -18,7 +19,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
@@ -36,6 +40,7 @@ import com.natsa.natsa20_mobile.adapter.AttachmentListAdapter;
 import com.natsa.natsa20_mobile.model.AttachmentListData;
 import com.natsa.natsa20_mobile.server.process.irrigations.GetIrrigations;
 import com.natsa.natsa20_mobile.server.process.products.AddProduct;
+import com.natsa.natsa20_mobile.server.process.products.GetRiceField;
 import com.natsa.natsa20_mobile.server.process.regions.GetRegions;
 import com.natsa.natsa20_mobile.server.process.vestiges.GetVestiges;
 
@@ -49,20 +54,40 @@ import okhttp3.RequestBody;
 
 public class AddProductFragment extends Fragment {
 
-    EditText judul, harga, luas, alamat, deskripsi
+    public static EditText judul, harga, luas, alamat, deskripsi
 //            , maps
             ;
-    Spinner sertifikasi, tipe, daerah, bekasSawah, irigasiSawah;
+    public static Spinner sertifikasi, tipe, daerah, bekasSawah, irigasiSawah;
     LinearLayout addImage;
     Button addButton;
-    RecyclerView newAttachmentListView;
+    RecyclerView newAttachmentListView, showAttachmentListView;
     String[] typeSelectionValueList, typeSelectionList, sertifikasiSelectionValueList,
             sertifikasiSelectionList;
     private ArrayList<AttachmentListData> newAttachmentList = new ArrayList<>();
-    AttachmentListAdapter attachmentListAdapter;
+    private ArrayList<AttachmentListData> showAttachmentList = new ArrayList<>();
+    AttachmentListAdapter newAttachmentListAdapter, showAttachmentListAdapter;
     final Integer REQUEST_CODE = 1111;
+    Boolean isEdit = false;
+    ArrayAdapter<String> sertifikasiAdapter, sertifikasiValueAdapter, tipeAdapter, tipeValueAdapter,
+            daerahAdapter, daerahValueAdapter, bekasSawahAdapter, bekasSawahValueAdapter,
+            irigasiSawahAdapter, irigasiSawahValueAdapter;
+    Integer idSawah;
+    public static List<Integer> riceFieldDeletedIdList = new ArrayList<>();
 
+    public AddProductFragment(Integer idSawah) {
+        this.idSawah = idSawah;
+        this.isEdit = idSawah != null;
+    }
 
+    public static List<Integer> getRiceFieldDeletedIdList() {
+        return riceFieldDeletedIdList;
+    }
+
+    public static void addRiceFieldDeletedIdList(Integer riceFieldDeletedIdList) {
+        AddProductFragment.riceFieldDeletedIdList.add(riceFieldDeletedIdList);
+    }
+
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,6 +109,7 @@ public class AddProductFragment extends Fragment {
         addImage = view.findViewById(R.id.add_image);
         addButton = view.findViewById(R.id.add_button);
         newAttachmentListView = view.findViewById(R.id.newAttachmentList);
+        showAttachmentListView = view.findViewById(R.id.showAttachmentList);
 
         //isi value spinner option
 
@@ -104,26 +130,20 @@ public class AddProductFragment extends Fragment {
         };
 
         //set spinner option
-        ArrayAdapter<String> sertifikasiAdapter = new ArrayAdapter<String>(getActivity(),
+        sertifikasiAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, sertifikasiSelectionList);
         sertifikasi.setAdapter(sertifikasiAdapter);
-        ArrayAdapter<String> tipeAdapter = new ArrayAdapter<String>(getActivity(),
+        tipeAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, typeSelectionList);
         tipe.setAdapter(tipeAdapter);
-        ArrayAdapter<String> daerahAdapter = new ArrayAdapter<String>(getActivity(),
+        daerahAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, GetRegions.getRegionsStringList());
-        //get regions from api
-        new GetRegions().getRegionsFromApi(daerahAdapter);
         daerah.setAdapter(daerahAdapter);
-        ArrayAdapter<String> bekasSawahAdapter = new ArrayAdapter<String>(getActivity(),
+        bekasSawahAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, GetVestiges.getVestigesStringList());
-        //get vestiges from api
-        new GetVestiges().getVestigesFromApi(bekasSawahAdapter);
         bekasSawah.setAdapter(bekasSawahAdapter);
-        ArrayAdapter<String> irigasiSawahAdapter = new ArrayAdapter<String>(getActivity(),
+        irigasiSawahAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, GetIrrigations.getIrrigationsStringList());
-        //get irrigations from api
-        new GetIrrigations().getIrrigationsFromApi(irigasiSawahAdapter);
         irigasiSawah.setAdapter(irigasiSawahAdapter);
 
         generateNewAttachmentList(newAttachmentList);
@@ -133,14 +153,55 @@ public class AddProductFragment extends Fragment {
             openGalery();
         });
 
-        addButton.setOnClickListener(v -> {
-            addDataToServer();
+        if (isEdit) {
+            addButton.setText("Update");
+            showAttachmentListView.setVisibility(RecyclerView.VISIBLE);
+            generateShowAttachmentList(showAttachmentList);
+            sertifikasiValueAdapter = new ArrayAdapter<String>(getActivity(),
+                    android.R.layout.simple_spinner_item, sertifikasiSelectionValueList);
+            tipeValueAdapter = new ArrayAdapter<String>(getActivity(),
+                    android.R.layout.simple_spinner_item, typeSelectionValueList);
+            daerahValueAdapter = new ArrayAdapter<String>(getActivity(),
+                    android.R.layout.simple_spinner_item, GetRegions.getRegionsStringIdList());
+            bekasSawahValueAdapter = new ArrayAdapter<String>(getActivity(),
+                    android.R.layout.simple_spinner_item, GetVestiges.getVestigesStringIdList());
+            bekasSawah.setAdapter(bekasSawahAdapter);
+            irigasiSawahValueAdapter = new ArrayAdapter<String>(getActivity(),
+                    android.R.layout.simple_spinner_item, GetIrrigations.getIrrigationsStringIdList());
+
+            addButton.setOnClickListener(v -> {
+                updateData();
+            });
+        } else {
+            addButton.setOnClickListener(v -> {
+                addDataToServer();
+            });
+        }
+
+        final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swipeRefresh);
+        pullToRefresh.setOnRefreshListener(() -> {
+            new GetRegions().getRegionsFromApi(daerahAdapter);
+            new GetVestiges().getVestigesFromApi(bekasSawahAdapter);
+            new GetIrrigations().getIrrigationsFromApi(irigasiSawahAdapter);
+            new Handler(Looper.getMainLooper()).postDelayed(() -> pullToRefresh.setRefreshing(false), 700);
         });
 
         return view;
     }
 
-    private void openGalery(){
+    public void onResume() {
+        super.onResume();
+        new GetRegions().getRegionsFromApi(daerahAdapter);
+        new GetVestiges().getVestigesFromApi(bekasSawahAdapter);
+        new GetIrrigations().getIrrigationsFromApi(irigasiSawahAdapter);
+        if (isEdit) {
+            new GetRiceField().getRiceFieldFromApi(idSawah, showAttachmentList, showAttachmentListAdapter,
+                    sertifikasiValueAdapter, tipeValueAdapter, daerahValueAdapter, bekasSawahValueAdapter,
+                    irigasiSawahValueAdapter);
+        }
+    }
+
+    private void openGalery() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (getActivity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 Intent intent = new Intent();
@@ -179,7 +240,7 @@ public class AddProductFragment extends Fragment {
                             Uri returnUri = data.getData();
                             setData(returnUri);
                         }
-                        attachmentListAdapter.notifyDataSetChanged();
+                        newAttachmentListAdapter.notifyDataSetChanged();
                     }
 
                 }
@@ -195,7 +256,8 @@ public class AddProductFragment extends Fragment {
                     attachmentListData.setRealUri(returnUri);
                     newAttachmentList.add(attachmentListData);
                 }
-            });
+            }
+    );
 
     private void addDataToServer() {
         List<MultipartBody.Part> productImagesParts = new ArrayList<>();
@@ -227,12 +289,24 @@ public class AddProductFragment extends Fragment {
 
     }
 
+    private void updateData() {
+
+    }
+
     private void generateNewAttachmentList(ArrayList<AttachmentListData> newAttachmentList) {
         newAttachmentListView.setHasFixedSize(false);
-        attachmentListAdapter = new AttachmentListAdapter(getActivity(), newAttachmentList);
+        newAttachmentListAdapter = new AttachmentListAdapter(getActivity(), newAttachmentList, false);
         LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getContext());
         newAttachmentListView.setLayoutManager(MyLayoutManager);
-        newAttachmentListView.setAdapter(attachmentListAdapter);
+        newAttachmentListView.setAdapter(newAttachmentListAdapter);
+    }
+
+    private void generateShowAttachmentList(ArrayList<AttachmentListData> showAttachmentList) {
+        showAttachmentListView.setHasFixedSize(false);
+        showAttachmentListAdapter = new AttachmentListAdapter(getActivity(), showAttachmentList, true);
+        LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getContext());
+        showAttachmentListView.setLayoutManager(MyLayoutManager);
+        showAttachmentListView.setAdapter(showAttachmentListAdapter);
     }
 
     public String getRealPathFromURI(Uri uri) {

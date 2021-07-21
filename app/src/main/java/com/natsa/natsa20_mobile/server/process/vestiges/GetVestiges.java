@@ -18,6 +18,7 @@ public class GetVestiges {
 
     public static List<String> vestigesStringList = new ArrayList<>();
     public static List<Integer> vestigesIdList = new ArrayList<>();
+    public static List<String> vestigesStringIdList = new ArrayList<>();
 
     public static List<String> getVestigesStringList() {
         return vestigesStringList;
@@ -26,14 +27,21 @@ public class GetVestiges {
         return vestigesIdList;
     }
 
+    public static List<String> getVestigesStringIdList() {
+        return vestigesStringIdList;
+    }
+
     public void setProducts(List<Data> vestigesDataList, ArrayAdapter<String> adapter) {
         vestigesStringList.clear();
         vestigesIdList.clear();
+        vestigesStringIdList.clear();
         vestigesStringList.add("---");
         vestigesIdList.add(null);
+        vestigesStringIdList.add(null);
         for (Iterator<Data> i = vestigesDataList.iterator(); i.hasNext();) {
             Data vestige = i.next();
             vestigesIdList.add(vestige.getId());
+            vestigesStringIdList.add(String.valueOf(vestige.getId()));
             vestigesStringList.add(vestige.getVestige());
         }
         adapter.notifyDataSetChanged();

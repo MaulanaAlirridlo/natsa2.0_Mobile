@@ -63,7 +63,7 @@ public class GetProduct {
                                   MakelarAdapter makelarAdapter,
                                   ProductImageAdapter productImageAdapter,
                                   RandomRiceFieldsAdapter randomRiceFieldsAdapter) {
-        RetrofitBuilder.endPoint().showRiceField(id)
+        RetrofitBuilder.endPoint().showProduct(id)
                 .enqueue(new Callback<Product>() {
                     @Override
                     public void onResponse(@NonNull Call<Product> call, @NonNull Response<Product> response) {

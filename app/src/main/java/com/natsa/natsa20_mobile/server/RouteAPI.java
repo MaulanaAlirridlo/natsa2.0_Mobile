@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 
 import com.natsa.natsa20_mobile.model.MakelarResponse;
 import com.natsa.natsa20_mobile.model.products.DeleteProductResponse;
+import com.natsa.natsa20_mobile.model.products.get_ricefield.GetRiceFieldResponse;
 import com.natsa.natsa20_mobile.model.user.GetLoginUser;
 import com.natsa.natsa20_mobile.model.user.GetUserRes;
 import com.natsa.natsa20_mobile.model.auth.login.LoginForm;
@@ -19,8 +20,6 @@ import com.natsa.natsa20_mobile.model.products.product.Product;
 import com.natsa.natsa20_mobile.model.products.products.Products;
 import com.natsa.natsa20_mobile.model.regions.Regions;
 import com.natsa.natsa20_mobile.model.vestiges.Vestiges;
-import com.natsa.natsa20_mobile.server.process.irrigations.GetIrrigations;
-import com.natsa.natsa20_mobile.server.process.vestiges.GetVestiges;
 
 import java.util.List;
 
@@ -126,7 +125,12 @@ public interface RouteAPI {
     //show product
     @Headers({"Accept: application/json"})
     @GET(Server.product + "{id}")
-    Call<Product> showRiceField(@Path("id") int id);
+    Call<Product> showProduct(@Path("id") int id);
+
+    //show riceField
+    @Headers({"Accept: application/json"})
+    @GET(Server.riceFields + "{id}")
+    Call<GetRiceFieldResponse> showRiceField(@Path("id") int id);
 
     //delete product
     @Headers({"Accept: application/json"})

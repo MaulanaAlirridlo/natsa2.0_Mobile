@@ -18,9 +18,14 @@ public class GetIrrigations {
 
     public static List<String> irrigationsStringList = new ArrayList<>();
     public static List<Integer> irrigationsIdList = new ArrayList<>();
+    public static List<String> irrigationsStringIdList = new ArrayList<>();
 
     public static List<String> getIrrigationsStringList() {
         return irrigationsStringList;
+    }
+
+    public static List<String> getIrrigationsStringIdList() {
+        return irrigationsStringIdList;
     }
 
     public static List<Integer> getIrrigationsIdList() {
@@ -30,11 +35,14 @@ public class GetIrrigations {
     public void setProducts(List<Data> irrigationsDataList, ArrayAdapter<String> adapter) {
         irrigationsStringList.clear();
         irrigationsIdList.clear();
+        getIrrigationsStringIdList().clear();
         irrigationsStringList.add("---");
         irrigationsIdList.add(null);
+        irrigationsStringIdList.add(null);
         for (Iterator<Data> i = irrigationsDataList.iterator(); i.hasNext();) {
             Data irrigation = i.next();
             irrigationsIdList.add(irrigation.getId());
+            irrigationsStringIdList.add(String.valueOf(irrigation.getId()));
             irrigationsStringList.add(irrigation.getIrrigation());
         }
         adapter.notifyDataSetChanged();

@@ -55,7 +55,7 @@ public class JualSewakanFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         showAddProductForm.setOnClickListener(v -> {
-            loadFragment(new AddProductFragment());
+            loadFragment(new AddProductFragment(null));
         });
 
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swipeRefresh);
