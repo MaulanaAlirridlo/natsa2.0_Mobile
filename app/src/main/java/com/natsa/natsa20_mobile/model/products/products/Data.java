@@ -6,6 +6,7 @@ public class Data {
     private int harga;
     private int user_id;
     private int luas;
+    private String ketersediaan;
     private String regions;
     private Photo photo;
 
@@ -47,6 +48,14 @@ public class Data {
 
     public void setLuas(int luas) {
         this.luas = luas;
+    }
+
+    public String getKetersediaan() {
+        return ketersediaan;
+    }
+
+    public void setKetersediaan(String ketersediaan) {
+        this.ketersediaan = ketersediaan;
     }
 
     public String getRegions() {

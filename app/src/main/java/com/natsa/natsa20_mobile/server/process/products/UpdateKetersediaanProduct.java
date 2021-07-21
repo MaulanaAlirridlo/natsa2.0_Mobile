@@ -11,9 +11,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DeleteProduct {
-    public void deleteProduct(Context context, Integer id){
-        RetrofitBuilder.endPoint().deleteProduct("Bearer "+ Preferences.getToken(context), id)
+public class UpdateKetersediaanProduct {
+    public void updateKetersediaanProduct(Context context, int id){
+        RetrofitBuilder.endPoint().updateKetersediaan("Bearer "+ Preferences.getToken(context), id)
                 .enqueue(new Callback<UpdateProductResponse>() {
                     @Override
                     public void onResponse(Call<UpdateProductResponse> call, Response<UpdateProductResponse> response) {
@@ -24,12 +24,14 @@ public class DeleteProduct {
                             } else {
                                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
                             }
+                        } else {
+                            Toast.makeText(context, "Error : "+response.message(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<UpdateProductResponse> call, Throwable t) {
-
+                        t.printStackTrace();
                     }
                 });
     }

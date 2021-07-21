@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import com.natsa.natsa20_mobile.helper.Preferences;
 import com.natsa.natsa20_mobile.model.products.DeletePhotoResponse;
-import com.natsa.natsa20_mobile.model.products.DeleteProductResponse;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
 
 import retrofit2.Call;

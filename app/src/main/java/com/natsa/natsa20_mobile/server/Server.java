@@ -13,6 +13,7 @@ public class Server {
     public static final String product = "product/";
     public static final String searchProduct = riceFields+"search/";
     public static final String deletePhoto = riceFields+"delete/photo/";
+    public static final String ketersediaan = riceFields+"ketersediaan/";
 
     //user
     public static final String user = "user/";

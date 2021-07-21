@@ -2,7 +2,7 @@ package com.natsa.natsa20_mobile.model.products;
 
 import com.natsa.natsa20_mobile.model.Status;
 
-public class DeleteProductResponse {
+public class UpdateProductResponse {
     Status status;
     Integer riceField;
 

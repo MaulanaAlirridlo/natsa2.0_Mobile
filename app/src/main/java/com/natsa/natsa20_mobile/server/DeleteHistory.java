@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.natsa.natsa20_mobile.helper.Preferences;
-import com.natsa.natsa20_mobile.model.products.DeleteProductResponse;
+import com.natsa.natsa20_mobile.model.products.UpdateProductResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -13,11 +13,11 @@ import retrofit2.Response;
 public class DeleteHistory {
     public void deleteHistory(Context context, Integer id){
         RetrofitBuilder.endPoint().deleteHistory("Bearer "+ Preferences.getToken(context), id)
-                .enqueue(new Callback<DeleteProductResponse>() {
+                .enqueue(new Callback<UpdateProductResponse>() {
                     @Override
-                    public void onResponse(Call<DeleteProductResponse> call, Response<DeleteProductResponse> response) {
+                    public void onResponse(Call<UpdateProductResponse> call, Response<UpdateProductResponse> response) {
                         if (response.isSuccessful()){
-                            DeleteProductResponse res = response.body();
+                            UpdateProductResponse res = response.body();
                             if (res.getRiceField() == 1) {
                                 Toast.makeText(context, res.getStatus().getDescription(), Toast.LENGTH_SHORT).show();
                             } else {
@@ -27,7 +27,7 @@ public class DeleteHistory {
                     }
 
                     @Override
-                    public void onFailure(Call<DeleteProductResponse> call, Throwable t) {
+                    public void onFailure(Call<UpdateProductResponse> call, Throwable t) {
 
                     }
                 });

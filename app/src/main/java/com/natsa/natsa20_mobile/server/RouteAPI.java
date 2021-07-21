@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import com.natsa.natsa20_mobile.model.MakelarResponse;
 import com.natsa.natsa20_mobile.model.irrigations.Irrigation;
 import com.natsa.natsa20_mobile.model.products.DeletePhotoResponse;
-import com.natsa.natsa20_mobile.model.products.DeleteProductResponse;
+import com.natsa.natsa20_mobile.model.products.UpdateProductResponse;
 import com.natsa.natsa20_mobile.model.products.UpdateResponse;
 import com.natsa.natsa20_mobile.model.products.get_ricefield.GetRiceFieldResponse;
 import com.natsa.natsa20_mobile.model.regions.Region;
@@ -38,6 +38,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -162,13 +163,12 @@ public interface RouteAPI {
     //delete product
     @Headers({"Accept: application/json"})
     @DELETE(Server.riceFields + "{productId}")
-    Call<DeleteProductResponse> deleteProduct(@Header("Authorization") String token, @Path("productId") int id);
+    Call<UpdateProductResponse> deleteProduct(@Header("Authorization") String token, @Path("productId") int id);
 
     //delete photo product
     @Headers({"Accept: application/json"})
     @DELETE(Server.deletePhoto + "{id}")
     Call<DeletePhotoResponse> deletePhotoProduct(@Header("Authorization") String token, @Path("id") Integer id);
-
 
     //user product
     @Headers({"Accept: application/json"})
@@ -179,6 +179,11 @@ public interface RouteAPI {
     @GET(Server.riceFields)
     Call<Products> getUserRiceFieldsPerPage(@Query("filter[user_id]") int id, @Query("page") int page);
 
+    //update ketersediaan product
+    @Headers({"Accept: application/json"})
+    @PUT(Server.ketersediaan+"{id}")
+    Call<UpdateProductResponse> updateKetersediaan(@Header("Authorization") String token, @Path("id") int id);
+
 
     //history
     @Headers({"Accept: application/json"})
@@ -188,7 +193,7 @@ public interface RouteAPI {
     //delete history
     @Headers({"Accept: application/json"})
     @DELETE(Server.history + "{historyId}")
-    Call<DeleteProductResponse> deleteHistory(@Header("Authorization") String token, @Path("historyId") int id);
+    Call<UpdateProductResponse> deleteHistory(@Header("Authorization") String token, @Path("historyId") int id);
 
 
     //bookmarks

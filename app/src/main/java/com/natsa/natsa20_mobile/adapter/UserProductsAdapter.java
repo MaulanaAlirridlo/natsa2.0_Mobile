@@ -1,5 +1,6 @@
 package com.natsa.natsa20_mobile.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -27,6 +28,7 @@ import com.natsa.natsa20_mobile.server.Server;
 import com.natsa.natsa20_mobile.server.process.Paging.products.user_products.UserProductsVM;
 import com.natsa.natsa20_mobile.server.process.bookmark.DeleteBookmark;
 import com.natsa.natsa20_mobile.server.process.products.DeleteProduct;
+import com.natsa.natsa20_mobile.server.process.products.UpdateKetersediaanProduct;
 
 public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdapter.UserProductsViewHolder> {
 
@@ -48,6 +50,7 @@ public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdap
         return new UserProductsViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull UserProductsViewHolder holder, int position) {
         if (getItem(position).getPhoto() != null) {
@@ -98,8 +101,38 @@ public class UserProductsAdapter extends PagedListAdapter<Data, UserProductsAdap
             });
             dialog.show();
         });
-        holder.ketersediaanProduct.setOnClickListener(v -> {
+        Boolean isTersedia = getItem(position).getKetersediaan().equals("1");
+        if (isTersedia){
+            holder.ketersediaanProduct.setText("Tersedia");
+        } else {
+            holder.ketersediaanProduct.setText("Tidak tersedia");
 
+        }
+        holder.ketersediaanProduct.setOnClickListener(v -> {
+            AlertDialog dialog = new AlertDialog.Builder(activity)
+                    .setMessage(isTersedia ? "Apakah anda yakin ingin mengubah sawah menjadi tidak tersedia?"
+                            : "Apakah anda yakin ingin mengubah sawah menjadi tersedia?")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setNegativeButton("Tidak", null)
+                    .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            new UpdateKetersediaanProduct().updateKetersediaanProduct(activity,
+                                    getItem(position).getId());
+                            userProductsVM.refresh();
+                        }
+                    })
+                    .create();
+            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface a) {
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
+                            activity.getResources().getColor(R.color.black));
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(activity.getResources()
+                            .getColor(R.color.black));
+                }
+            });
+            dialog.show();
         });
     }
 
