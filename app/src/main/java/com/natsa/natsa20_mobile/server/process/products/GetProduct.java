@@ -14,6 +14,9 @@ import com.natsa.natsa20_mobile.model.products.product.RandomRiceFields;
 import com.natsa.natsa20_mobile.model.products.product.RiceField;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
 import com.natsa.natsa20_mobile.server.process.User.GetUser;
+import com.natsa.natsa20_mobile.server.process.irrigations.GetIrrigations;
+import com.natsa.natsa20_mobile.server.process.regions.GetRegions;
+import com.natsa.natsa20_mobile.server.process.vestiges.GetVestiges;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +74,9 @@ public class GetProduct {
                             assert response.body() != null;
                             Product res = response.body();
                             RiceField riceField = res.getRiceField();
+                            new GetRegions().getRegionsFromApiByApi(riceField.getRegion_id(), productAdapter);
+                            new GetVestiges().getVestigesFromApiById(riceField.getVestige_id(), productAdapter);
+                            new GetIrrigations().getIrrigationsFromApiById(riceField.getIrrigation_id(), productAdapter);
                             new GetUser().getUserFromApi(riceField.getUser_id(), makelarAdapter);
                             List<Photos> photos = riceField.getPhotos();
                             List<RandomRiceFields> randomRiceFields = res.getRandomRiceFields();

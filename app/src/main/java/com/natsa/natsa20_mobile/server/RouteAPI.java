@@ -3,10 +3,12 @@ package com.natsa.natsa20_mobile.server;
 import androidx.annotation.Nullable;
 
 import com.natsa.natsa20_mobile.model.MakelarResponse;
+import com.natsa.natsa20_mobile.model.irrigations.Irrigation;
 import com.natsa.natsa20_mobile.model.products.DeletePhotoResponse;
 import com.natsa.natsa20_mobile.model.products.DeleteProductResponse;
 import com.natsa.natsa20_mobile.model.products.UpdateResponse;
 import com.natsa.natsa20_mobile.model.products.get_ricefield.GetRiceFieldResponse;
+import com.natsa.natsa20_mobile.model.regions.Region;
 import com.natsa.natsa20_mobile.model.user.GetLoginUser;
 import com.natsa.natsa20_mobile.model.user.GetUserRes;
 import com.natsa.natsa20_mobile.model.auth.login.LoginForm;
@@ -21,6 +23,7 @@ import com.natsa.natsa20_mobile.model.irrigations.Irrigations;
 import com.natsa.natsa20_mobile.model.products.product.Product;
 import com.natsa.natsa20_mobile.model.products.products.Products;
 import com.natsa.natsa20_mobile.model.regions.Regions;
+import com.natsa.natsa20_mobile.model.vestiges.Vestige;
 import com.natsa.natsa20_mobile.model.vestiges.Vestiges;
 
 import java.util.List;
@@ -210,15 +213,29 @@ public interface RouteAPI {
     @GET(Server.regions)
     Call<Regions> getRegions();
 
+    //regions by id
+    @Headers({"Accept: application/json"})
+    @GET(Server.regions+"{id}")
+    Call<Region> getRegionById(@Path("id") int id);
+
     //vestiges atau bekas sawah
     @Headers({"Accept: application/json"})
     @GET(Server.vestiges)
     Call<Vestiges> getVestiges();
+
+    //vestiges atau bekas sawah by id
+    @Headers({"Accept: application/json"})
+    @GET(Server.vestiges+"{id}")
+    Call<Vestige> getVestigeById(@Path("id") int id);
 
     //irrigation
     @Headers({"Accept: application/json"})
     @GET(Server.irrigations)
     Call<Irrigations> getIrrigations();
 
+    //irrigation
+    @Headers({"Accept: application/json"})
+    @GET(Server.irrigations+"{id}")
+    Call<Irrigation> getIrrigationById(@Path("id") int id);
 
 }

@@ -2,7 +2,9 @@ package com.natsa.natsa20_mobile.server.process.irrigations;
 
 import android.widget.ArrayAdapter;
 
+import com.natsa.natsa20_mobile.adapter.ProductAdapter;
 import com.natsa.natsa20_mobile.model.irrigations.Data;
+import com.natsa.natsa20_mobile.model.irrigations.Irrigation;
 import com.natsa.natsa20_mobile.model.irrigations.Irrigations;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
 
@@ -19,6 +21,7 @@ public class GetIrrigations {
     public static List<String> irrigationsStringList = new ArrayList<>();
     public static List<Integer> irrigationsIdList = new ArrayList<>();
     public static List<String> irrigationsStringIdList = new ArrayList<>();
+    public static Data irrigationData;
 
     public static List<String> getIrrigationsStringList() {
         return irrigationsStringList;
@@ -30,6 +33,10 @@ public class GetIrrigations {
 
     public static List<Integer> getIrrigationsIdList() {
         return irrigationsIdList;
+    }
+
+    public static Data getIrrigationData() {
+        return irrigationData;
     }
 
     public void setProducts(List<Data> irrigationsDataList, ArrayAdapter<String> adapter) {
@@ -60,6 +67,23 @@ public class GetIrrigations {
 
                     @Override
                     public void onFailure(Call<Irrigations> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
+
+    public void getIrrigationsFromApiById(int id, ProductAdapter adapter) {
+        RetrofitBuilder.endPoint().getIrrigationById(id)
+                .enqueue(new Callback<Irrigation>() {
+                    @Override
+                    public void onResponse(Call<Irrigation> call, Response<Irrigation> response) {
+                        assert response.body() != null;
+                        irrigationData = response.body().getData();
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Irrigation> call, Throwable t) {
                         t.printStackTrace();
                     }
                 });

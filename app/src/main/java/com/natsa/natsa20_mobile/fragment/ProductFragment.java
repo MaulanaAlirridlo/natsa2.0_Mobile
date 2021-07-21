@@ -22,7 +22,10 @@ import com.natsa.natsa20_mobile.adapter.ProductAdapter;
 import com.natsa.natsa20_mobile.adapter.ProductImageAdapter;
 import com.natsa.natsa20_mobile.adapter.RandomRiceFieldsAdapter;
 import com.natsa.natsa20_mobile.server.process.User.GetUser;
+import com.natsa.natsa20_mobile.server.process.irrigations.GetIrrigations;
 import com.natsa.natsa20_mobile.server.process.products.GetProduct;
+import com.natsa.natsa20_mobile.server.process.regions.GetRegions;
+import com.natsa.natsa20_mobile.server.process.vestiges.GetVestiges;
 import com.smarteist.autoimageslider.SliderView;
 
 public class ProductFragment extends Fragment {
@@ -43,8 +46,7 @@ public class ProductFragment extends Fragment {
         //show product
         RecyclerView productRecyclerView = view.findViewById(R.id.productRecyclerView);
         productImageAdapter = new ProductImageAdapter(getActivity(), GetProduct.getProductImageList());
-        productAdapter = new ProductAdapter(activity, GetProduct.getProductList(),
-                productImageAdapter);
+        productAdapter = new ProductAdapter(activity, GetProduct.getProductList(), productImageAdapter);
         RecyclerView.LayoutManager productLayoutManager = new LinearLayoutManager(getActivity());
         productRecyclerView.setLayoutManager(productLayoutManager);
         productRecyclerView.setAdapter(productAdapter);

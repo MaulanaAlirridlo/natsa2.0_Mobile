@@ -20,9 +20,13 @@ import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.helper.Preferences;
 import com.natsa.natsa20_mobile.model.products.product.Product;
 import com.natsa.natsa20_mobile.model.products.product.RiceField;
+import com.natsa.natsa20_mobile.model.regions.Data;
 import com.natsa.natsa20_mobile.model.user.User;
 import com.natsa.natsa20_mobile.server.process.bookmark.AddBookmark;
+import com.natsa.natsa20_mobile.server.process.irrigations.GetIrrigations;
 import com.natsa.natsa20_mobile.server.process.products.GetProduct;
+import com.natsa.natsa20_mobile.server.process.regions.GetRegions;
+import com.natsa.natsa20_mobile.server.process.vestiges.GetVestiges;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderView;
 
@@ -32,7 +36,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     private final Activity activity;
     private final List<RiceField> productDataList;
     private final ProductImageAdapter productImageAdapter;
-
     public ProductAdapter(Activity activity, List<RiceField> productsDataList,
                           ProductImageAdapter productImageAdapter) {
         this.activity = activity;
@@ -61,12 +64,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.productTitle.setText(product.getTitle());
         holder.productPrice.setText(String.valueOf(product.getHarga()));
         holder.address.setText(product.getAlamat());
-//        Log.d("TAG", "onBindViewHolder: "+product.getUser());
-//        holder.region.setText(product.getRegion().getProvinsi()+", "+product.getRegion().getKabupaten());
+        Data regionData = GetRegions.getRegionData();
+        if (regionData != null) {
+            holder.region.setText(regionData.getProvinsi()+", "+regionData.getKabupaten());
+        }
         holder.description.setText(product.getDeskripsi());
         holder.certification.setText(product.getSertifikasi().toUpperCase());
         holder.type.setText(product.getTipe());
-//        holder.category.setText(product.getVestige().getVestige()+", "+product.getIrrigation().getIrrigation());
+        com.natsa.natsa20_mobile.model.vestiges.Data vestigeData = GetVestiges.getVestigeData();
+        com.natsa.natsa20_mobile.model.irrigations.Data irrigationData = GetIrrigations.getIrrigationData();
+        if (vestigeData != null && irrigationData != null) {
+            holder.category.setText(vestigeData.getVestige()+", "+irrigationData.getIrrigation());
+        }
         holder.addBookmarkButton.setOnClickListener(v -> {
             new AddBookmark().addBookmarkProcess(product.getId(), activity);
         });

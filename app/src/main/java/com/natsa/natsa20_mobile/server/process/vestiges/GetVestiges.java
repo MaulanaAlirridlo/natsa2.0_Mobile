@@ -2,7 +2,9 @@ package com.natsa.natsa20_mobile.server.process.vestiges;
 
 import android.widget.ArrayAdapter;
 
+import com.natsa.natsa20_mobile.adapter.ProductAdapter;
 import com.natsa.natsa20_mobile.model.vestiges.Data;
+import com.natsa.natsa20_mobile.model.vestiges.Vestige;
 import com.natsa.natsa20_mobile.model.vestiges.Vestiges;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
 
@@ -19,6 +21,7 @@ public class GetVestiges {
     public static List<String> vestigesStringList = new ArrayList<>();
     public static List<Integer> vestigesIdList = new ArrayList<>();
     public static List<String> vestigesStringIdList = new ArrayList<>();
+    public static Data vestigeData;
 
     public static List<String> getVestigesStringList() {
         return vestigesStringList;
@@ -29,6 +32,10 @@ public class GetVestiges {
 
     public static List<String> getVestigesStringIdList() {
         return vestigesStringIdList;
+    }
+
+    public static Data getVestigeData() {
+        return vestigeData;
     }
 
     public void setProducts(List<Data> vestigesDataList, ArrayAdapter<String> adapter) {
@@ -61,6 +68,25 @@ public class GetVestiges {
 
                     @Override
                     public void onFailure(Call<Vestiges> call, Throwable t) {
+                        t.printStackTrace();
+                    }
+                });
+    }
+
+    public void getVestigesFromApiById(int id, ProductAdapter adapter) {
+        RetrofitBuilder.endPoint().getVestigeById(id)
+                .enqueue(new Callback<Vestige>() {
+                    @Override
+                    public void onResponse(Call<Vestige> call, Response<Vestige> response) {
+                        if (response.isSuccessful()) {
+                            assert response.body() != null;
+                            vestigeData = response.body().getData();
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Vestige> call, Throwable t) {
                         t.printStackTrace();
                     }
                 });
