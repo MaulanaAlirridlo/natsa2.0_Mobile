@@ -22,6 +22,7 @@ public class Server {
     public static final String login = users+"login/";
     public static final String logout = users+"logout/";
     public static final String userDetails = user+"details/";
+    public static final String updatePassword = users+"password/";
 
     //makelar
     public static final String makelar = "makelar/";

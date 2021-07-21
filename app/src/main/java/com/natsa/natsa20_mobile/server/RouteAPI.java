@@ -23,6 +23,8 @@ import com.natsa.natsa20_mobile.model.irrigations.Irrigations;
 import com.natsa.natsa20_mobile.model.products.product.Product;
 import com.natsa.natsa20_mobile.model.products.products.Products;
 import com.natsa.natsa20_mobile.model.regions.Regions;
+import com.natsa.natsa20_mobile.model.user.update_password.Request;
+import com.natsa.natsa20_mobile.model.user.update_password.Response;
 import com.natsa.natsa20_mobile.model.vestiges.Vestige;
 import com.natsa.natsa20_mobile.model.vestiges.Vestiges;
 
@@ -50,6 +52,11 @@ public interface RouteAPI {
     @Headers({"Accept: application/json"})
     @GET(Server.userDetails)
     Call<GetLoginUser> getLoginUser(@Header("Authorization") String token);
+
+    //update password
+    @Headers({"Accept: application/json"})
+    @PUT(Server.updatePassword)
+    Call<Response> updatePassword(@Header("Authorization") String token, @Body Request request);
 
     //show user
     @Headers({"Accept: application/json"})
