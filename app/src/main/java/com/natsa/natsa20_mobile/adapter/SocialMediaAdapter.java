@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +33,7 @@ public class SocialMediaAdapter extends RecyclerView.Adapter<SocialMediaAdapter.
     @Override
     public SocialMediaAdapter.SocialMediaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.social_media_layout, parent, false);
+        View view = layoutInflater.inflate(R.layout.makelar_social_media_layout, parent, false);
         return new SocialMediaAdapter.SocialMediaViewHolder(view);
     }
 
