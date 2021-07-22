@@ -37,6 +37,7 @@ import com.natsa.natsa20_mobile.fragment.MakelarFragment;
 import com.natsa.natsa20_mobile.fragment.ProductFragment;
 import com.natsa.natsa20_mobile.fragment.ProductsFragment;
 import com.natsa.natsa20_mobile.helper.GlideLoader;
+import com.natsa.natsa20_mobile.server.Server;
 import com.natsa.natsa20_mobile.server.process.auth.Logout;
 import com.natsa.natsa20_mobile.helper.Preferences;
 
@@ -62,8 +63,6 @@ public class BackActivity extends AppCompatActivity implements ProductsAdapter.s
         setContentView(R.layout.activity_back);
 
         init();
-        new GlideLoader().glideImageRoundedLoader(BackActivity.this, showAccountMenu, showAccountMenu,
-                Preferences.getPhotoUrl(getApplicationContext()));
         setOnclickListener();
 
         Bundle intentExtra = getIntent().getExtras();
@@ -101,6 +100,17 @@ public class BackActivity extends AppCompatActivity implements ProductsAdapter.s
                 loadFragment(new MakelarFragment());
                 title.setText(intentExtra.getString("makelar_name"));
                 break;
+        }
+    }
+
+    public void onResume() {
+        super.onResume();
+        if (Preferences.getPhotoUrl(getApplicationContext()).contains("https://")) {
+            new GlideLoader().glideImageRoundedLoader(BackActivity.this, showAccountMenu, showAccountMenu,
+                    Preferences.getPhotoUrl(getApplicationContext()));
+        } else {
+            new GlideLoader().glideImageRoundedLoader(BackActivity.this, showAccountMenu, showAccountMenu,
+                    Server.urlWithoutSlash+Preferences.getPhotoUrl(getApplicationContext()));
         }
     }
 

@@ -17,6 +17,7 @@ import com.natsa.natsa20_mobile.model.user.GetLoginUser;
 import com.natsa.natsa20_mobile.model.user.GetUserRes;
 import com.natsa.natsa20_mobile.model.user.User;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
+import com.natsa.natsa20_mobile.server.Server;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +78,13 @@ public class GetUser {
                                     data.getEmail(), data.getUsername(), data.getKtp(),
                                     data.getNo_hp(),
                                     data.getProfile_photo_url());
-                            new GlideLoader().glideImageRoundedLoader(activity, view, photoProfile, data.getProfile_photo_url());
+                            if (data.getProfile_photo_url().contains("https://")) {
+                                new GlideLoader().glideImageRoundedLoader(activity, view, photoProfile,
+                                        data.getProfile_photo_url());
+                            } else {
+                                new GlideLoader().glideImageRoundedLoader(activity, view, photoProfile,
+                                        Server.urlWithoutSlash+data.getProfile_photo_url());
+                            }
                             name.setText(data.getName());
                             username.setText(data.getUsername());
                             email.setText(data.getEmail());

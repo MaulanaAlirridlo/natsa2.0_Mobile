@@ -53,6 +53,19 @@ public interface RouteAPI {
     @GET(Server.userDetails)
     Call<GetLoginUser> getLoginUser(@Header("Authorization") String token);
 
+    //update profile
+    @Headers({"Accept: application/json"})
+    @Multipart
+    @POST(Server.users)
+    Call<com.natsa.natsa20_mobile.model.user.update_profile.Response>
+    updateProfile(@Query("_method") String method, @Header("Authorization") String token,
+                  @Part("name") RequestBody name,
+                  @Part("email") RequestBody email,
+                  @Part("username") RequestBody username,
+                  @Part("ktp") RequestBody ktp,
+                  @Part("no_hp") RequestBody no_hp,
+                  @Part MultipartBody.Part photo);
+
     //update password
     @Headers({"Accept: application/json"})
     @PUT(Server.updatePassword)

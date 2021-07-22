@@ -27,14 +27,14 @@ public class UpdatePassword {
                     context.startActivity(intent);
 
                 } else {
-                    Toast.makeText(context, response.code() == 422 ? "Silahkan cek ulang data" + response.raw().request().header("current_password") :
+                    Toast.makeText(context, response.code() == 422 ? "Silahkan cek ulang data" :
                             response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Response> call, Throwable t) {
-
+                t.printStackTrace();
             }
         });
     }

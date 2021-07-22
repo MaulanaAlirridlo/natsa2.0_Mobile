@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.helper.GlideLoader;
+import com.natsa.natsa20_mobile.server.Server;
 import com.natsa.natsa20_mobile.server.process.auth.Logout;
 import com.natsa.natsa20_mobile.helper.Preferences;
 
@@ -39,9 +40,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         init();
-        new GlideLoader().glideImageRoundedLoader(MainActivity.this, showAccountMenu, showAccountMenu,
-                Preferences.getPhotoUrl(getApplicationContext()));
         setOnclickListener();
+    }
+
+    public void onResume() {
+        super.onResume();
+        if (Preferences.getPhotoUrl(getApplicationContext()).contains("https://")) {
+            new GlideLoader().glideImageRoundedLoader(MainActivity.this, showAccountMenu, showAccountMenu,
+                    Preferences.getPhotoUrl(getApplicationContext()));
+        } else {
+            new GlideLoader().glideImageRoundedLoader(MainActivity.this, showAccountMenu, showAccountMenu,
+                    Server.urlWithoutSlash+Preferences.getPhotoUrl(getApplicationContext()));
+        }
     }
 
 

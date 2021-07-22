@@ -37,6 +37,7 @@ import android.widget.Spinner;
 
 import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.adapter.AttachmentListAdapter;
+import com.natsa.natsa20_mobile.helper.PathUri;
 import com.natsa.natsa20_mobile.model.AttachmentListData;
 import com.natsa.natsa20_mobile.server.process.irrigations.GetIrrigations;
 import com.natsa.natsa20_mobile.server.process.products.AddProduct;
@@ -68,7 +69,7 @@ public class AddProductFragment extends Fragment {
     private ArrayList<AttachmentListData> newAttachmentList = new ArrayList<>();
     private ArrayList<AttachmentListData> showAttachmentList = new ArrayList<>();
     AttachmentListAdapter newAttachmentListAdapter, showAttachmentListAdapter;
-    final Integer REQUEST_CODE = 1111;
+    final Integer REQUEST_CODE = 2545;
     Boolean isEdit = false;
     ArrayAdapter<String> sertifikasiAdapter, sertifikasiValueAdapter, tipeAdapter, tipeValueAdapter,
             daerahAdapter, daerahValueAdapter, bekasSawahAdapter, bekasSawahValueAdapter,
@@ -193,12 +194,12 @@ public class AddProductFragment extends Fragment {
             new GetRegions().getRegionsFromApi(daerahAdapter);
             new GetVestiges().getVestigesFromApi(bekasSawahAdapter);
             new GetIrrigations().getIrrigationsFromApi(irigasiSawahAdapter);
-            new Handler(Looper.getMainLooper()).postDelayed(() -> pullToRefresh.setRefreshing(false), 700);
             if (isEdit){
                 new GetRiceField().getRiceFieldFromApi(idSawah, showAttachmentList, showAttachmentListAdapter,
                         sertifikasiValueAdapter, tipeValueAdapter, daerahValueAdapter, bekasSawahValueAdapter,
                         irigasiSawahValueAdapter);
             }
+            new Handler(Looper.getMainLooper()).postDelayed(() -> pullToRefresh.setRefreshing(false), 700);
         });
 
         return view;
@@ -255,7 +256,7 @@ public class AddProductFragment extends Fragment {
                     AttachmentListData attachmentListData = new AttachmentListData();
                     attachmentListData.setImageName(returnCursor.getString(nameIndex));
                     attachmentListData.setImageUri(returnUri.toString());
-                    attachmentListData.setImagePath(getRealPathFromURI(returnUri));
+                    attachmentListData.setImagePath(new PathUri().getRealPathFromURI(getActivity(), returnUri));
                     attachmentListData.setRealUri(returnUri);
                     newAttachmentList.add(attachmentListData);
                 }
@@ -340,16 +341,5 @@ public class AddProductFragment extends Fragment {
         LinearLayoutManager MyLayoutManager = new LinearLayoutManager(getContext());
         showAttachmentListView.setLayoutManager(MyLayoutManager);
         showAttachmentListView.setAdapter(showAttachmentListAdapter);
-    }
-
-    public String getRealPathFromURI(Uri uri) {
-        Cursor cursor = getActivity().getContentResolver().query(uri, null, null, null, null);
-        if (cursor == null) {
-            return uri.getPath();
-        } else {
-            cursor.moveToFirst();
-            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-            return cursor.getString(idx);
-        }
     }
 }
