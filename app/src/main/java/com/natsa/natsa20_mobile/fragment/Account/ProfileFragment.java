@@ -2,6 +2,8 @@ package com.natsa.natsa20_mobile.fragment.Account;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -38,9 +40,11 @@ import com.natsa.natsa20_mobile.helper.PathUri;
 import com.natsa.natsa20_mobile.model.AttachmentListData;
 import com.natsa.natsa20_mobile.model.user.User;
 import com.natsa.natsa20_mobile.model.user.update_password.Request;
+import com.natsa.natsa20_mobile.server.process.User.DeleteUser;
 import com.natsa.natsa20_mobile.server.process.User.GetUser;
 import com.natsa.natsa20_mobile.server.process.User.UpdatePassword;
 import com.natsa.natsa20_mobile.server.process.User.UpdateProfile;
+import com.natsa.natsa20_mobile.server.process.bookmark.DeleteBookmark;
 import com.natsa.natsa20_mobile.server.process.irrigations.GetIrrigations;
 import com.natsa.natsa20_mobile.server.process.products.GetRiceField;
 import com.natsa.natsa20_mobile.server.process.regions.GetRegions;
@@ -57,9 +61,10 @@ public class ProfileFragment extends Fragment {
     ImageView photoProfile;
     EditText name, username, email, ktp, noHp, currentPassword, newPassword, confirmPassword;
     TextView updateImageButton;
-    Button updateProfileButton, updatePasswordButton;
+    Button updateProfileButton, updatePasswordButton, deleteUserButton;
     AttachmentListData newAttachment;
     final Integer REQUEST_CODE = 2545;
+    Activity activity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,8 +83,11 @@ public class ProfileFragment extends Fragment {
         updateImageButton = view.findViewById(R.id.update_image_button);
         updateProfileButton = view.findViewById(R.id.update_profile_button);
         updatePasswordButton = view.findViewById(R.id.update_password_button);
+        deleteUserButton = view.findViewById(R.id.delete_user_button);
 
         new GetUser().getLoginUserFromApi(getActivity(), view, photoProfile, name, username, email, ktp, noHp);
+
+        activity = getActivity();
 
         updateProfileButton.setOnClickListener(v -> {
             MultipartBody.Part productImagesParts;
@@ -108,6 +116,30 @@ public class ProfileFragment extends Fragment {
 
         updateImageButton.setOnClickListener(v -> {
             openGalery();
+        });
+
+        deleteUserButton.setOnClickListener(v -> {
+            AlertDialog dialog = new AlertDialog.Builder(activity)
+                    .setMessage("Apakah anda yakin ingin menghapusnya?")
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setNegativeButton("Tidak", null)
+                    .setPositiveButton("Iya", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            new DeleteUser().deleteLoginUser(getContext());
+                        }
+                    })
+                    .create();
+            dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                @Override
+                public void onShow(DialogInterface a) {
+                    dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(
+                            activity.getResources().getColor(R.color.black));
+                    dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(activity.getResources()
+                            .getColor(R.color.black));
+                }
+            });
+            dialog.show();
         });
 
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swipeRefresh);

@@ -184,6 +184,7 @@
                     android:text="@string/once_your_account_is_deleted_all_of_its_resources_and_data_will_be_permanently_deleted_before_deleting_your_account_please_download_any_data_or_information_that_you_wish_to_retain" />
 
                 <Button
+                    android:id="@+id/delete_user_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/delete_account" />

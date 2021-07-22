@@ -9,6 +9,7 @@ import com.natsa.natsa20_mobile.model.products.UpdateProductResponse;
 import com.natsa.natsa20_mobile.model.products.UpdateResponse;
 import com.natsa.natsa20_mobile.model.products.get_ricefield.GetRiceFieldResponse;
 import com.natsa.natsa20_mobile.model.regions.Region;
+import com.natsa.natsa20_mobile.model.user.DeleteUserResponse;
 import com.natsa.natsa20_mobile.model.user.GetLoginUser;
 import com.natsa.natsa20_mobile.model.user.GetUserRes;
 import com.natsa.natsa20_mobile.model.auth.login.LoginForm;
@@ -70,6 +71,11 @@ public interface RouteAPI {
     @Headers({"Accept: application/json"})
     @PUT(Server.updatePassword)
     Call<Response> updatePassword(@Header("Authorization") String token, @Body Request request);
+
+    //delete user
+    @Headers({"Accept: application/json"})
+    @DELETE(Server.users)
+    Call<DeleteUserResponse> deleteLoginUser(@Header("Authorization") String token);
 
     //show user
     @Headers({"Accept: application/json"})
