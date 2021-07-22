@@ -17,13 +17,13 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.MediaStore;
 import android.provider.OpenableColumns;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,27 +31,24 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.natsa.natsa20_mobile.R;
-import com.natsa.natsa20_mobile.adapter.AttachmentListAdapter;
+import com.natsa.natsa20_mobile.adapter.MakelarSocialMediaAdapter;
+import com.natsa.natsa20_mobile.adapter.UserSocialMediaAdapter;
 import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.helper.PathUri;
 import com.natsa.natsa20_mobile.model.AttachmentListData;
-import com.natsa.natsa20_mobile.model.user.User;
 import com.natsa.natsa20_mobile.model.user.update_password.Request;
 import com.natsa.natsa20_mobile.server.process.User.DeleteUser;
 import com.natsa.natsa20_mobile.server.process.User.GetUser;
 import com.natsa.natsa20_mobile.server.process.User.UpdatePassword;
 import com.natsa.natsa20_mobile.server.process.User.UpdateProfile;
-import com.natsa.natsa20_mobile.server.process.bookmark.DeleteBookmark;
-import com.natsa.natsa20_mobile.server.process.irrigations.GetIrrigations;
-import com.natsa.natsa20_mobile.server.process.products.GetRiceField;
-import com.natsa.natsa20_mobile.server.process.regions.GetRegions;
-import com.natsa.natsa20_mobile.server.process.vestiges.GetVestiges;
+import com.natsa.natsa20_mobile.server.process.social_media.GetSocialMedia;
+import com.natsa.natsa20_mobile.server.process.social_media.GetUserSocialMedia;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -62,9 +59,12 @@ public class ProfileFragment extends Fragment {
     EditText name, username, email, ktp, noHp, currentPassword, newPassword, confirmPassword;
     TextView updateImageButton;
     Button updateProfileButton, updatePasswordButton, deleteUserButton;
+    Spinner socialMediaSelection;
     AttachmentListData newAttachment;
+    UserSocialMediaAdapter userSocialMediaAdapter;
     final Integer REQUEST_CODE = 2545;
     Activity activity;
+    ArrayAdapter<String> socialMediaAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,10 +84,22 @@ public class ProfileFragment extends Fragment {
         updateProfileButton = view.findViewById(R.id.update_profile_button);
         updatePasswordButton = view.findViewById(R.id.update_password_button);
         deleteUserButton = view.findViewById(R.id.delete_user_button);
+        socialMediaSelection = view.findViewById(R.id.social_media_selection);
+        activity = getActivity();
+
+        socialMediaAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, GetSocialMedia.getSocialMediaStringList());
+        socialMediaSelection.setAdapter(socialMediaAdapter);
+
+        RecyclerView makelarRecyclerView = view.findViewById(R.id.user_social_media);
+        userSocialMediaAdapter = new UserSocialMediaAdapter(getActivity(), GetUserSocialMedia.getUserSocialMediaList());
+        RecyclerView.LayoutManager makelarLayoutManager = new LinearLayoutManager(getActivity());
+        makelarRecyclerView.setLayoutManager(makelarLayoutManager);
+        makelarRecyclerView.setAdapter(userSocialMediaAdapter);
 
         new GetUser().getLoginUserFromApi(getActivity(), view, photoProfile, name, username, email, ktp, noHp);
-
-        activity = getActivity();
+        new GetSocialMedia().getSocialMediaFromApi(socialMediaAdapter);
+        new GetUserSocialMedia().getUserSocialMediaFromApi(getContext(), userSocialMediaAdapter);
 
         updateProfileButton.setOnClickListener(v -> {
             MultipartBody.Part productImagesParts;
@@ -145,6 +157,9 @@ public class ProfileFragment extends Fragment {
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swipeRefresh);
         pullToRefresh.setOnRefreshListener(() -> {
             new GetUser().getLoginUserFromApi(getActivity(), view, photoProfile, name, username, email, ktp, noHp);
+            new GetSocialMedia().getSocialMediaFromApi(socialMediaAdapter);
+            new GetUserSocialMedia().getUserSocialMediaFromApi(getContext(), userSocialMediaAdapter);
+
             new Handler(Looper.getMainLooper()).postDelayed(() -> pullToRefresh.setRefreshing(false), 700);
         });
 

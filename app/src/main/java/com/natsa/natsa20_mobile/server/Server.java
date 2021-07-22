@@ -42,4 +42,8 @@ public class Server {
 
     //irrigations
     public static final String irrigations = "irrigations/";
+
+    //social media
+    public static final String socialMedia = "social-media/";
+    public static final String userSocialMedia = "user/social-media/";
 }

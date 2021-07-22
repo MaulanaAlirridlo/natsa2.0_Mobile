@@ -3,7 +3,6 @@ package com.natsa.natsa20_mobile.adapter;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +40,7 @@ public class MakelarAdapter extends RecyclerView.Adapter<MakelarAdapter.MakelarV
         View view = layoutInflater.inflate(R.layout.makelar_layout, parent, false);
 
         RecyclerView socialMediaRecyclerView = view.findViewById(R.id.social_media_recycler_view);
-        SocialMediaAdapter socialMediaAdapter = new SocialMediaAdapter(activity,
+        MakelarSocialMediaAdapter socialMediaAdapter = new MakelarSocialMediaAdapter(activity,
                 GetMakelar.getMakelarSocialMediaDataList());
         RecyclerView.LayoutManager productsLayoutManager = new LinearLayoutManager(activity,
                 LinearLayoutManager.HORIZONTAL, false);
