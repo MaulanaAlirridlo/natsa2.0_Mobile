@@ -45,12 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void onResume() {
         super.onResume();
-        if (Preferences.getPhotoUrl(getApplicationContext()).contains("https://")) {
-            new GlideLoader().glideImageRoundedLoader(MainActivity.this, showAccountMenu, showAccountMenu,
-                    Preferences.getPhotoUrl(getApplicationContext()));
-        } else {
-            new GlideLoader().glideImageRoundedLoader(MainActivity.this, showAccountMenu, showAccountMenu,
-                    Server.urlWithoutSlash+Preferences.getPhotoUrl(getApplicationContext()));
+        if (Preferences.isLogin(getApplicationContext())){
+            if (Preferences.getPhotoUrl(getApplicationContext()).contains("https://")) {
+                new GlideLoader().glideImageRoundedLoader(MainActivity.this, showAccountMenu, showAccountMenu,
+                        Preferences.getPhotoUrl(getApplicationContext()));
+            } else {
+                new GlideLoader().glideImageRoundedLoader(MainActivity.this, showAccountMenu, showAccountMenu,
+                        Server.urlWithoutSlash+Preferences.getPhotoUrl(getApplicationContext()));
+            }
         }
     }
 

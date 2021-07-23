@@ -106,10 +106,14 @@ public class ProfileFragment extends Fragment {
 
         updateProfileButton.setOnClickListener(v -> {
             MultipartBody.Part productImagesParts;
-            File file = new File(newAttachment.getImagePath());
-            RequestBody body = RequestBody.create(MediaType.parse("image/*"), file);
-            productImagesParts = MultipartBody.Part.createFormData("photo",
-                    file.getName(), body);
+            if (newAttachment != null) {
+                File file = new File(newAttachment.getImagePath());
+                RequestBody body = RequestBody.create(MediaType.parse("image/*"), file);
+                productImagesParts = MultipartBody.Part.createFormData("photo",
+                        file.getName(), body);
+            }
+
+            productImagesParts = null;
 
             new UpdateProfile().uploadDataProfile(getActivity(),
                     RequestBody.create(MediaType.parse("text/plain"), name.getText().toString()),

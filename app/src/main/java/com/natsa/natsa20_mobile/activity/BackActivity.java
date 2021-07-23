@@ -100,12 +100,14 @@ public class BackActivity extends AppCompatActivity implements ProductsAdapter.s
 
     public void onResume() {
         super.onResume();
-        if (Preferences.getPhotoUrl(getApplicationContext()).contains("https://")) {
-            new GlideLoader().glideImageRoundedLoader(BackActivity.this, showAccountMenu, showAccountMenu,
-                    Preferences.getPhotoUrl(getApplicationContext()));
-        } else {
-            new GlideLoader().glideImageRoundedLoader(BackActivity.this, showAccountMenu, showAccountMenu,
-                    Server.urlWithoutSlash+Preferences.getPhotoUrl(getApplicationContext()));
+        if (Preferences.isLogin(getApplicationContext())){
+            if (Preferences.getPhotoUrl(getApplicationContext()).contains("https://")) {
+                new GlideLoader().glideImageRoundedLoader(BackActivity.this, showAccountMenu, showAccountMenu,
+                        Preferences.getPhotoUrl(getApplicationContext()));
+            } else {
+                new GlideLoader().glideImageRoundedLoader(BackActivity.this, showAccountMenu, showAccountMenu,
+                        Server.urlWithoutSlash+Preferences.getPhotoUrl(getApplicationContext()));
+            }
         }
     }
 

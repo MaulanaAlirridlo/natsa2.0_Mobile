@@ -82,7 +82,7 @@ public interface RouteAPI {
 
     //show user
     @Headers({"Accept: application/json"})
-    @GET(Server.users + "{userId}")
+    @GET(Server.usersWithSlash + "{userId}")
     Call<GetUserRes> getUser(@Path("userId") Integer id);
 
     //register
@@ -102,7 +102,7 @@ public interface RouteAPI {
 
     //get makelar
     @Headers({"Accept: application/json"})
-    @GET(Server.makelar + "{id}")
+    @GET(Server.makelarWithSlash + "{id}")
     Call<MakelarResponse> getMakelar(@Header("Authorization") String token, @Path("id") Integer id);
 
     //product
@@ -154,23 +154,23 @@ public interface RouteAPI {
 
     //search ricefield with paging
     @Headers({"Accept: application/json"})
-    @GET(Server.searchProduct + "{search}")
+    @GET(Server.searchProductWithSlash + "{search}")
     Call<Products> getRiceFieldsSearchResult(@Path("search") String search, @Query("page") int page);
 
     //show product
     @Headers({"Accept: application/json"})
-    @GET(Server.product + "{id}")
+    @GET(Server.productWithSlash + "{id}")
     Call<Product> showProduct(@Path("id") int id);
 
     //show riceField
     @Headers({"Accept: application/json"})
-    @GET(Server.riceFields + "{id}")
+    @GET(Server.riceFieldsWithSlash + "{id}")
     Call<GetRiceFieldResponse> showRiceField(@Path("id") int id);
 
     //update product
     @Headers({"Accept: application/json"})
     @Multipart
-    @POST(Server.riceFields+"{id}")
+    @POST(Server.riceFieldsWithSlash + "{id}")
     Call<UpdateResponse> updateRiceFields(
             @Path("id") int id,
             @Query("_method") String method,
@@ -191,12 +191,12 @@ public interface RouteAPI {
 
     //delete product
     @Headers({"Accept: application/json"})
-    @DELETE(Server.riceFields + "{productId}")
+    @DELETE(Server.riceFieldsWithSlash + "{productId}")
     Call<UpdateProductResponse> deleteProduct(@Header("Authorization") String token, @Path("productId") int id);
 
     //delete photo product
     @Headers({"Accept: application/json"})
-    @DELETE(Server.deletePhoto + "{id}")
+    @DELETE(Server.deletePhotoWithSlash + "{id}")
     Call<DeletePhotoResponse> deletePhotoProduct(@Header("Authorization") String token, @Path("id") Integer id);
 
     //user product
@@ -210,7 +210,7 @@ public interface RouteAPI {
 
     //update ketersediaan product
     @Headers({"Accept: application/json"})
-    @PUT(Server.ketersediaan+"{id}")
+    @PUT(Server.ketersediaanWithSlash + "{id}")
     Call<UpdateProductResponse> updateKetersediaan(@Header("Authorization") String token, @Path("id") int id);
 
 
@@ -221,13 +221,13 @@ public interface RouteAPI {
 
     //delete history
     @Headers({"Accept: application/json"})
-    @DELETE(Server.history + "{historyId}")
+    @DELETE(Server.historyWithSlash + "{historyId}")
     Call<UpdateProductResponse> deleteHistory(@Header("Authorization") String token, @Path("historyId") int id);
 
 
     //bookmarks
     @Headers({"Accept: application/json"})
-    @POST(Server.bookmarks + "{riceFieldId}")
+    @POST(Server.bookmarksWithSlash + "{riceFieldId}")
     Call<AddBookmarkRespone> addBookmark(@Header("Authorization") String token, @Path("riceFieldId") int riceFieldId);
 
     @Headers({"Accept: application/json"})
@@ -239,7 +239,7 @@ public interface RouteAPI {
     Call<GetBookmarkRespone> getBookmarkPerPage(@Header("Authorization") String token, @Query("page") int page);
 
     @Headers({"Accept: application/json"})
-    @DELETE(Server.bookmarks + "{bookmarkId}")
+    @DELETE(Server.bookmarksWithSlash + "{bookmarkId}")
     Call<DeleteBookmarkRespone> deleteBookmark(@Header("Authorization") String token, @Path("bookmarkId") int bookmarkId);
 
     //regions
@@ -249,7 +249,7 @@ public interface RouteAPI {
 
     //regions by id
     @Headers({"Accept: application/json"})
-    @GET(Server.regions+"{id}")
+    @GET(Server.regionsWithSlash + "{id}")
     Call<Region> getRegionById(@Path("id") int id);
 
     //vestiges atau bekas sawah
@@ -259,7 +259,7 @@ public interface RouteAPI {
 
     //vestiges atau bekas sawah by id
     @Headers({"Accept: application/json"})
-    @GET(Server.vestiges+"{id}")
+    @GET(Server.vestigesWithSlash + "{id}")
     Call<Vestige> getVestigeById(@Path("id") int id);
 
     //irrigation
@@ -269,7 +269,7 @@ public interface RouteAPI {
 
     //irrigation by id
     @Headers({"Accept: application/json"})
-    @GET(Server.irrigations+"{id}")
+    @GET(Server.irrigationsWithSlash + "{id}")
     Call<Irrigation> getIrrigationById(@Path("id") int id);
 
     //social media
@@ -291,7 +291,7 @@ public interface RouteAPI {
 
     //add user social media
     @Headers({"Accept: application/json"})
-    @PUT(Server.userSocialMedia+"{id}")
+    @PUT(Server.userSocialMediaWithSlash + "{id}")
     Call<com.natsa.natsa20_mobile.model.social_media.update_social_media_link.Response>
     updateUserSocialMedia(@Header("Authorization") String token,
                           @Body com.natsa.natsa20_mobile.model.social_media.update_social_media_link.Request request,
@@ -299,7 +299,7 @@ public interface RouteAPI {
 
     //delete user social media
     @Headers({"Accept: application/json"})
-    @DELETE(Server.userSocialMedia+"{id}")
+    @DELETE(Server.userSocialMediaWithSlash + "{id}")
     Call<DeleteUserSocialMediaResponse> deleteUserSocialMedia(@Header("Authorization") String token,
                                                               @Path("id") Integer id);
 
