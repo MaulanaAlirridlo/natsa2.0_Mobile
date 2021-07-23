@@ -18,10 +18,12 @@ import com.natsa.natsa20_mobile.R;
 import com.natsa.natsa20_mobile.helper.GlideLoader;
 import com.natsa.natsa20_mobile.helper.Preferences;
 import com.natsa.natsa20_mobile.model.social_media.UserSocialMedia;
+import com.natsa.natsa20_mobile.model.social_media.update_social_media_link.Request;
 import com.natsa.natsa20_mobile.server.DeleteHistory;
 import com.natsa.natsa20_mobile.server.Server;
 import com.natsa.natsa20_mobile.server.process.social_media.DeleteUserSocialMedia;
 import com.natsa.natsa20_mobile.server.process.social_media.GetUserSocialMedia;
+import com.natsa.natsa20_mobile.server.process.social_media.UpdateUserSocialMedia;
 
 import java.util.List;
 
@@ -51,6 +53,13 @@ public class UserSocialMediaAdapter extends RecyclerView.Adapter<UserSocialMedia
                     Server.storage+userSocialMedia.getSocial_media().getIcon_path());
             holder.name.setText(userSocialMedia.getSocial_media().getSosmed());
             holder.link.setText(userSocialMedia.getLink());
+
+            holder.save.setOnClickListener(v -> {
+                Request request = new Request(holder.link.getText().toString());
+                new UpdateUserSocialMedia().updateUserSocialMedia(activity, request, userSocialMedia.getId());
+                new GetUserSocialMedia().getUserSocialMediaFromApi(activity, UserSocialMediaAdapter.this);
+                holder.link.clearFocus();
+            });
 
             holder.delete.setOnClickListener(v -> {
                 AlertDialog dialog = new AlertDialog.Builder(activity)
