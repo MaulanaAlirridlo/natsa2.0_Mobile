@@ -33,8 +33,8 @@ public class ContactFragment extends Fragment {
     // onclick function
 
     public void showEmail(View v) {
-        Intent i = new Intent(getActivity(), BackActivity.class);
-        i.putExtra("page", "email");
+        Intent i = new Intent(Intent.ACTION_SENDTO);
+        i.setData(Uri.parse("mailto:natsa@email.com"));
         startActivity(i);
     }
 

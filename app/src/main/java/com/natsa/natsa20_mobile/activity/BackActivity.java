@@ -31,7 +31,6 @@ import com.natsa.natsa20_mobile.adapter.UserProductsAdapter;
 import com.natsa.natsa20_mobile.fragment.AboutFragment;
 import com.natsa.natsa20_mobile.fragment.AccountFragment;
 import com.natsa.natsa20_mobile.fragment.ContactFragment;
-import com.natsa.natsa20_mobile.fragment.EmailFragment;
 import com.natsa.natsa20_mobile.fragment.FaqFragment;
 import com.natsa.natsa20_mobile.fragment.MakelarFragment;
 import com.natsa.natsa20_mobile.fragment.ProductFragment;
@@ -87,10 +86,6 @@ public class BackActivity extends AppCompatActivity implements ProductsAdapter.s
             case "contact":
                 loadFragment(new ContactFragment());
                 title.setText("Our Contact");
-                break;
-            case "email":
-                loadFragment(new EmailFragment());
-                title.setText("Send Email");
                 break;
             case "account":
                 loadFragment(new AccountFragment());
