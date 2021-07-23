@@ -45,5 +45,5 @@ public class Server {
 
     //social media
     public static final String socialMedia = "social-media/";
-    public static final String userSocialMedia = "user/social-media/";
+    public static final String userSocialMedia = "user/"+socialMedia;
 }

@@ -45,6 +45,7 @@ import com.natsa.natsa20_mobile.server.process.User.DeleteUser;
 import com.natsa.natsa20_mobile.server.process.User.GetUser;
 import com.natsa.natsa20_mobile.server.process.User.UpdatePassword;
 import com.natsa.natsa20_mobile.server.process.User.UpdateProfile;
+import com.natsa.natsa20_mobile.server.process.social_media.AddUserSocialMedia;
 import com.natsa.natsa20_mobile.server.process.social_media.GetSocialMedia;
 import com.natsa.natsa20_mobile.server.process.social_media.GetUserSocialMedia;
 
@@ -56,9 +57,9 @@ import okhttp3.RequestBody;
 
 public class ProfileFragment extends Fragment {
     ImageView photoProfile;
-    EditText name, username, email, ktp, noHp, currentPassword, newPassword, confirmPassword;
+    EditText name, username, email, ktp, noHp, currentPassword, newPassword, confirmPassword, linkSocialMedia;
     TextView updateImageButton;
-    Button updateProfileButton, updatePasswordButton, deleteUserButton;
+    Button updateProfileButton, updatePasswordButton, deleteUserButton, addUserSocialMediaButton;
     Spinner socialMediaSelection;
     AttachmentListData newAttachment;
     UserSocialMediaAdapter userSocialMediaAdapter;
@@ -85,6 +86,8 @@ public class ProfileFragment extends Fragment {
         updatePasswordButton = view.findViewById(R.id.update_password_button);
         deleteUserButton = view.findViewById(R.id.delete_user_button);
         socialMediaSelection = view.findViewById(R.id.social_media_selection);
+        addUserSocialMediaButton = view.findViewById(R.id.add_user_social_media_button);
+        linkSocialMedia = view.findViewById(R.id.link_social_media);
         activity = getActivity();
 
         socialMediaAdapter = new ArrayAdapter<String>(getActivity(),
@@ -128,6 +131,17 @@ public class ProfileFragment extends Fragment {
 
         updateImageButton.setOnClickListener(v -> {
             openGalery();
+        });
+
+        addUserSocialMediaButton.setOnClickListener(v -> {
+            com.natsa.natsa20_mobile.model.social_media.add_new_social_media.Request request =
+                    new com.natsa.natsa20_mobile.model.social_media.add_new_social_media.Request(
+                    GetSocialMedia.getSocialMediaIdList().get(socialMediaSelection.getSelectedItemPosition()),
+                    linkSocialMedia.getText().toString()
+            );
+            new AddUserSocialMedia().addUserSocialMedia(getContext(), request);
+            linkSocialMedia.setText("");
+            new GetUserSocialMedia().getUserSocialMediaFromApi(getContext(), userSocialMediaAdapter);
         });
 
         deleteUserButton.setOnClickListener(v -> {

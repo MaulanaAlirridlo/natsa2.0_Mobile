@@ -282,6 +282,21 @@ public interface RouteAPI {
     @GET(Server.userSocialMedia)
     Call<GetUserSocialMediaResponse> getUserSocialMedia(@Header("Authorization") String token);
 
+    //add user social media
+    @Headers({"Accept: application/json"})
+    @POST(Server.userSocialMedia)
+    Call<com.natsa.natsa20_mobile.model.social_media.add_new_social_media.Response>
+    addUserSocialMedia(@Header("Authorization") String token,
+                          @Body com.natsa.natsa20_mobile.model.social_media.add_new_social_media.Request request);
+
+    //add user social media
+    @Headers({"Accept: application/json"})
+    @PUT(Server.userSocialMedia+"{id}")
+    Call<com.natsa.natsa20_mobile.model.social_media.update_social_media_link.Response>
+    updateUserSocialMedia(@Header("Authorization") String token,
+                          @Body com.natsa.natsa20_mobile.model.social_media.update_social_media_link.Request request,
+                          @Path("id") Integer id);
+
     //delete user social media
     @Headers({"Accept: application/json"})
     @DELETE(Server.userSocialMedia+"{id}")

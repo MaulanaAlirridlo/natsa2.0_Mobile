@@ -190,11 +190,14 @@
                     android:maxLines="1" />
 
                 <Button
+                    android:inputType="textUri"
+                    android:id="@+id/add_user_social_media_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/tambah"
                     android:layout_gravity="end"
                     android:layout_margin="5dp"/>
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/user_social_media"
                     android:layout_width="match_parent"
