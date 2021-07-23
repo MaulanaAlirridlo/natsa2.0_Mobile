@@ -9,6 +9,7 @@ import com.natsa.natsa20_mobile.model.products.UpdateProductResponse;
 import com.natsa.natsa20_mobile.model.products.UpdateResponse;
 import com.natsa.natsa20_mobile.model.products.get_ricefield.GetRiceFieldResponse;
 import com.natsa.natsa20_mobile.model.regions.Region;
+import com.natsa.natsa20_mobile.model.social_media.DeleteUserSocialMediaResponse;
 import com.natsa.natsa20_mobile.model.social_media.GetSocialMediaResponse;
 import com.natsa.natsa20_mobile.model.social_media.GetUserSocialMediaResponse;
 import com.natsa.natsa20_mobile.model.user.DeleteUserResponse;
@@ -280,5 +281,11 @@ public interface RouteAPI {
     @Headers({"Accept: application/json"})
     @GET(Server.userSocialMedia)
     Call<GetUserSocialMediaResponse> getUserSocialMedia(@Header("Authorization") String token);
+
+    //delete user social media
+    @Headers({"Accept: application/json"})
+    @DELETE(Server.userSocialMedia+"{id}")
+    Call<DeleteUserSocialMediaResponse> deleteUserSocialMedia(@Header("Authorization") String token,
+                                                              @Path("id") Integer id);
 
 }
