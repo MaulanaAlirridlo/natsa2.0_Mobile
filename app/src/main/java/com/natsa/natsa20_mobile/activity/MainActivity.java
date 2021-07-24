@@ -14,6 +14,7 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout menu, search, accountBeforeLogin, accountAfterLogin;
     ImageView showMenu, showSearch, showBookmark, showAccountMenu, mic, clearInput;
     TextView showSawah, showAbout, showFaq, showContact, showRegister, showLogin, showDashboard, logout;
+    Button showAllSawah, showSawahDijjual, showSawahDisewakan;
     EditText searchInput;
 
     @Override
@@ -78,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
         searchInput = findViewById(R.id.searchInput);
         mic = findViewById(R.id.mic);
         clearInput = findViewById(R.id.clear_input);
+        showAllSawah = findViewById(R.id.show_all_sawah);
+        showSawahDijjual = findViewById(R.id.show_sawah_dijual);
+        showSawahDisewakan = findViewById(R.id.show_sawah_disewakan);
     }
 
     // event listener function
@@ -119,12 +124,22 @@ public class MainActivity extends AppCompatActivity {
             }
             checkSearchVisibility();
             checkMenuVisibility();
+        });
 
+        showAllSawah.setOnClickListener(v -> {
+            showProduct("sawah", null);
+        });
+
+        showSawahDisewakan.setOnClickListener(v -> {
+            showProduct("sawah", "sewa");
+        });
+
+        showSawahDijjual.setOnClickListener(v -> {
+            showProduct("sawah", "jual");
         });
 
         showSawah.setOnClickListener(v -> {
-            showBackActivity("sawah");
-
+            showProduct("sawah", null);
         });
 
         showAbout.setOnClickListener(v -> {
@@ -225,6 +240,14 @@ public class MainActivity extends AppCompatActivity {
     private void showBackActivity(String page) {
         Intent i = new Intent(MainActivity.this, BackActivity.class);
         i.putExtra("page", page);
+        startActivity(i);
+        menu.setVisibility(LinearLayout.GONE);
+    }
+
+    private void showProduct(String page, String tipe) {
+        Intent i = new Intent(MainActivity.this, BackActivity.class);
+        i.putExtra("page", page);
+        i.putExtra("tipe", tipe);
         startActivity(i);
         menu.setVisibility(LinearLayout.GONE);
     }

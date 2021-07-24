@@ -71,6 +71,8 @@ public class ProductsFragment extends Fragment {
         sortSelection = view.findViewById(R.id.sort_selection);
         applyFilter = view.findViewById(R.id.apply_filter);
 
+        tipe = getActivity().getIntent().getExtras().getString("tipe");
+
         String[] typeSelectionValueList = new String[]{
                 "", "jual", "sewa"
         };
