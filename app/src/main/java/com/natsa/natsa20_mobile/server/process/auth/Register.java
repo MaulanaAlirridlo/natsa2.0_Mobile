@@ -42,7 +42,7 @@ public class Register {
                             activity.finish();
                         } else {
                             Toast.makeText(activity, response.code() == 422 ? "Silahkan cek ulang data" :
-                                    response.message(), Toast.LENGTH_SHORT).show();
+                                    response.code() + response.message(), Toast.LENGTH_SHORT).show();
                         }
                     }
                     @Override

@@ -2,6 +2,7 @@ package com.natsa.natsa20_mobile.server.process.auth;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -42,7 +43,7 @@ public class Login {
                             activity.finish();
                         } else {
                             Toast.makeText(activity, response.code() == 422 ? "Silahkan cek ulang data" :
-                                    response.message(), Toast.LENGTH_SHORT).show();
+                                    response.code() + response.message(), Toast.LENGTH_SHORT).show();
                         }
                     }
 
