@@ -21,16 +21,16 @@ public class Server {
     //sawah
     public static final String riceFields = "riceFields";
     public static final String product = "product";
-    public static final String searchProduct = riceFields+"search";
-    public static final String deletePhoto = riceFields+"delete/photo";
-    public static final String ketersediaan = riceFields+"ketersediaan";
 
     public static final String riceFieldsWithSlash = "riceFields/";
     public static final String productWithSlash = "product/";
-    public static final String searchProductWithSlash = riceFields+"search/";
-    public static final String deletePhotoWithSlash = riceFields+"delete/photo/";
-    public static final String ketersediaanWithSlash = riceFields+"ketersediaan/";
+    public static final String searchProductWithSlash = riceFieldsWithSlash+"search/";
+    public static final String deletePhotoWithSlash = riceFieldsWithSlash+"delete/photo/";
+    public static final String ketersediaanWithSlash = riceFieldsWithSlash+"ketersediaan/";
 
+    public static final String searchProduct = riceFieldsWithSlash+"search";
+    public static final String deletePhoto = riceFieldsWithSlash+"delete/photo";
+    public static final String ketersediaan = riceFieldsWithSlash+"ketersediaan";
     //user
     public static final String user = "user";
     public static final String users = "users";
@@ -40,7 +40,7 @@ public class Server {
     public static final String registerWithSlash = usersWithSlash+"register/";
     public static final String loginWithSlash = usersWithSlash+"login/";
     public static final String logoutWithSlash = usersWithSlash+"logout/";
-    public static final String userDetailsWithSlash = user+"details/";
+    public static final String userDetailsWithSlash = userWithSlash+"details/";
     public static final String updatePasswordWithSlash = usersWithSlash+"password/";
 
     public static final String register = usersWithSlash+"register";

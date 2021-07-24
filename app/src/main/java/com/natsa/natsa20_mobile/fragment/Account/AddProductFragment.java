@@ -190,6 +190,9 @@ public class AddProductFragment extends Fragment {
         }
 
         final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.swipeRefresh);
+        if (!isEdit){
+            pullToRefresh.setEnabled(false);
+        }
         pullToRefresh.setOnRefreshListener(() -> {
             new GetRegions().getRegionsFromApi(daerahAdapter);
             new GetVestiges().getVestigesFromApi(bekasSawahAdapter);
@@ -290,7 +293,6 @@ public class AddProductFragment extends Fragment {
                         ? "" : GetRegions.getRegionsIdList().get(daerah.getSelectedItemPosition()).toString()),
                 productImagesParts
         );
-
     }
 
     private void updateData() {

@@ -19,7 +19,7 @@
         android:clickable="true"
         android:contentDescription="@string/bottom_sheet_behavior"
         android:focusable="true"
-        app:backgroundTint="@color/bg_main"
+        app:backgroundTint="@color/bg_floating_button"
         app:srcCompat="@drawable/ic_add" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

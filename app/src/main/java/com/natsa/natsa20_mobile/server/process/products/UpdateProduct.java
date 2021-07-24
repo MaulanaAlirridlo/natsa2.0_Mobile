@@ -7,7 +7,6 @@ import android.widget.Toast;
 import com.natsa.natsa20_mobile.activity.BackActivity;
 import com.natsa.natsa20_mobile.helper.Preferences;
 import com.natsa.natsa20_mobile.model.products.UpdateResponse;
-import com.natsa.natsa20_mobile.model.products.product.Product;
 import com.natsa.natsa20_mobile.server.RetrofitBuilder;
 
 import java.util.List;
@@ -52,6 +51,7 @@ public class UpdateProduct {
                     i.putExtra("page", "detailSawah");
                     i.putExtra("id", id);
                     activity.startActivity(i);
+                    activity.finish();
                 } else {
                     Toast.makeText(activity, response.code() == 422 ? "Silahkan cek ulang data" :
                             response.message(), Toast.LENGTH_SHORT).show();

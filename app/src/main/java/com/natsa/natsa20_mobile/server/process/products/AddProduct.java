@@ -2,7 +2,6 @@ package com.natsa.natsa20_mobile.server.process.products;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.natsa.natsa20_mobile.activity.BackActivity;
@@ -17,7 +16,6 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Part;
 
 public class AddProduct {
 
@@ -53,6 +51,7 @@ public class AddProduct {
                     i.putExtra("page", "detailSawah");
                     i.putExtra("id", response.body().getRiceField().getId());
                     activity.startActivity(i);
+                    activity.finish();
                 } else {
                     Toast.makeText(activity, response.code() == 422 ? "Silahkan cek ulang data" :
                             response.message(), Toast.LENGTH_SHORT).show();

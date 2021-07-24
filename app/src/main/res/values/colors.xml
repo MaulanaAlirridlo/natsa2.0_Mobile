@@ -16,6 +16,7 @@
     <color name="bg4">#ffd4c7</color>
     <color name="card_bg">#14F4CCC4</color>
     <color name="font_color">@color/black</color>
+    <color name="bg_floating_button">#f4ccc4</color>
 
     <color name="splash_bg">#f4eee4</color>
 
